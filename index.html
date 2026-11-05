@@ -1612,11 +1612,11 @@
               <span class="tech-pill">grep / awk</span>
             </div>
             <div class="project-links">
+              <a href="./projects/linux-log-watchdog.html" target="_blank" rel="noopener noreferrer" class="project-link">
+                <span>🔍 Full Case Study ↗</span>
+              </a>
               <button class="project-link" type="button" data-project="watchdog">
-                <span>🔍 View Architecture</span>
-              </button>
-              <button class="project-link" type="button" data-project="watchdog">
-                <span>⚡ Inspect Bash Script →</span>
+                <span>⚡ Quick Blueprint →</span>
               </button>
             </div>
           </div>
@@ -1647,11 +1647,11 @@
               <span class="tech-pill">Alerting</span>
             </div>
             <div class="project-links">
+              <a href="./projects/disk-space-monitor.html" target="_blank" rel="noopener noreferrer" class="project-link">
+                <span>🔍 Full Case Study ↗</span>
+              </a>
               <button class="project-link" type="button" data-project="disk">
-                <span>🔍 View Architecture</span>
-              </button>
-              <button class="project-link" type="button" data-project="disk">
-                <span>⚡ Inspect Monitor Code →</span>
+                <span>⚡ Quick Blueprint →</span>
               </button>
             </div>
           </div>
@@ -1887,7 +1887,7 @@
     }
   ]
 }`,
-          github: 'https://github.com/ibrahim-a-elsayed-eng'
+          github: 'https://github.com/ibrahim-a-elsayed-eng/linux-basics-project'
         },
         watchdog: {
           title: 'Linux Log Watchdog Blueprint',
@@ -1904,7 +1904,7 @@ tail -Fn0 "$LOG_FILE" | while read -r line; do
     echo "[ALERT $(date -Iseconds)] Suspicious auth: $line" >> /var/log/watchdog_alerts.log
   fi
 done`,
-          github: 'https://github.com/ibrahim-a-elsayed-eng'
+          github: 'https://github.com/ibrahim-a-elsayed-eng/linux-basics-project'
         },
         iam: {
           title: '🛡️ AWS IAM Cloud Security & ABAC Access Control Blueprint',
@@ -1934,7 +1934,7 @@ done`,
     }
   ]
 }`,
-          github: 'https://github.com/ibrahim-a-elsayed-eng'
+          github: 'https://github.com/ibrahim-a-elsayed-eng/linux-basics-project'
         },
         disk: {
           title: 'Disk Space Monitor Blueprint',
@@ -1952,7 +1952,7 @@ df -P | awk -v max="$THRESHOLD" 'NR>1 {
     printf "[WARN] Partition %s at %d%% (%s)\\n", $1, usage, $6
   }
 }'`,
-          github: 'https://github.com/ibrahim-a-elsayed-eng'
+          github: 'https://github.com/ibrahim-a-elsayed-eng/linux-basics-project'
         }
       };
 

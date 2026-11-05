@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Automated Linux Disk Space Monitor & Proactive Alerting Case Study by Ibrahim Ahmed | Cloud Engineer & Tech Magician" />
+  <title>Disk Space Monitor Case Study | Ibrahim Ahmed</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-deep: #06050c;
+      --bg-surface: #0e0b1c;
+      --bg-card: rgba(18, 14, 36, 0.85);
+      --magenta: #ff007f;
+      --magenta-glow: rgba(255, 0, 127, 0.45);
+      --purple: #9d4edd;
+      --electric-blue: #00f0ff;
+      --blue-glow: rgba(0, 240, 255, 0.4);
+      --text-main: #f4f0ff;
+      --text-muted: #a69ec0;
+      --border-subtle: rgba(157, 78, 221, 0.28);
+      --border-neon: rgba(255, 0, 127, 0.65);
+      --gradient-aura: linear-gradient(135deg, var(--magenta) 0%, var(--purple) 50%, var(--electric-blue) 100%);
+      --gradient-text: linear-gradient(90deg, #ff2a9d 0%, #c77dff 50%, #00f0ff 100%);
+      --shadow-aura: 0 0 28px rgba(255, 0, 127, 0.25), 0 0 60px rgba(157, 78, 221, 0.15);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-deep);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.7;
+      min-height: 100vh;
+      position: relative;
+      background:
+        radial-gradient(circle at 15% 15%, rgba(255, 0, 127, 0.12), transparent 40%),
+        radial-gradient(circle at 85% 30%, rgba(0, 240, 255, 0.1), transparent 38%),
+        radial-gradient(circle at 50% 85%, rgba(157, 78, 221, 0.14), transparent 45%),
+        var(--bg-deep);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(157, 78, 221, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(157, 78, 221, 0.045) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: rgba(6, 5, 12, 0.85);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 1rem 1.5rem;
+    }
+
+    .header-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--electric-blue);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.92rem;
+      transition: var(--transition);
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      padding: 0.45rem 1rem;
+      border-radius: var(--radius-md);
+    }
+
+    .back-btn:hover {
+      background: var(--electric-blue);
+      color: #06050c;
+      box-shadow: 0 0 16px var(--blue-glow);
+      transform: translateX(-3px);
+    }
+
+    .badge-rank {
+      font-family: 'Cinzel', serif;
+      color: var(--magenta);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    main {
+      position: relative;
+      z-index: 2;
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 6rem;
+    }
+
+    .hero-case {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      color: var(--electric-blue);
+      background: rgba(157, 78, 221, 0.15);
+      border: 1px solid var(--border-subtle);
+      padding: 0.35rem 1rem;
+      border-radius: 999px;
+      margin-bottom: 1.2rem;
+    }
+
+    .case-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      line-height: 1.2;
+      background: var(--gradient-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+
+    .case-subtitle {
+      color: var(--text-muted);
+      font-size: 1.12rem;
+      max-width: 780px;
+      margin: 0 auto 2rem;
+    }
+
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .spec-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.4rem;
+    }
+
+    .spec-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+      text-transform: uppercase;
+    }
+
+    .spec-value {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--electric-blue);
+    }
+
+    .section-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      margin-bottom: 2.5rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .section-card h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      color: var(--magenta);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .section-card p {
+      color: #d1c8e8;
+      font-size: 1.02rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .feature-list {
+      list-style: none;
+      display: grid;
+      gap: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      color: var(--text-main);
+    }
+
+    .feature-list li::before {
+      content: "♦";
+      color: var(--magenta);
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+
+    .code-box {
+      background: rgba(5, 4, 12, 0.95);
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin: 1.5rem 0;
+    }
+
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.65rem 1rem;
+      background: rgba(255, 255, 255, 0.04);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .copy-btn {
+      background: rgba(255, 0, 127, 0.15);
+      border: 1px solid var(--border-neon);
+      color: #fff;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: var(--transition);
+    }
+
+    .copy-btn:hover {
+      background: var(--magenta);
+    }
+
+    pre code {
+      display: block;
+      padding: 1.2rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.86rem;
+      color: #e2d9ff;
+      overflow-x: auto;
+      line-height: 1.55;
+    }
+
+    .flow-diagram {
+      background: radial-gradient(circle at center, rgba(157, 78, 221, 0.12), rgba(6, 5, 12, 0.9));
+      border: 1px dashed var(--magenta);
+      border-radius: 14px;
+      padding: 1.8rem;
+      margin: 1.5rem 0;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .flow-steps {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .flow-node {
+      background: rgba(18, 14, 36, 0.95);
+      border: 1px solid var(--electric-blue);
+      padding: 0.75rem 1.1rem;
+      border-radius: 10px;
+      color: var(--text-main);
+      font-size: 0.84rem;
+      box-shadow: 0 0 12px var(--blue-glow);
+    }
+
+    .flow-arrow {
+      color: var(--magenta);
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .cta-box {
+      text-align: center;
+      padding: 3rem 2rem;
+      background: linear-gradient(145deg, rgba(22, 16, 44, 0.9), rgba(10, 8, 24, 0.95));
+      border: 1px solid var(--magenta);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-aura);
+    }
+
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.9rem 1.8rem;
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      text-decoration: none;
+      transition: var(--transition);
+      margin: 0.5rem;
+    }
+
+    .btn-primary {
+      background: var(--gradient-aura);
+      color: #fff;
+      box-shadow: 0 0 24px var(--magenta-glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 35px var(--magenta-glow);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--electric-blue);
+      color: var(--electric-blue);
+    }
+
+    .btn-outline:hover {
+      background: rgba(0, 240, 255, 0.12);
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px var(--blue-glow);
+    }
+
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+
+    @media (max-width: 768px) {
+      .section-card { padding: 1.6rem 1.2rem; }
+      .flow-steps { flex-direction: column; }
+      .flow-arrow { transform: rotate(90deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <a href="../index.html#projects" class="back-btn">
+        <span>← Back to Main Portfolio</span>
+      </a>
+      <span class="badge-rank">JOKER ♦ // HISOKA ARCHIVES</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-case">
+      <div class="eyebrow">♦ Linux Storage Telemetry &amp; Automation ♣</div>
+      <h1 class="case-title">Linux Disk Space Monitor &amp; Health Daemon</h1>
+      <p class="case-subtitle">
+        Proactive storage health utility that audits mounted filesystems, computes usage percentages via awk and tr, triggers alerts at configurable thresholds, and executes through scheduled systemd timers.
+      </p>
+    </section>
+
+    <div class="specs-grid">
+      <div class="spec-card">
+        <div class="spec-label">Script Engine</div>
+        <div class="spec-value">Bash, df, awk, tr</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-label">Scheduler</div>
+        <div class="spec-value">Systemd Timer / Cron Daemon</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-label">Threshold Logic</div>
+        <div class="spec-value">Dynamic Check (&gt; 80% Warning)</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-label">Source Repository</div>
+        <div class="spec-value">GitHub / linux-basics-project</div>
+      </div>
+    </div>
+
+    <!-- Section 1: Problem -->
+    <section class="section-card">
+      <h2><span>1.</span> The Infrastructure Risk: Root Partition Saturation</h2>
+      <p>
+        A full filesystem (especially <code>/</code> or <code>/var</code>) is one of the most common causes of silent production outages:
+      </p>
+      <ul class="feature-list">
+        <li>Databases crash immediately when write operations or temporary tables fail.</li>
+        <li>Systemd and Linux services fail to write pidfiles, causing cascading service crashes.</li>
+        <li>SSH authentication locks out administrators if <code>/var/log/auth.log</code> or temporary sessions cannot be written.</li>
+      </ul>
+      <p>
+        <strong>The Solution:</strong> A lightweight, automated monitoring script that checks partition utilization and records warnings before reaching critical capacity.
+      </p>
+    </section>
+
+    <!-- Section 2: Flow -->
+    <section class="section-card">
+      <h2><span>2.</span> Storage Telemetry &amp; Alert Flow</h2>
+      <div class="flow-diagram">
+        <div style="color: var(--electric-blue); font-weight: 700; margin-bottom: 0.5rem;">[ Proactive Disk Health Telemetry ]</div>
+        <div class="flow-steps">
+          <div class="flow-node">Filesystem Query<br><small style="color: var(--magenta);">df -h /</small></div>
+          <span class="flow-arrow">➔</span>
+          <div class="flow-node">Awk Text Processor<br><small style="color: #00f0ff;">awk '{print $5}' | tr -d '%'</small></div>
+          <span class="flow-arrow">➔</span>
+          <div class="flow-node">Threshold Gatekeeper<br><small style="color: #8be9fd;">is usage &gt; 80%?</small></div>
+          <span class="flow-arrow">➔</span>
+          <div class="flow-node" style="border-color: #50fa7b; color: #50fa7b;">Warning Log Dispatch ✅<br><small style="color: #f1fa8c;">/var/log/disk-monitor.log</small></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Bash Script -->
+    <section class="section-card">
+      <h2><span>3.</span> Production Bash Script (disk-monitor.sh)</h2>
+      <p>
+        The shell script extracted directly from the administration toolkit:
+      </p>
+
+      <div class="code-box">
+        <div class="code-header">
+          <span>practice/disk-monitor-training/disk-monitor.sh</span>
+          <button class="copy-btn" id="copy-disk-btn" type="button">Copy Script</button>
+        </div>
+        <pre><code id="disk-code">#!/bin/bash
+usage=$(df -h / | tail -n 1 | awk '{ print $5 }' | tr -d '%')
+if [ $usage -gt 80 ]; then
+  echo "$(date) $usage warning" >> /var/log/disk-monitor/disk-monitor.log
+fi</code></pre>
+      </div>
+    </section>
+
+    <!-- Section 4: Systemd Timer Automation -->
+    <section class="section-card">
+      <h2><span>4.</span> Automated Scheduling via Systemd Timer</h2>
+      <p>
+        Configured as a periodic systemd timer for modern Linux distributions:
+      </p>
+
+      <div class="code-box">
+        <div class="code-header">
+          <span>practice/disk-monitor-training/disk-monitor.timer</span>
+          <button class="copy-btn" id="copy-timer-btn" type="button">Copy Timer</button>
+        </div>
+        <pre><code id="timer-code">[Unit]
+Description=Run disk space monitor every 10 minutes
+Documentation=man:systemd.timer(5)
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=10min
+Persistent=true
+
+[Install]
+WantedBy=timers.target</code></pre>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="cta-box">
+      <h3 style="font-family: 'Cinzel', serif; font-size: 1.8rem; margin-bottom: 0.8rem; color: #fff;">
+        Need Automated Linux System Administration?
+      </h3>
+      <p style="color: var(--text-muted); max-width: 620px; margin: 0 auto 1.8rem;">
+        Explore full bash utilities, backup strategies, and automation scripts on GitHub.
+      </p>
+      <div>
+        <a href="https://github.com/ibrahim-a-elsayed-eng/linux-basics-project" target="_blank" rel="noopener noreferrer" class="btn-action btn-primary">
+          <span>View on GitHub (linux-basics-project)</span>
+          <span>♦</span>
+        </a>
+        <a href="../index.html#contact" class="btn-action btn-outline">
+          <span>Contact Ibrahim</span>
+          <span>🃏</span>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div style="color: var(--magenta); letter-spacing: 0.5rem; margin-bottom: 0.5rem;">♠ ♥ ♦ ♣</div>
+    <p>&copy; 2026 <strong>Ibrahim Ahmed</strong> — Cloud Engineer &amp; Tech Magician. Hosted on Amazon S3.</p>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const pre = btn.closest('.code-box').querySelector('code');
+        navigator.clipboard.writeText(pre.innerText).then(() => {
+          btn.textContent = 'Copied! 🃏';
+          setTimeout(() => btn.textContent = 'Copy', 2000);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
