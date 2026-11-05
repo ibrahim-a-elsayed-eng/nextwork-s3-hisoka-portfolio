@@ -1,0 +1,1984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Ibrahim Ahmed | Cloud Engineer & Tech Magician — Portfolio showcasing AWS Cloud, Linux, Bash Automation, Networking, and Git/GitHub projects." />
+  <title>Ibrahim Ahmed | Cloud Engineer & Tech Magician</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-deep: #06050c;
+      --bg-surface: #0e0b1c;
+      --bg-card: rgba(18, 14, 36, 0.78);
+      --bg-card-hover: rgba(26, 20, 52, 0.92);
+      --magenta: #ff007f;
+      --magenta-glow: rgba(255, 0, 127, 0.45);
+      --purple: #9d4edd;
+      --purple-glow: rgba(157, 78, 221, 0.4);
+      --electric-blue: #00f0ff;
+      --blue-glow: rgba(0, 240, 255, 0.4);
+      --text-main: #f4f0ff;
+      --text-muted: #a69ec0;
+      --border-subtle: rgba(157, 78, 221, 0.25);
+      --border-neon: rgba(255, 0, 127, 0.65);
+      --gradient-aura: linear-gradient(135deg, var(--magenta) 0%, var(--purple) 50%, var(--electric-blue) 100%);
+      --gradient-text: linear-gradient(90deg, #ff2a9d 0%, #c77dff 50%, #00f0ff 100%);
+      --shadow-aura: 0 0 28px rgba(255, 0, 127, 0.22), 0 0 60px rgba(157, 78, 221, 0.12);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --transition: all 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-deep);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 15% 15%, rgba(255, 0, 127, 0.12), transparent 38%),
+        radial-gradient(circle at 85% 25%, rgba(0, 240, 255, 0.1), transparent 36%),
+        radial-gradient(circle at 50% 80%, rgba(157, 78, 221, 0.14), transparent 45%),
+        var(--bg-deep);
+      position: relative;
+      line-height: 1.6;
+    }
+
+    /* Subtle cyber-grid overlay */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(157, 78, 221, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(157, 78, 221, 0.045) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(circle at center, black 40%, transparent 90%);
+      -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 90%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    #aura-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-deep);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--magenta), var(--purple), var(--electric-blue));
+      border-radius: 4px;
+    }
+
+    /* Navigation */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(6, 5, 12, 0.78);
+      border-bottom: 1px solid var(--border-subtle);
+      transition: var(--transition);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.95rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      text-decoration: none;
+      color: var(--text-main);
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: 0.06em;
+    }
+
+    .brand-card-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: var(--gradient-aura);
+      display: grid;
+      place-items: center;
+      font-size: 1.1rem;
+      color: #fff;
+      box-shadow: 0 0 15px var(--magenta-glow);
+    }
+
+    .brand span.accent {
+      color: var(--magenta);
+      text-shadow: 0 0 10px var(--magenta-glow);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.8rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+      padding: 0.25rem 0;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text-main);
+      text-shadow: 0 0 8px var(--blue-glow);
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0%;
+      height: 2px;
+      background: var(--gradient-aura);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .nav-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      color: var(--electric-blue);
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--electric-blue);
+      box-shadow: 0 0 8px var(--electric-blue);
+      animation: pulseGlow 2s infinite;
+    }
+
+    .mobile-toggle {
+      display: none;
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      border-radius: 8px;
+      padding: 0.45rem 0.65rem;
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+
+    /* Main Container */
+    main {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    section {
+      padding: 6rem 0;
+    }
+
+    /* Section Header */
+    .section-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--electric-blue);
+      background: rgba(157, 78, 221, 0.12);
+      border: 1px solid var(--border-subtle);
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      margin-bottom: 0.85rem;
+    }
+
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.9rem, 4vw, 2.75rem);
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      background: var(--gradient-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.65rem;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      max-width: 620px;
+      margin: 0 auto;
+      font-size: 1rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 3rem;
+      padding-top: 7.5rem;
+      padding-bottom: 4rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      background: rgba(255, 0, 127, 0.1);
+      border: 1px solid rgba(255, 0, 127, 0.4);
+      color: #ff66b2;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 0 20px rgba(255, 0, 127, 0.18);
+    }
+
+    .hero-badge .suits {
+      letter-spacing: 0.15em;
+      color: var(--electric-blue);
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2.1rem, 4.5vw, 3.45rem);
+      line-height: 1.15;
+      font-weight: 800;
+      margin-bottom: 1.25rem;
+      color: var(--text-main);
+    }
+
+    .hero-title .gradient-span {
+      display: block;
+      background: var(--gradient-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 18px rgba(255, 0, 127, 0.25));
+    }
+
+    .hero-description {
+      color: var(--text-muted);
+      font-size: 1.08rem;
+      max-width: 580px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-description strong {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.85rem 1.65rem;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: var(--gradient-aura);
+      color: #fff;
+      box-shadow: 0 0 24px var(--magenta-glow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 34px rgba(255, 0, 127, 0.7), 0 0 18px var(--blue-glow);
+    }
+
+    .btn-outline {
+      background: rgba(18, 14, 36, 0.75);
+      color: var(--text-main);
+      border: 1px solid var(--border-neon);
+      box-shadow: inset 0 0 12px rgba(255, 0, 127, 0.12);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 0, 127, 0.14);
+      border-color: var(--electric-blue);
+      box-shadow: 0 0 20px var(--blue-glow);
+      transform: translateY(-2px);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--electric-blue);
+      text-shadow: 0 0 12px var(--blue-glow);
+    }
+
+    .stat-label {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* Hero Right: Cyber-Magic Joker Card + Live Terminal */
+    .hero-visual {
+      perspective: 1000px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .magician-card {
+      width: 100%;
+      max-width: 440px;
+      background: linear-gradient(160deg, rgba(24, 17, 48, 0.92), rgba(10, 8, 22, 0.96));
+      border: 1px solid rgba(255, 0, 127, 0.45);
+      border-radius: 22px;
+      padding: 1.6rem;
+      box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.65),
+        0 0 35px rgba(255, 0, 127, 0.22),
+        inset 0 0 22px rgba(0, 240, 255, 0.08);
+      position: relative;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+      transform-style: preserve-3d;
+    }
+
+    .magician-card::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: 24px;
+      background: var(--gradient-aura);
+      z-index: -1;
+      opacity: 0.45;
+      filter: blur(12px);
+    }
+
+    .card-corner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+    }
+
+    .joker-rank {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--magenta);
+      font-size: 1.1rem;
+      text-shadow: 0 0 10px var(--magenta-glow);
+    }
+
+    .aura-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      background: rgba(157, 78, 221, 0.2);
+      color: #e0aaff;
+      border: 1px solid rgba(157, 78, 221, 0.4);
+    }
+
+    .hisoka-emblem {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      padding: 0.9rem 1.15rem;
+      margin-bottom: 1rem;
+      border-radius: 14px;
+      background: radial-gradient(circle, rgba(255, 0, 127, 0.16) 0%, rgba(14, 11, 28, 0.85) 75%);
+      border: 1px solid rgba(255, 0, 127, 0.25);
+    }
+
+    /* Hero Cyber-Magic Image Frame */
+    .hero-banner-frame {
+      position: relative;
+      border-radius: 16px;
+      padding: 3px;
+      background: linear-gradient(135deg, var(--magenta), var(--purple), var(--electric-blue));
+      box-shadow:
+        0 0 26px rgba(255, 0, 127, 0.45),
+        0 0 42px rgba(0, 240, 255, 0.28);
+      margin-bottom: 1.15rem;
+      overflow: hidden;
+    }
+
+    .hero-banner-img {
+      display: block;
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 13px;
+      filter: contrast(1.06) saturate(1.12);
+      transition: transform 0.45s ease;
+    }
+
+    .magician-card:hover .hero-banner-img {
+      transform: scale(1.03);
+    }
+
+    /* Project Card Preview Banner */
+    .project-banner-wrap {
+      position: relative;
+      border-radius: 12px;
+      padding: 2px;
+      background: linear-gradient(135deg, var(--magenta), var(--electric-blue));
+      box-shadow: 0 0 18px rgba(255, 0, 127, 0.28);
+      margin-bottom: 1.15rem;
+      overflow: hidden;
+    }
+
+    .project-banner-img {
+      display: block;
+      width: 100%;
+      height: 155px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 10px;
+      transition: transform 0.4s ease;
+    }
+
+    .project-card:hover .project-banner-img {
+      transform: scale(1.04);
+    }
+
+    .emblem-symbol {
+      font-size: 2.2rem;
+      color: var(--magenta);
+      text-shadow: 0 0 16px var(--magenta);
+      animation: floatSymbol 3.5s ease-in-out infinite;
+    }
+
+    .emblem-symbol.blue {
+      color: var(--electric-blue);
+      text-shadow: 0 0 16px var(--electric-blue);
+      animation-delay: 1.75s;
+    }
+
+    .emblem-center {
+      text-align: center;
+    }
+
+    .emblem-center h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.05rem;
+      letter-spacing: 0.08em;
+      color: var(--text-main);
+    }
+
+    .emblem-center p {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--electric-blue);
+    }
+
+    .terminal-box {
+      background: rgba(5, 4, 10, 0.92);
+      border: 1px solid rgba(0, 240, 255, 0.28);
+      border-radius: 12px;
+      overflow: hidden;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+    }
+
+    .terminal-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 0.85rem;
+      background: rgba(255, 255, 255, 0.04);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .terminal-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .terminal-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .dot-magenta { background: var(--magenta); }
+    .dot-purple { background: var(--purple); }
+    .dot-blue { background: var(--electric-blue); }
+
+    .terminal-title {
+      color: var(--text-muted);
+      font-size: 0.72rem;
+    }
+
+    .terminal-body {
+      padding: 1rem;
+      min-height: 175px;
+      color: #d8d0f0;
+      line-height: 1.55;
+    }
+
+    .cmd-prompt {
+      color: var(--magenta);
+      font-weight: 700;
+    }
+
+    .cmd-path {
+      color: var(--electric-blue);
+    }
+
+    .cmd-output {
+      color: #a69ec0;
+      margin-bottom: 0.55rem;
+      display: block;
+    }
+
+    .cmd-highlight {
+      color: #00f0ff;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 14px;
+      background: var(--magenta);
+      vertical-align: middle;
+      animation: blink 1s step-end infinite;
+    }
+
+    /* Skills Section */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.4rem;
+    }
+
+    .skill-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .skill-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gradient-aura);
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-6px);
+      background: var(--bg-card-hover);
+      border-color: var(--magenta);
+      box-shadow: var(--shadow-aura);
+    }
+
+    .skill-card:hover::before {
+      opacity: 1;
+    }
+
+    .skill-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.1rem;
+    }
+
+    .skill-icon-wrap {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(255, 0, 127, 0.12);
+      border: 1px solid rgba(255, 0, 127, 0.35);
+      display: grid;
+      place-items: center;
+      color: var(--electric-blue);
+    }
+
+    .skill-icon-wrap svg {
+      width: 25px;
+      height: 25px;
+    }
+
+    .card-suit {
+      font-size: 1.35rem;
+      font-family: 'Cinzel', serif;
+      color: var(--magenta);
+      text-shadow: 0 0 10px var(--magenta-glow);
+    }
+
+    .card-suit.blue {
+      color: var(--electric-blue);
+      text-shadow: 0 0 10px var(--blue-glow);
+    }
+
+    .skill-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.45rem;
+      color: var(--text-main);
+    }
+
+    .skill-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .skill-meter {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 0.65rem;
+    }
+
+    .skill-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: var(--gradient-aura);
+      box-shadow: 0 0 12px var(--magenta-glow);
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
+
+    .skill-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      background: rgba(157, 78, 221, 0.14);
+      color: #d8b4fe;
+      border: 1px solid rgba(157, 78, 221, 0.28);
+    }
+
+    /* Projects Section */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.8rem;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .project-card::after {
+      content: attr(data-suit);
+      position: absolute;
+      right: 1.2rem;
+      bottom: 0.6rem;
+      font-size: 5rem;
+      color: rgba(255, 0, 127, 0.05);
+      pointer-events: none;
+      font-family: 'Cinzel', serif;
+      transition: var(--transition);
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--electric-blue);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6), 0 0 28px rgba(0, 240, 255, 0.2);
+    }
+
+    .project-card:hover::after {
+      color: rgba(0, 240, 255, 0.11);
+      transform: scale(1.08) rotate(-6deg);
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.2rem;
+    }
+
+    .project-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      padding: 0.28rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(0, 240, 255, 0.1);
+      color: var(--electric-blue);
+      border: 1px solid rgba(0, 240, 255, 0.35);
+    }
+
+    .project-card-num {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      color: var(--magenta);
+      font-size: 0.95rem;
+    }
+
+    .project-title {
+      font-size: 1.38rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--text-main);
+    }
+
+    .project-desc {
+      color: var(--text-muted);
+      font-size: 0.93rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .project-snippet {
+      background: rgba(5, 4, 12, 0.85);
+      border: 1px solid rgba(157, 78, 221, 0.28);
+      border-radius: 10px;
+      padding: 0.75rem 0.95rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      color: #c77dff;
+      margin-bottom: 1.35rem;
+      overflow-x: auto;
+    }
+
+    .project-snippet code {
+      white-space: pre;
+    }
+
+    .project-footer {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .tech-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      padding: 0.24rem 0.6rem;
+      border-radius: 6px;
+      background: rgba(255, 0, 127, 0.1);
+      color: #ff85c1;
+      border: 1px solid rgba(255, 0, 127, 0.28);
+    }
+
+    .project-links {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding-top: 0.85rem;
+      border-top: 1px solid rgba(157, 78, 221, 0.18);
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 0.86rem;
+      font-weight: 600;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      transition: var(--transition);
+    }
+
+    .project-link:hover {
+      color: var(--electric-blue);
+      text-shadow: 0 0 8px var(--blue-glow);
+    }
+
+    /* Contact Section */
+    .contact-wrapper {
+      background: linear-gradient(145deg, rgba(22, 16, 44, 0.88), rgba(10, 8, 24, 0.94));
+      border: 1px solid rgba(255, 0, 127, 0.4);
+      border-radius: 24px;
+      padding: 3.2rem 2.5rem;
+      box-shadow: var(--shadow-aura);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .contact-wrapper::before {
+      content: "♠ ♥ ♦ ♣";
+      position: absolute;
+      top: 1.2rem;
+      right: 1.8rem;
+      font-size: 1.1rem;
+      letter-spacing: 0.35rem;
+      color: rgba(255, 0, 127, 0.35);
+    }
+
+    .contact-email-box {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.85rem;
+      background: rgba(6, 5, 12, 0.85);
+      border: 1px solid rgba(0, 240, 255, 0.38);
+      padding: 0.85rem 1.35rem;
+      border-radius: 14px;
+      margin: 1.8rem 0;
+      max-width: 100%;
+    }
+
+    .email-address {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.85rem, 2.5vw, 1.05rem);
+      color: var(--electric-blue);
+      text-decoration: none;
+      word-break: break-all;
+    }
+
+    .copy-btn {
+      background: rgba(255, 0, 127, 0.16);
+      border: 1px solid rgba(255, 0, 127, 0.5);
+      color: var(--text-main);
+      padding: 0.45rem 0.85rem;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .copy-btn:hover {
+      background: var(--magenta);
+      color: #fff;
+      box-shadow: 0 0 15px var(--magenta-glow);
+    }
+
+    .social-grid {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.15rem;
+      margin-top: 1rem;
+    }
+
+    .social-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.9rem 1.5rem;
+      border-radius: 14px;
+      background: rgba(18, 14, 36, 0.85);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .social-card svg {
+      width: 20px;
+      height: 20px;
+      color: var(--magenta);
+      transition: var(--transition);
+    }
+
+    .social-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--electric-blue);
+      box-shadow: 0 0 22px var(--blue-glow);
+    }
+
+    .social-card:hover svg {
+      color: var(--electric-blue);
+    }
+
+    /* Modal for Project Blueprint */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 3, 10, 0.82);
+      backdrop-filter: blur(8px);
+      display: none;
+      place-items: center;
+      z-index: 200;
+      padding: 1.5rem;
+    }
+
+    .modal-backdrop.open {
+      display: grid;
+    }
+
+    .modal-content {
+      background: #100c22;
+      border: 1px solid var(--magenta);
+      border-radius: 18px;
+      max-width: 600px;
+      width: 100%;
+      padding: 2rem;
+      box-shadow: 0 0 40px rgba(255, 0, 127, 0.35);
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.1rem;
+      right: 1.2rem;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    .modal-close:hover {
+      color: var(--magenta);
+    }
+
+    .modal-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+      color: var(--electric-blue);
+    }
+
+    .modal-body {
+      color: var(--text-muted);
+      font-size: 0.94rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .modal-list {
+      list-style: none;
+      display: grid;
+      gap: 0.55rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .modal-list li {
+      font-size: 0.88rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .modal-list li::before {
+      content: "♦";
+      color: var(--magenta);
+    }
+
+    .modal-code {
+      background: rgba(5, 4, 12, 0.92);
+      border: 1px solid rgba(0, 240, 255, 0.32);
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--electric-blue);
+      overflow-x: auto;
+      margin-bottom: 1.4rem;
+      white-space: pre;
+    }
+
+    .modal-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .copy-toast {
+      position: fixed;
+      bottom: 1.6rem;
+      right: 1.6rem;
+      z-index: 300;
+      background: rgba(16, 12, 34, 0.96);
+      border: 1px solid var(--electric-blue);
+      box-shadow: 0 0 24px var(--blue-glow), 0 0 16px var(--magenta-glow);
+      color: var(--text-main);
+      padding: 0.8rem 1.2rem;
+      border-radius: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      opacity: 0;
+      transform: translateY(16px);
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+
+    .copy-toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Footer */
+    footer {
+      position: relative;
+      z-index: 2;
+      border-top: 1px solid var(--border-subtle);
+      padding: 2.2rem 1.5rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+
+    footer .suits-divider {
+      color: var(--magenta);
+      letter-spacing: 0.5rem;
+      margin-bottom: 0.6rem;
+      font-size: 1rem;
+    }
+
+    /* Animations */
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(1.2); }
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    @keyframes floatSymbol {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-6px) rotate(6deg); }
+    }
+
+    /* Responsive */
+    @media (max-width: 920px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-top: 6.5rem;
+      }
+
+      .hero-description {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .nav-status {
+        display: none;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .mobile-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(8, 6, 18, 0.96);
+        border-bottom: 1px solid var(--border-subtle);
+        flex-direction: column;
+        padding: 1.25rem;
+        gap: 1rem;
+        display: none;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .contact-wrapper {
+        padding: 2.2rem 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Cyber-Magic Aura Canvas -->
+  <canvas id="aura-canvas" aria-hidden="true"></canvas>
+
+  <!-- Navigation -->
+  <header>
+    <div class="nav-container">
+      <a href="#hero" class="brand">
+        <span class="brand-card-icon">🃏</span>
+        <span>IBRAHIM <span class="accent">AHMED</span></span>
+      </a>
+
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Menu">☰</button>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#hero" class="active">Deck</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="https://nextwork.ai/portfolio/hemaa" target="_blank" rel="noopener noreferrer">View My NextWork Portfolio</a></li>
+        <li><a href="https://github.com/ibrahim-a-elsayed-eng" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
+        <li><a href="https://www.linkedin.com/in/ibrahim-ahmed-elsayed-5a2aa4446" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li>
+      </ul>
+
+      <div class="nav-status">
+        <span class="status-dot"></span>
+        <span>AWS S3 :: ONLINE</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span>HISOKA THE TECH MAGICIAN</span>
+          <span class="suits">♠ ♥ ♦ ♣</span>
+        </div>
+
+        <h1 class="hero-title">
+          Ibrahim Ahmed | <span class="gradient-span">Cloud Engineer &amp; Tech Magician</span>
+        </h1>
+
+        <p class="hero-description">
+          Crafting resilient <strong>AWS Cloud architectures</strong>, self-healing <strong>Linux environments</strong>, and automated <strong>Bash spells</strong> with sleight-of-hand precision. Turning complex infrastructure challenges into seamless, high-availability illusions.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">
+            <span>Explore Featured Projects</span>
+            <span>♦</span>
+          </a>
+          <a href="#contact" class="btn btn-outline">
+            <span>Summon / Contact</span>
+            <span>♠</span>
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-value">99.99%</span>
+            <span class="stat-label">S3 Durability &amp; Uptime</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">5+</span>
+            <span class="stat-label">Core Cloud &amp; OS Pillars</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">24/7</span>
+            <span class="stat-label">Automated Daemons</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cyber-Magic Card & Live Terminal -->
+      <div class="hero-visual">
+        <div class="magician-card" id="tilt-card">
+          <div class="card-corner">
+            <div class="joker-rank">
+              <span>JOKER</span>
+              <span>★</span>
+            </div>
+            <span class="aura-tag">AURA :: BUNGEE_CLOUD</span>
+          </div>
+
+          <div class="hisoka-emblem">
+            <span class="emblem-symbol">♠</span>
+            <div class="emblem-center">
+              <h3>TECH MAGICIAN</h3>
+              <p>CLOUD &amp; LINUX ARCHITECT</p>
+            </div>
+            <span class="emblem-symbol blue">♦</span>
+          </div>
+
+          <div class="hero-banner-frame">
+            <img
+              src="./hisoka-banner.jpg"
+              alt="Ibrahim Ahmed — Hisoka The Tech Magician Banner"
+              class="hero-banner-img"
+            />
+          </div>
+
+          <div class="terminal-box">
+            <div class="terminal-bar">
+              <div class="terminal-dots">
+                <span class="dot-magenta"></span>
+                <span class="dot-purple"></span>
+                <span class="dot-blue"></span>
+              </div>
+              <span class="terminal-title">ibrahim@hisoka-cloud:~</span>
+            </div>
+            <div class="terminal-body">
+              <div>
+                <span class="cmd-prompt">ibrahim@cloud</span>:<span class="cmd-path">~</span>$ ./cast_illusion.sh --target aws
+              </div>
+              <span class="cmd-output">
+                [+] Initializing Cyber-Magic Aura...<br />
+                [+] Provisioning S3 Bucket &amp; IAM Policy...<br />
+                [+] Watchdog &amp; Disk Daemons: <span class="cmd-highlight">ACTIVE</span>
+              </span>
+              <div>
+                <span class="cmd-prompt">ibrahim@cloud</span>:<span class="cmd-path">~</span>$ <span id="typed-cmd"></span><span class="cursor"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+      <div class="section-header">
+        <div class="section-eyebrow">♠ Hisoka's Arsenal ♦</div>
+        <h2 class="section-title">Core Cloud &amp; System Skills</h2>
+        <p class="section-subtitle">
+          Every magician masters their deck. Here are the five foundational pillars powering my cloud infrastructure and automation workflows.
+        </p>
+      </div>
+
+      <div class="skills-grid">
+        <!-- Skill 1: Linux -->
+        <article class="skill-card">
+          <div>
+            <div class="skill-top">
+              <div class="skill-icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="3" width="20" height="14" rx="2" />
+                  <path d="M8 21h8M12 17v4M6 8l3 3-3 3M11 14h5" />
+                </svg>
+              </div>
+              <span class="card-suit">♠</span>
+            </div>
+            <h3 class="skill-name">Linux</h3>
+            <p class="skill-desc">
+              System administration, systemd service hardening, user/permission security, process tuning, and log analysis across Ubuntu, Debian, and RHEL/Amazon Linux.
+            </p>
+          </div>
+          <div>
+            <div class="skill-meter"><div class="skill-fill" style="width: 94%"></div></div>
+            <div class="skill-tags">
+              <span class="skill-tag">systemd</span>
+              <span class="skill-tag">chmod/chown</span>
+              <span class="skill-tag">journalctl</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Skill 2: Bash -->
+        <article class="skill-card">
+          <div>
+            <div class="skill-top">
+              <div class="skill-icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 17l6-6-6-6M12 19h8" />
+                </svg>
+              </div>
+              <span class="card-suit blue">♦</span>
+            </div>
+            <h3 class="skill-name">Bash</h3>
+            <p class="skill-desc">
+              Writing idempotent shell scripts, cron-scheduled health checks, automated log rotation, regex parsing with awk/sed/grep, and real-time alert pipelines.
+            </p>
+          </div>
+          <div>
+            <div class="skill-meter"><div class="skill-fill" style="width: 92%"></div></div>
+            <div class="skill-tags">
+              <span class="skill-tag">cron</span>
+              <span class="skill-tag">awk / sed</span>
+              <span class="skill-tag">automation</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Skill 3: Networking -->
+        <article class="skill-card">
+          <div>
+            <div class="skill-top">
+              <div class="skill-icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="5" r="3" />
+                  <circle cx="5" cy="19" r="3" />
+                  <circle cx="19" cy="19" r="3" />
+                  <path d="M10.5 7.5L6.5 16.5M13.5 7.5l4 9M8 19h8" />
+                </svg>
+              </div>
+              <span class="card-suit">♥</span>
+            </div>
+            <h3 class="skill-name">Networking</h3>
+            <p class="skill-desc">
+              TCP/IP fundamentals, DNS resolution, CIDR subnetting, firewalls, SSH tunneling, HTTP/HTTPS routing, and packet inspection for cloud connectivity.
+            </p>
+          </div>
+          <div>
+            <div class="skill-meter"><div class="skill-fill" style="width: 88%"></div></div>
+            <div class="skill-tags">
+              <span class="skill-tag">TCP/IP</span>
+              <span class="skill-tag">DNS &amp; CIDR</span>
+              <span class="skill-tag">SSH / TLS</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Skill 4: Git/GitHub -->
+        <article class="skill-card">
+          <div>
+            <div class="skill-top">
+              <div class="skill-icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="6" cy="6" r="3" />
+                  <circle cx="6" cy="18" r="3" />
+                  <circle cx="18" cy="12" r="3" />
+                  <path d="M6 9v6M9 6h4a2 2 0 0 1 2 2v1" />
+                </svg>
+              </div>
+              <span class="card-suit blue">♣</span>
+            </div>
+            <h3 class="skill-name">Git/GitHub</h3>
+            <p class="skill-desc">
+              Version control mastery, branching workflows, pull request reviews, conflict resolution, and GitHub Actions for continuous cloud deployment.
+            </p>
+          </div>
+          <div>
+            <div class="skill-meter"><div class="skill-fill" style="width: 90%"></div></div>
+            <div class="skill-tags">
+              <span class="skill-tag">Git Flow</span>
+              <span class="skill-tag">GitHub CLI</span>
+              <span class="skill-tag">CI/CD</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Skill 5: AWS Cloud -->
+        <article class="skill-card">
+          <div>
+            <div class="skill-top">
+              <div class="skill-icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
+                </svg>
+              </div>
+              <span class="card-suit">🃏</span>
+            </div>
+            <h3 class="skill-name">AWS Cloud</h3>
+            <p class="skill-desc">
+              Architecting scalable cloud solutions with Amazon S3 static hosting, IAM least-privilege policies, EC2 instances, VPC networking, and CloudWatch monitoring.
+            </p>
+          </div>
+          <div>
+            <div class="skill-meter"><div class="skill-fill" style="width: 93%"></div></div>
+            <div class="skill-tags">
+              <span class="skill-tag">Amazon S3</span>
+              <span class="skill-tag">EC2 &amp; IAM</span>
+              <span class="skill-tag">VPC</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Featured Projects Section -->
+    <section id="projects">
+      <div class="section-header">
+        <div class="section-eyebrow">♣ Signature Illusions ♥</div>
+        <h2 class="section-title">Featured Projects</h2>
+        <p class="section-subtitle">
+          Production-ready cloud deployments and Linux automation scripts engineered for reliability, security, and observability.
+        </p>
+      </div>
+
+      <div class="projects-grid">
+        <!-- Project 1: AWS S3 Static Hosting -->
+        <article class="project-card" data-suit="♠">
+          <div>
+            <div class="project-header">
+              <span class="project-badge">Cloud Infrastructure</span>
+              <span class="project-card-num">ACE ♠</span>
+            </div>
+            <div class="project-banner-wrap">
+              <img
+                src="./hisoka-banner.jpg"
+                alt="AWS S3 Static Hosting Preview Banner"
+                class="project-banner-img"
+              />
+            </div>
+            <h3 class="project-title">AWS S3 Static Hosting</h3>
+            <p class="project-desc">
+              Configured a highly available, globally accessible static portfolio website on Amazon S3. Engineered custom bucket policies, public access controls, static website endpoints, and custom S3 error handling (`error.html`).
+            </p>
+            <div class="project-snippet">
+              <code>aws s3 website s3://hisoka-portfolio/ \
+  --index-document index.html \
+  --error-document error.html</code>
+            </div>
+          </div>
+
+          <div class="project-footer">
+            <div class="project-tech">
+              <span class="tech-pill">AWS S3</span>
+              <span class="tech-pill">Bucket Policy</span>
+              <span class="tech-pill">IAM</span>
+              <span class="tech-pill">HTML/CSS/JS</span>
+            </div>
+            <div class="project-links">
+              <button class="project-link" type="button" data-project="s3">
+                <span>🔍 View Architecture</span>
+              </button>
+              <button class="project-link" type="button" data-project="s3">
+                <span>⚡ Inspect Code &amp; Policy →</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2: Linux Log Watchdog -->
+        <article class="project-card" data-suit="♥">
+          <div>
+            <div class="project-header">
+              <span class="project-badge">Security &amp; Observability</span>
+              <span class="project-card-num">KING ♥</span>
+            </div>
+            <h3 class="project-title">Linux Log Watchdog</h3>
+            <p class="project-desc">
+              Automated Bash daemon that continuously inspects `/var/log/auth.log` and `/var/log/syslog` for SSH brute-force attempts, critical kernel errors, and unauthorized privilege escalations with instant incident reporting.
+            </p>
+            <div class="project-snippet">
+              <code>tail -Fn0 /var/log/auth.log | \
+  grep --line-buffered "Failed password"</code>
+            </div>
+          </div>
+
+          <div class="project-footer">
+            <div class="project-tech">
+              <span class="tech-pill">Linux</span>
+              <span class="tech-pill">Bash</span>
+              <span class="tech-pill">systemd</span>
+              <span class="tech-pill">grep / awk</span>
+            </div>
+            <div class="project-links">
+              <button class="project-link" type="button" data-project="watchdog">
+                <span>🔍 View Architecture</span>
+              </button>
+              <button class="project-link" type="button" data-project="watchdog">
+                <span>⚡ Inspect Bash Script →</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3: Disk Space Monitor -->
+        <article class="project-card" data-suit="♦">
+          <div>
+            <div class="project-header">
+              <span class="project-badge">System Automation</span>
+              <span class="project-card-num">JOKER ♦</span>
+            </div>
+            <h3 class="project-title">Disk Space Monitor</h3>
+            <p class="project-desc">
+              Proactive storage health utility that audits mounted filesystems via `df -h`, detects partitions crossing configurable threshold limits (e.g., 80%), prunes stale temporary caches, and dispatches formatted alerts.
+            </p>
+            <div class="project-snippet">
+              <code>df -P | awk 'NR&gt;1 {gsub("%","",$5);
+  if ($5 &gt;= 80) print $6, $5"%"}'</code>
+            </div>
+          </div>
+
+          <div class="project-footer">
+            <div class="project-tech">
+              <span class="tech-pill">Bash Scripting</span>
+              <span class="tech-pill">Cron Jobs</span>
+              <span class="tech-pill">Linux FS</span>
+              <span class="tech-pill">Alerting</span>
+            </div>
+            <div class="project-links">
+              <button class="project-link" type="button" data-project="disk">
+                <span>🔍 View Architecture</span>
+              </button>
+              <button class="project-link" type="button" data-project="disk">
+                <span>⚡ Inspect Monitor Code →</span>
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <div class="contact-wrapper">
+        <div class="section-eyebrow">🃏 Draw A Card 🃏</div>
+        <h2 class="section-title">Summon The Tech Magician</h2>
+        <p class="section-subtitle">
+          Looking for a dedicated Cloud Engineer to build, automate, and safeguard your AWS &amp; Linux infrastructure? Let's connect.
+        </p>
+
+        <div class="contact-email-box">
+          <a href="mailto:ibrahim.a.elsayed.eng@gmail.com" class="email-address email-action-trigger" id="email-text">
+            ibrahim.a.elsayed.eng@gmail.com
+          </a>
+          <a href="mailto:ibrahim.a.elsayed.eng@gmail.com" class="copy-btn email-action-trigger" id="copy-email-btn" style="text-decoration: none;">
+            Email &amp; Copy
+          </a>
+        </div>
+
+        <div class="social-grid">
+          <a href="mailto:ibrahim.a.elsayed.eng@gmail.com" class="social-card email-action-trigger" id="direct-email-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+            </svg>
+            <span>ibrahim.a.elsayed.eng@gmail.com</span>
+          </a>
+
+          <a href="https://github.com/ibrahim-a-elsayed-eng" target="_blank" rel="noopener noreferrer" class="social-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+              <path d="M9 18c-4.51 2-5-2-7-2" />
+            </svg>
+            <span>GitHub Profile</span>
+          </a>
+
+          <a href="https://www.linkedin.com/in/ibrahim-ahmed-elsayed-5a2aa4446" target="_blank" rel="noopener noreferrer" class="social-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+              <rect x="2" y="9" width="4" height="12" />
+              <circle cx="4" cy="4" r="2" />
+            </svg>
+            <span>LinkedIn Network</span>
+          </a>
+
+          <a href="https://nextwork.ai/portfolio/hemaa" target="_blank" rel="noopener noreferrer" class="social-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5z" />
+              <path d="M2 17l10 5 10-5" />
+              <path d="M2 12l10 5 10-5" />
+            </svg>
+            <span>View My NextWork Portfolio</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Copy Notification Toast -->
+  <div class="copy-toast" id="copy-toast" role="status" aria-live="polite">
+    🃏 Copied ibrahim.a.elsayed.eng@gmail.com to clipboard &amp; opening mail client!
+  </div>
+
+  <!-- Project Details Modal -->
+  <div class="modal-backdrop" id="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-content">
+      <button class="modal-close" id="modal-close" aria-label="Close modal">&times;</button>
+      <h3 class="modal-title" id="modal-title">Project Architecture</h3>
+      <p class="modal-body" id="modal-body"></p>
+      <ul class="modal-list" id="modal-list"></ul>
+      <pre class="modal-code" id="modal-code"></pre>
+      <div class="modal-actions">
+        <a
+          href="https://github.com/ibrahim-a-elsayed-eng"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-primary"
+          id="modal-github-link"
+        >
+          <span>View on GitHub</span>
+          <span>♠</span>
+        </a>
+        <button class="btn btn-outline" id="modal-ok" type="button">Close Blueprint ♦</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="suits-divider">♠ ♥ ♦ ♣</div>
+    <p>
+      &copy; <span id="year"></span> <strong>Ibrahim Ahmed</strong> — Cloud Engineer &amp; Tech Magician. Hosted on Amazon S3.
+      &nbsp;|&nbsp;
+      <a href="https://nextwork.ai/portfolio/hemaa" target="_blank" rel="noopener noreferrer" style="color: var(--electric-blue); text-decoration: none; font-weight: 600;">View My NextWork Portfolio</a>
+      &nbsp;&bull;&nbsp;
+      <a href="https://github.com/ibrahim-a-elsayed-eng" target="_blank" rel="noopener noreferrer" style="color: var(--electric-blue); text-decoration: none;">GitHub</a>
+      &nbsp;&bull;&nbsp;
+      <a href="https://www.linkedin.com/in/ibrahim-ahmed-elsayed-5a2aa4446" target="_blank" rel="noopener noreferrer" style="color: var(--magenta); text-decoration: none;">LinkedIn</a>
+    </p>
+  </footer>
+
+  <!-- Self-Contained JavaScript -->
+  <script>
+    (function () {
+      // Dynamic Year
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Mobile Navigation Toggle
+      const mobileToggle = document.getElementById('mobile-toggle');
+      const navLinks = document.getElementById('nav-links');
+      mobileToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('open');
+      });
+
+      navLinks.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => navLinks.classList.remove('open'));
+      });
+
+      // Terminal Typewriter Effect
+      const commands = [
+        'aws s3 sync . s3://ibrahim-hisoka-cloud',
+        './log_watchdog.sh --daemon --strict',
+        './disk_monitor.sh --threshold 80%',
+        'git push origin main --tags'
+      ];
+      const typedEl = document.getElementById('typed-cmd');
+      let cmdIdx = 0;
+      let charIdx = 0;
+      let deleting = false;
+
+      function typeLoop() {
+        const current = commands[cmdIdx];
+        if (!deleting) {
+          typedEl.textContent = current.slice(0, ++charIdx);
+          if (charIdx === current.length) {
+            deleting = true;
+            setTimeout(typeLoop, 1800);
+            return;
+          }
+          setTimeout(typeLoop, 55);
+        } else {
+          typedEl.textContent = current.slice(0, --charIdx);
+          if (charIdx === 0) {
+            deleting = false;
+            cmdIdx = (cmdIdx + 1) % commands.length;
+            setTimeout(typeLoop, 350);
+            return;
+          }
+          setTimeout(typeLoop, 28);
+        }
+      }
+      typeLoop();
+
+      // 3D Card Tilt Effect on Hero Card
+      const tiltCard = document.getElementById('tilt-card');
+      if (tiltCard) {
+        tiltCard.addEventListener('mousemove', (e) => {
+          const rect = tiltCard.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const rotateY = ((x / rect.width) - 0.5) * 12;
+          const rotateX = ((0.5 - (y / rect.height))) * 12;
+          tiltCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+        tiltCard.addEventListener('mouseleave', () => {
+          tiltCard.style.transform = 'rotateX(0deg) rotateY(0deg)';
+        });
+      }
+
+      // Email Action Triggers (mailto: + Copy-to-Clipboard Notification)
+      const copyBtn = document.getElementById('copy-email-btn');
+      const copyToast = document.getElementById('copy-toast');
+      const emailText = 'ibrahim.a.elsayed.eng@gmail.com';
+      let toastTimer = null;
+
+      function copyToClipboardAndNotify() {
+        const showNotification = () => {
+          if (copyBtn) {
+            copyBtn.textContent = 'Copied! 🃏';
+            setTimeout(() => (copyBtn.textContent = 'Email & Copy'), 2400);
+          }
+          if (copyToast) {
+            copyToast.classList.add('show');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => copyToast.classList.remove('show'), 3200);
+          }
+        };
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(emailText).then(showNotification).catch(showNotification);
+        } else {
+          const temp = document.createElement('textarea');
+          temp.value = emailText;
+          document.body.appendChild(temp);
+          temp.select();
+          document.execCommand('copy');
+          document.body.removeChild(temp);
+          showNotification();
+        }
+      }
+
+      document.querySelectorAll('.email-action-trigger').forEach((el) => {
+        el.addEventListener('click', () => {
+          copyToClipboardAndNotify();
+        });
+      });
+
+      // Project Blueprint & Code Modal
+      const projectData = {
+        s3: {
+          title: 'AWS S3 Static Hosting Blueprint',
+          body: 'Zero-dependency static portfolio deployment engineered specifically for Amazon S3 static website hosting without broken relative asset paths.',
+          bullets: [
+            'Single-file bundle (index.html) + relative banner asset (./hisoka-banner.jpg) for reliable S3 object delivery.',
+            'Custom S3 Bucket Policy granting least-privilege public s3:GetObject read access.',
+            'Dedicated error.html document configured for graceful 404/403 S3 HTTP status handling.'
+          ],
+          code: `{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "PublicReadGetObject",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::hisoka-portfolio/*"
+    }
+  ]
+}`,
+          github: 'https://github.com/ibrahim-a-elsayed-eng'
+        },
+        watchdog: {
+          title: 'Linux Log Watchdog Blueprint',
+          body: 'Real-time security and anomaly detection script built for Linux servers to catch brute-force attacks and service failures.',
+          bullets: [
+            'Streams /var/log/auth.log and /var/log/syslog using non-blocking tail & regex filters.',
+            'Aggregates offending IP addresses and triggers automated firewall/alert actions.',
+            'Managed as a resilient systemd service with automatic restart policies.'
+          ],
+          code: `#!/usr/bin/env bash
+LOG_FILE="/var/log/auth.log"
+tail -Fn0 "$LOG_FILE" | while read -r line; do
+  if echo "$line" | grep -qE "Failed password|Invalid user"; then
+    echo "[ALERT $(date -Iseconds)] Suspicious auth: $line" >> /var/log/watchdog_alerts.log
+  fi
+done`,
+          github: 'https://github.com/ibrahim-a-elsayed-eng'
+        },
+        disk: {
+          title: 'Disk Space Monitor Blueprint',
+          body: 'Automated filesystem telemetry and self-healing storage monitor preventing production outages caused by full disks.',
+          bullets: [
+            'Parses df -P output across all critical mount points (/var, /home, /).',
+            'Triggers automated log rotation and cache cleanup when usage crosses threshold.',
+            'Scheduled via cron with structured timestamped reports.'
+          ],
+          code: `#!/usr/bin/env bash
+THRESHOLD=80
+df -P | awk -v max="$THRESHOLD" 'NR>1 {
+  usage=$5; gsub("%","",usage);
+  if (usage+0 >= max) {
+    printf "[WARN] Partition %s at %d%% (%s)\\n", $1, usage, $6
+  }
+}'`,
+          github: 'https://github.com/ibrahim-a-elsayed-eng'
+        }
+      };
+
+      const modal = document.getElementById('project-modal');
+      const modalTitle = document.getElementById('modal-title');
+      const modalBody = document.getElementById('modal-body');
+      const modalList = document.getElementById('modal-list');
+      const modalCode = document.getElementById('modal-code');
+      const modalGithubLink = document.getElementById('modal-github-link');
+      const closeModal = () => modal.classList.remove('open');
+
+      document.querySelectorAll('[data-project]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const key = btn.getAttribute('data-project');
+          const info = projectData[key];
+          if (!info) return;
+          modalTitle.textContent = info.title;
+          modalBody.textContent = info.body;
+          modalList.innerHTML = info.bullets.map((b) => `<li>${b}</li>`).join('');
+          modalCode.textContent = info.code;
+          modalGithubLink.href = info.github;
+          modal.classList.add('open');
+        });
+      });
+
+      document.getElementById('modal-close').addEventListener('click', closeModal);
+      document.getElementById('modal-ok').addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+      });
+
+      // Cyber-Magic Aura Particle Canvas
+      const canvas = document.getElementById('aura-canvas');
+      const ctx = canvas.getContext('2d');
+      let particles = [];
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      const colors = ['#ff007f', '#9d4edd', '#00f0ff'];
+      const count = Math.min(48, Math.floor(window.innerWidth / 28));
+
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 2.2 + 0.8,
+          vx: (Math.random() - 0.5) * 0.45,
+          vy: (Math.random() - 0.5) * 0.45,
+          color: colors[i % colors.length],
+          alpha: Math.random() * 0.55 + 0.2
+        });
+      }
+
+      function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.x < 0) p.x = canvas.width;
+          if (p.x > canvas.width) p.x = 0;
+          if (p.y < 0) p.y = canvas.height;
+          if (p.y > canvas.height) p.y = 0;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = p.alpha;
+          ctx.shadowBlur = 12;
+          ctx.shadowColor = p.color;
+          ctx.fill();
+
+          // Connect nearby aura nodes ("Bungee Gum" threads)
+          for (let j = i + 1; j < particles.length; j++) {
+            const p2 = particles[j];
+            const dx = p.x - p2.x;
+            const dy = p.y - p2.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 130) {
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.strokeStyle = p.color;
+              ctx.globalAlpha = (1 - dist / 130) * 0.14;
+              ctx.lineWidth = 0.8;
+              ctx.stroke();
+            }
+          }
+        }
+        requestAnimationFrame(animateParticles);
+      }
+      animateParticles();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 | Card Not In The Deck — Ibrahim Ahmed</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800&family=JetBrains+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-deep: #06050c;
+      --bg-card: rgba(18, 14, 36, 0.86);
+      --magenta: #ff007f;
+      --magenta-glow: rgba(255, 0, 127, 0.5);
+      --purple: #9d4edd;
+      --electric-blue: #00f0ff;
+      --blue-glow: rgba(0, 240, 255, 0.45);
+      --text-main: #f4f0ff;
+      --text-muted: #a69ec0;
+      --gradient-aura: linear-gradient(135deg, var(--magenta) 0%, var(--purple) 50%, var(--electric-blue) 100%);
+      --gradient-text: linear-gradient(90deg, #ff2a9d 0%, #c77dff 50%, #00f0ff 100%);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 1.5rem;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text-main);
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 0, 127, 0.15), transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(0, 240, 255, 0.12), transparent 40%),
+        var(--bg-deep);
+      overflow: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(157, 78, 221, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(157, 78, 221, 0.05) 1px, transparent 1px);
+      background-size: 44px 44px;
+      pointer-events: none;
+    }
+
+    .error-card {
+      position: relative;
+      z-index: 2;
+      max-width: 540px;
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 0, 127, 0.5);
+      border-radius: 24px;
+      padding: 2.8rem 2.2rem;
+      text-align: center;
+      box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.75),
+        0 0 40px rgba(255, 0, 127, 0.25),
+        inset 0 0 24px rgba(0, 240, 255, 0.08);
+      backdrop-filter: blur(16px);
+    }
+
+    .suits-row {
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      letter-spacing: 0.6rem;
+      color: var(--magenta);
+      text-shadow: 0 0 12px var(--magenta-glow);
+      margin-bottom: 1rem;
+    }
+
+    .error-code {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(4rem, 12vw, 6.2rem);
+      font-weight: 800;
+      line-height: 1;
+      background: var(--gradient-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 22px rgba(255, 0, 127, 0.35));
+      margin-bottom: 0.5rem;
+    }
+
+    .error-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.45rem;
+      margin-bottom: 0.85rem;
+      color: var(--text-main);
+    }
+
+    .error-desc {
+      color: var(--text-muted);
+      font-size: 0.96rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .terminal-log {
+      background: rgba(5, 4, 12, 0.9);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--electric-blue);
+      text-align: left;
+      margin-bottom: 1.8rem;
+    }
+
+    .terminal-log span {
+      color: var(--magenta);
+    }
+
+    .btn-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.9rem 1.8rem;
+      border-radius: 12px;
+      background: var(--gradient-aura);
+      color: #fff;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 0 25px var(--magenta-glow);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .btn-home:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 35px var(--magenta-glow), 0 0 20px var(--blue-glow);
+    }
+  </style>
+</head>
+<body>
+  <main class="error-card">
+    <div class="suits-row">♠ ♥ 🃏 ♦ ♣</div>
+    <div class="error-code">404</div>
+    <h1 class="error-title">Texture Surprise! Page Vanished</h1>
+    <p class="error-desc">
+      The S3 object or route you drew isn't in Hisoka's deck. It may have been moved, renamed, or concealed by an illusion.
+    </p>
+
+    <div class="terminal-log">
+      <div><span>[AWS S3 ERROR]</span> :: NoSuchKey / HTTP 404</div>
+      <div><span>[PATH]</span> :: <code id="missing-path">/unknown</code></div>
+      <div><span>[STATUS]</span> :: Redirecting aura to index.html...</div>
+    </div>
+
+    <a href="index.html" class="btn-home">
+      <span>Return to Main Deck</span>
+      <span>🃏</span>
+    </a>
+  </main>
+
+  <script>
+    document.getElementById('missing-path').textContent = window.location.pathname || '/missing-card';
+  </script>
+</body>
+</html>
