@@ -1544,6 +1544,49 @@
           </div>
         </article>
 
+        <!-- Project: AWS IAM Cloud Security & ABAC Access Control -->
+        <article class="project-card" data-suit="♦">
+          <div>
+            <div class="project-header">
+              <span class="project-badge">Cloud Security &amp; IAM</span>
+              <span class="project-card-num">QUEEN ♦</span>
+            </div>
+            <div class="project-banner-wrap">
+              <img
+                src="./iam-abac-banner.jpg"
+                alt="AWS IAM Cloud Security &amp; ABAC Access Control Banner"
+                class="project-banner-img"
+              />
+            </div>
+            <h3 class="project-title">🛡️ AWS IAM Cloud Security &amp; ABAC Access Control</h3>
+            <p class="project-desc">
+              Leveling Up: From S3 Bucket to IAM Least Privilege Security! Engineered Attribute-Based Access Control (ABAC), fine-grained least-privilege IAM policies, resource tag boundaries, and GuardDuty / Security Hub monitoring.
+            </p>
+            <div class="project-snippet">
+              <code>"Condition": {
+  "StringEquals": {"aws:PrincipalTag/Department": "${aws:ResourceTag/Department}"}
+}</code>
+            </div>
+          </div>
+
+          <div class="project-footer">
+            <div class="project-tech">
+              <span class="tech-pill">AWS IAM</span>
+              <span class="tech-pill">ABAC &amp; RBAC</span>
+              <span class="tech-pill">Least Privilege</span>
+              <span class="tech-pill">Security Hub</span>
+            </div>
+            <div class="project-links">
+              <button class="project-link" type="button" data-project="iam">
+                <span>🔍 View Architecture</span>
+              </button>
+              <button class="project-link" type="button" data-project="iam">
+                <span>⚡ Inspect IAM Policy →</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
         <!-- Project 2: Linux Log Watchdog -->
         <article class="project-card" data-suit="♥">
           <div>
@@ -1861,6 +1904,36 @@ tail -Fn0 "$LOG_FILE" | while read -r line; do
     echo "[ALERT $(date -Iseconds)] Suspicious auth: $line" >> /var/log/watchdog_alerts.log
   fi
 done`,
+          github: 'https://github.com/ibrahim-a-elsayed-eng'
+        },
+        iam: {
+          title: '🛡️ AWS IAM Cloud Security & ABAC Access Control Blueprint',
+          body: 'Fine-grained cloud security and least privilege governance architecture leveraging AWS IAM Policies, Attribute-Based Access Control (ABAC), and GuardDuty monitoring.',
+          bullets: [
+            'Attribute-Based Access Control (ABAC) using aws:PrincipalTag and aws:ResourceTag matching to scale permissions dynamically without role explosion.',
+            'Strict least-privilege IAM policies preventing unauthorized S3 deletion, privilege escalation, and unintended cross-account access.',
+            'Continuous monitoring & audit trails using AWS CloudTrail, GuardDuty, and Security Hub dashboard.'
+          ],
+          code: `{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowAccessBasedOnMatchingTags",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject"
+      ],
+      "Resource": "arn:aws:s3:::hisoka-secure-bucket/*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/Department": "${aws:PrincipalTag/Department}",
+          "aws:ResourceTag/Environment": "${aws:PrincipalTag/Environment}"
+        }
+      }
+    }
+  ]
+}`,
           github: 'https://github.com/ibrahim-a-elsayed-eng'
         },
         disk: {
