@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AWS IAM Cloud Security & ABAC Access Control Case Study by Ibrahim Ahmed | Cloud Engineer & Tech Magician" />
+  <title>AWS IAM Cloud Security &amp; ABAC Case Study | Ibrahim Ahmed</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-deep: #06050c;
+      --bg-surface: #0e0b1c;
+      --bg-card: rgba(18, 14, 36, 0.85);
+      --magenta: #ff007f;
+      --magenta-glow: rgba(255, 0, 127, 0.45);
+      --purple: #9d4edd;
+      --electric-blue: #00f0ff;
+      --blue-glow: rgba(0, 240, 255, 0.4);
+      --text-main: #f4f0ff;
+      --text-muted: #a69ec0;
+      --border-subtle: rgba(157, 78, 221, 0.28);
+      --border-neon: rgba(255, 0, 127, 0.65);
+      --gradient-aura: linear-gradient(135deg, var(--magenta) 0%, var(--purple) 50%, var(--electric-blue) 100%);
+      --gradient-text: linear-gradient(90deg, #ff2a9d 0%, #c77dff 50%, #00f0ff 100%);
+      --shadow-aura: 0 0 28px rgba(255, 0, 127, 0.25), 0 0 60px rgba(157, 78, 221, 0.15);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-deep);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.7;
+      min-height: 100vh;
+      position: relative;
+      background:
+        radial-gradient(circle at 15% 15%, rgba(255, 0, 127, 0.12), transparent 40%),
+        radial-gradient(circle at 85% 30%, rgba(0, 240, 255, 0.1), transparent 38%),
+        radial-gradient(circle at 50% 85%, rgba(157, 78, 221, 0.14), transparent 45%),
+        var(--bg-deep);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(157, 78, 221, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(157, 78, 221, 0.045) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: rgba(6, 5, 12, 0.85);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 1rem 1.5rem;
+    }
+
+    .header-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--electric-blue);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.92rem;
+      transition: var(--transition);
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      padding: 0.45rem 1rem;
+      border-radius: var(--radius-md);
+    }
+
+    .back-btn:hover {
+      background: var(--electric-blue);
+      color: #06050c;
+      box-shadow: 0 0 16px var(--blue-glow);
+      transform: translateX(-3px);
+    }
+
+    .badge-rank {
+      font-family: 'Cinzel', serif;
+      color: var(--magenta);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    main {
+      position: relative;
+      z-index: 2;
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 6rem;
+    }
+
+    /* Hero Banner Area */
+    .hero-case {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      color: var(--electric-blue);
+      background: rgba(157, 78, 221, 0.15);
+      border: 1px solid var(--border-subtle);
+      padding: 0.35rem 1rem;
+      border-radius: 999px;
+      margin-bottom: 1.2rem;
+    }
+
+    .case-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      line-height: 1.2;
+      background: var(--gradient-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+
+    .case-subtitle {
+      color: var(--text-muted);
+      font-size: 1.12rem;
+      max-width: 780px;
+      margin: 0 auto 2rem;
+    }
+
+    .banner-wrapper {
+      position: relative;
+      border-radius: 20px;
+      padding: 3px;
+      background: linear-gradient(135deg, var(--magenta), var(--purple), var(--electric-blue));
+      box-shadow: var(--shadow-aura);
+      margin-bottom: 3.5rem;
+      overflow: hidden;
+    }
+
+    .banner-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 17px;
+    }
+
+    /* Key Specs Grid */
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .spec-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.4rem;
+    }
+
+    .spec-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+      text-transform: uppercase;
+    }
+
+    .spec-value {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--electric-blue);
+    }
+
+    /* Article Sections */
+    .section-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      margin-bottom: 2.5rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .section-card h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      color: var(--magenta);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .section-card p {
+      color: #d1c8e8;
+      font-size: 1.02rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .feature-list {
+      list-style: none;
+      display: grid;
+      gap: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      color: var(--text-main);
+    }
+
+    .feature-list li::before {
+      content: "♦";
+      color: var(--magenta);
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+
+    /* Code & Terminal Blocks */
+    .code-box {
+      background: rgba(5, 4, 12, 0.95);
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin: 1.5rem 0;
+    }
+
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.65rem 1rem;
+      background: rgba(255, 255, 255, 0.04);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .copy-btn {
+      background: rgba(255, 0, 127, 0.15);
+      border: 1px solid var(--border-neon);
+      color: #fff;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: var(--transition);
+    }
+
+    .copy-btn:hover {
+      background: var(--magenta);
+    }
+
+    pre code {
+      display: block;
+      padding: 1.2rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.86rem;
+      color: #e2d9ff;
+      overflow-x: auto;
+      line-height: 1.55;
+    }
+
+    .code-comment { color: #7f74a2; }
+    .code-key { color: var(--electric-blue); }
+    .code-str { color: #ff85c1; }
+
+    /* Architecture Flow Box */
+    .flow-diagram {
+      background: radial-gradient(circle at center, rgba(157, 78, 221, 0.12), rgba(6, 5, 12, 0.9));
+      border: 1px dashed var(--magenta);
+      border-radius: 14px;
+      padding: 1.8rem;
+      margin: 1.5rem 0;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .flow-steps {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .flow-node {
+      background: rgba(18, 14, 36, 0.95);
+      border: 1px solid var(--electric-blue);
+      padding: 0.75rem 1.1rem;
+      border-radius: 10px;
+      color: var(--text-main);
+      font-size: 0.84rem;
+      box-shadow: 0 0 12px var(--blue-glow);
+    }
+
+    .flow-arrow {
+      color: var(--magenta);
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    /* Actions Footer */
+    .cta-box {
+      text-align: center;
+      padding: 3rem 2rem;
+      background: linear-gradient(145deg, rgba(22, 16, 44, 0.9), rgba(10, 8, 24, 0.95));
+      border: 1px solid var(--magenta);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-aura);
+    }
+
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.9rem 1.8rem;
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      text-decoration: none;
+      transition: var(--transition);
+      margin: 0.5rem;
+    }
+
+    .btn-primary {
+      background: var(--gradient-aura);
+      color: #fff;
+      box-shadow: 0 0 24px var(--magenta-glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 35px var(--magenta-glow);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--electric-blue);
+      color: var(--electric-blue);
+    }
+
+    .btn-outline:hover {
+      background: rgba(0, 240, 255, 0.12);
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px var(--blue-glow);
+    }
+
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+
+    @media (max-width: 768px) {
+      .section-card { padding: 1.6rem 1.2rem; }
+      .flow-steps { flex-direction: column; }
+      .flow-arrow { transform: rotate(90deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <a href="../index.html#projects" class="back-btn">
+        <span>← Back to Main Portfolio</span>
+      </a>
+      <span class="badge-rank">QUEEN ♦ // HISOKA ARCHIVES</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Title -->
+    <section class="hero-case">
+      <div class="eyebrow">♠ AWS IAM &amp; Enterprise Governance ♦</div>
+      <h1 class="case-title">AWS IAM Cloud Security &amp; ABAC Access Control</h1>
+      <p class="case-subtitle">
+        Leveling Up: From S3 Bucket to IAM Least Privilege Security! Implementing dynamic Attribute-Based Access Control to scale security boundaries without role explosion.
+      </p>
+    </section>
+
+    <!-- Main Visual Banner -->
+    <div class="banner-wrapper">
+      <img src="../iam-abac-banner.jpg" alt="AWS IAM &amp; ABAC Case Study Banner with Hisoka" class="banner-img" />
+    </div>
+
+    <!-- Quick Technical Specs -->
+    <div class="specs-grid">
+      <div class="spec-card">
+        <div class="spec-label">Security Model</div>
+        <div class="spec-value">ABAC + RBAC Hybrid</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-label">AWS Services</div>
+        <div class="spec-value">IAM, S3, CloudTrail, Security Hub</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-label">Core Principle</div>
+        <div class="spec-value">Zero-Trust &amp; Least Privilege</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-label">Scalability</div>
+        <div class="spec-value">Tag-Based Dynamic Matching</div>
+      </div>
+    </div>
+
+    <!-- Section 1: The Problem -->
+    <section class="section-card">
+      <h2><span>1.</span> The Challenge: Role Explosion &amp; Privilege Creep</h2>
+      <p>
+        In traditional <strong>Role-Based Access Control (RBAC)</strong>, as an organization scales across multiple departments (DevOps, Data, Security, QA) and environments (Dev, Staging, Prod), cloud engineers face <strong>Role Explosion</strong>. Hundreds of static IAM roles and policies are created, resulting in:
+      </p>
+      <ul class="feature-list">
+        <li>Accidental privilege escalation and unmonitored wildcards (<code>Action: "*"</code>).</li>
+        <li>High administrative overhead whenever new projects or employees join teams.</li>
+        <li>Risk of human error in S3 bucket permissions exposing sensitive customer data.</li>
+      </ul>
+    </section>
+
+    <!-- Section 2: The Solution (ABAC) -->
+    <section class="section-card">
+      <h2><span>2.</span> The Architectural Solution: Dynamic ABAC</h2>
+      <p>
+        Instead of creating individual roles for every team and environment combination, we implemented <strong>Attribute-Based Access Control (ABAC)</strong>. Access is governed dynamically at runtime by evaluating tags attached to the <strong>Principal</strong> (IAM User or Role) against tags attached to the <strong>Resource</strong> (e.g., S3 Buckets, EC2 instances, KMS keys).
+      </p>
+
+      <!-- Flow Visual -->
+      <div class="flow-diagram">
+        <div style="color: var(--electric-blue); font-weight: 700; margin-bottom: 0.5rem;">[ ABAC Dynamic Policy Evaluation Flow ]</div>
+        <div class="flow-steps">
+          <div class="flow-node">User: Ibrahim<br><small style="color: var(--magenta);">PrincipalTag: Department=CloudDevOps</small></div>
+          <span class="flow-arrow">➔</span>
+          <div class="flow-node">IAM Policy Rule<br><small style="color: #00f0ff;">Condition: StringEquals PrincipalTag == ResourceTag</small></div>
+          <span class="flow-arrow">➔</span>
+          <div class="flow-node">Target S3 Bucket<br><small style="color: #8be9fd;">ResourceTag: Department=CloudDevOps</small></div>
+          <span class="flow-arrow">➔</span>
+          <div class="flow-node" style="border-color: #50fa7b; color: #50fa7b;">Access: ALLOWED ✅</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: IAM Policy Implementation -->
+    <section class="section-card">
+      <h2><span>3.</span> Production-Ready IAM Policy Document</h2>
+      <p>
+        Below is the core least-privilege IAM policy statement engineered to strictly enforce department and environment tagging boundaries:
+      </p>
+
+      <div class="code-box">
+        <div class="code-header">
+          <span>iam-abac-least-privilege-policy.json</span>
+          <button class="copy-btn" id="copy-code-btn" type="button">Copy JSON</button>
+        </div>
+        <pre><code id="policy-code">{
+  <span class="code-key">"Version"</span>: <span class="code-str">"2012-10-17"</span>,
+  <span class="code-key">"Statement"</span>: [
+    {
+      <span class="code-key">"Sid"</span>: <span class="code-str">"AllowS3AccessMatchingDepartmentAndEnv"</span>,
+      <span class="code-key">"Effect"</span>: <span class="code-str">"Allow"</span>,
+      <span class="code-key">"Action"</span>: [
+        <span class="code-str">"s3:GetObject"</span>,
+        <span class="code-str">"s3:PutObject"</span>,
+        <span class="code-str">"s3:ListBucket"</span>
+      ],
+      <span class="code-key">"Resource"</span>: [
+        <span class="code-str">"arn:aws:s3:::hisoka-enterprise-assets"</span>,
+        <span class="code-str">"arn:aws:s3:::hisoka-enterprise-assets/*"</span>
+      ],
+      <span class="code-key">"Condition"</span>: {
+        <span class="code-key">"StringEquals"</span>: {
+          <span class="code-str">"aws:ResourceTag/Department"</span>: <span class="code-str">"${aws:PrincipalTag/Department}"</span>,
+          <span class="code-str">"aws:ResourceTag/Environment"</span>: <span class="code-str">"${aws:PrincipalTag/Environment}"</span>
+        }
+      }
+    },
+    {
+      <span class="code-key">"Sid"</span>: <span class="code-str">"ExplicitDenyPrivilegeEscalation"</span>,
+      <span class="code-key">"Effect"</span>: <span class="code-str">"Deny"</span>,
+      <span class="code-key">"Action"</span>: [
+        <span class="code-str">"iam:CreatePolicyVersion"</span>,
+        <span class="code-str">"iam:SetDefaultPolicyVersion"</span>,
+        <span class="code-str">"iam:AttachUserPolicy"</span>
+      ],
+      <span class="code-key">"Resource"</span>: <span class="code-str">"*"</span>
+    }
+  ]
+}</code></pre>
+      </div>
+    </section>
+
+    <!-- Section 4: Testing & Verification -->
+    <section class="section-card">
+      <h2><span>4.</span> Testing &amp; Verification with AWS CLI</h2>
+      <p>
+        Simulated multi-role permission requests via the AWS CLI and IAM Policy Simulator to verify that cross-department tampering is automatically blocked:
+      </p>
+
+      <div class="code-box">
+        <div class="code-header"><span>AWS CLI Simulation Log</span></div>
+        <pre><code><span class="code-comment"># Test 1: Matching department tag (DevOps -> DevOps Assets)</span>
+$ aws s3 cp deployment.tar.gz s3://hisoka-enterprise-assets/devops/
+upload: ./deployment.tar.gz to s3://hisoka-enterprise-assets/devops/deployment.tar.gz [200 OK]
+
+<span class="code-comment"># Test 2: Mismatched department tag (DevOps -> Financial Assets)</span>
+$ aws s3 cp ledger.csv s3://hisoka-enterprise-assets/finance/
+upload failed: (AccessDenied) when calling PutObject: User is not authorized based on tag condition.</code></pre>
+      </div>
+    </section>
+
+    <!-- Call to action -->
+    <div class="cta-box">
+      <h3 style="font-family: 'Cinzel', serif; font-size: 1.8rem; margin-bottom: 0.8rem; color: #fff;">
+        Interested in Cloud Security &amp; Infrastructure?
+      </h3>
+      <p style="color: var(--text-muted); max-width: 620px; margin: 0 auto 1.8rem;">
+        Let's discuss zero-trust cloud architectures, AWS automation pipelines, and infrastructure as code.
+      </p>
+      <div>
+        <a href="https://github.com/ibrahim-a-elsayed-eng" target="_blank" rel="noopener noreferrer" class="btn-action btn-primary">
+          <span>View GitHub Repository</span>
+          <span>⚡</span>
+        </a>
+        <a href="../index.html#contact" class="btn-action btn-outline">
+          <span>Summon / Contact Ibrahim</span>
+          <span>🃏</span>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div style="color: var(--magenta); letter-spacing: 0.5rem; margin-bottom: 0.5rem;">♠ ♥ ♦ ♣</div>
+    <p>&copy; 2026 <strong>Ibrahim Ahmed</strong> — Cloud Engineer &amp; Tech Magician. Hosted on Amazon S3.</p>
+  </footer>
+
+  <script>
+    // Copy Code Helper
+    const copyBtn = document.getElementById('copy-code-btn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        const text = document.getElementById('policy-code').innerText;
+        navigator.clipboard.writeText(text).then(() => {
+          copyBtn.textContent = 'Copied! 🃏';
+          setTimeout(() => copyBtn.textContent = 'Copy JSON', 2200);
+        });
+      });
+    }
+  </script>
+</body>
+</html>
