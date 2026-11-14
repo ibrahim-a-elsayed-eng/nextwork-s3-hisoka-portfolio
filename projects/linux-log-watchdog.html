@@ -381,70 +381,67 @@
 
   <main>
     <section class="hero-case">
-      <div class="eyebrow">♥ Linux System Administration &amp; Hardening ♠</div>
-      <h1 class="case-title">Linux Log Watchdog &amp; Security Hardening</h1>
+      <div class="eyebrow">♥ Training Project // Ubuntu WSL &amp; systemd ♠</div>
+      <h1 class="case-title">Linux Log Watchdog &amp; Hardening Practice</h1>
       <p class="case-subtitle">
-        Continuous server-side observability daemon that monitors access logs, aggregates HTTP 404/500 errors, tracks suspicious client IPs, and runs inside a sandboxed systemd service jail.
+        A training project on a demo app log (<code>/var/log/demo-app/application.log</code>) on Ubuntu WSL, combining general SSH hardening and UFW firewall rules with a Bash log-monitoring script running inside a hardened <code>systemd</code> oneshot service.
       </p>
     </section>
 
     <div class="specs-grid">
       <div class="spec-card">
-        <div class="spec-label">Language &amp; Tools</div>
-        <div class="spec-value">Bash (set -euo pipefail), awk, grep</div>
+        <div class="spec-label">Environment</div>
+        <div class="spec-value">Ubuntu WSL (Training Project)</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-label">Script &amp; Tools</div>
+        <div class="spec-value">Bash (log-monitor.sh), tail, grep</div>
       </div>
       <div class="spec-card">
         <div class="spec-label">Process Supervisor</div>
-        <div class="spec-value">Systemd (Jailed Oneshot Service)</div>
+        <div class="spec-value">systemd (Oneshot, user log-monitor)</div>
       </div>
       <div class="spec-card">
-        <div class="spec-label">Security Hardening</div>
-        <div class="spec-value">ProtectSystem=strict, NoNewPrivileges</div>
-      </div>
-      <div class="spec-card">
-        <div class="spec-label">Source Repository</div>
-        <div class="spec-value">GitHub / linux-basics-project</div>
+        <div class="spec-label">Hardening Practice</div>
+        <div class="spec-value">SSH, UFW, ProtectSystem=strict</div>
       </div>
     </div>
 
-    <!-- Section 1: Problem -->
+    <!-- Section 1: Overview -->
     <section class="section-card">
-      <h2><span>1.</span> The Operational Problem: Silent Production Failures</h2>
+      <h2><span>1.</span> Training Project Overview</h2>
       <p>
-        In production Linux environments, applications write thousands of lines per hour to <code>/var/log</code>. Relying on manual inspections means:
+        This is a training project built on Ubuntu WSL using a demo application log (<code>/var/log/demo-app/application.log</code>):
       </p>
       <ul class="feature-list">
-        <li>Malicious actors probing endpoints with brute-force attacks go unnoticed until damage is done.</li>
-        <li>Spikes in 500 internal server errors remain invisible until customers complain.</li>
-        <li>Custom monitoring scripts running as <code>root</code> risk system compromise if exploited.</li>
+        <li>Practiced general SSH hardening and UFW firewall rules on Ubuntu WSL.</li>
+        <li>Wrote a Bash script (<code>log-monitor.sh</code>) that reads the last 200 lines of <code>/var/log/demo-app/application.log</code>, counts lines with <code>level=WARN</code> and <code>level=ERROR</code>, writes a summary line to <code>/var/log/log-monitor/report.log</code>, and prints an <code>ALERT</code> message if there is at least one <code>ERROR</code>.</li>
+        <li>Ran the script as a <code>systemd</code> oneshot service (<code>log-monitor.service</code>) under a dedicated user <code>log-monitor</code> with sandboxing options.</li>
       </ul>
-      <p>
-        <strong>The Solution:</strong> A robust, hardened Bash watchdog daemon managed via isolated systemd unit configurations with strict kernel-level sandboxing.
-      </p>
     </section>
 
     <!-- Section 2: Flow -->
     <section class="section-card">
-      <h2><span>2.</span> Watchdog Architecture &amp; Execution Pipeline</h2>
+      <h2><span>2.</span> Log Monitoring Pipeline</h2>
       <div class="flow-diagram">
-        <div style="color: var(--electric-blue); font-weight: 700; margin-bottom: 0.5rem;">[ Automated Log Watchdog Pipeline ]</div>
+        <div style="color: var(--electric-blue); font-weight: 700; margin-bottom: 0.5rem;">[ Demo App Log Monitoring Pipeline ]</div>
         <div class="flow-steps">
-          <div class="flow-node">Log Stream<br><small style="color: var(--magenta);">access.log / app.log</small></div>
-          <span class="flow-arrow">➔</span>
-          <div class="flow-node">Sandboxed Watchdog Daemon<br><small style="color: #00f0ff;">log-monitor.sh (pipefail)</small></div>
-          <span class="flow-arrow">➔</span>
-          <div class="flow-node">Regex &amp; IP Aggregator<br><small style="color: #8be9fd;">awk + grep (Top IPs / 500s)</small></div>
-          <span class="flow-arrow">➔</span>
-          <div class="flow-node" style="border-color: #50fa7b; color: #50fa7b;">Structured Report &amp; Alert ✅<br><small style="color: #f1fa8c;">/var/log/log-monitor/report.log</small></div>
+          <div class="flow-node">application.log<br><small style="color: var(--magenta);">/var/log/demo-app/application.log</small></div>
+          <span class="flow-arrow">&gt;</span>
+          <div class="flow-node">log-monitor.sh<br><small style="color: #00f0ff;">tail -n 200</small></div>
+          <span class="flow-arrow">&gt;</span>
+          <div class="flow-node">grep WARN/ERROR<br><small style="color: #8be9fd;">level=WARN &amp; level=ERROR</small></div>
+          <span class="flow-arrow">&gt;</span>
+          <div class="flow-node" style="border-color: #50fa7b; color: #50fa7b;">report.log<br><small style="color: #f1fa8c;">/var/log/log-monitor/report.log</small></div>
         </div>
       </div>
     </section>
 
     <!-- Section 3: Actual Code -->
     <section class="section-card">
-      <h2><span>3.</span> Production Bash Script (log-monitor.sh)</h2>
+      <h2><span>3.</span> Bash Script (log-monitor.sh)</h2>
       <p>
-        Written with strict error handling (<code>set -euo pipefail</code>) to safely extract warning/error frequency windows:
+        Reads the last 200 lines of the demo app log, counts <code>level=WARN</code> and <code>level=ERROR</code>, appends a summary to <code>/var/log/log-monitor/report.log</code>, and prints <code>ALERT</code> to stderr if <code>error_count &gt; 0</code>:
       </p>
 
       <div class="code-box">
@@ -465,8 +462,8 @@ if [[ ! -r "$source_log" ]]; then
 fi
 
 recent_log="$(tail -n "$window_lines" "$source_log")"
-warning_count="$(grep -c 'level=WARN' <<<"$recent_log" || true)"
-error_count="$(grep -c 'level=ERROR' <<<"$recent_log" || true)"
+warning_count="$(grep -c 'level=WARN' &lt;&lt;&lt;"$recent_log" || true)"
+error_count="$(grep -c 'level=ERROR' &lt;&lt;&lt;"$recent_log" || true)"
 timestamp="$(date --iso-8601=seconds)"
 summary="$timestamp source=$source_log window_lines=$window_lines warnings=$warning_count errors=$error_count"
 
@@ -480,9 +477,9 @@ fi</code></pre>
 
     <!-- Section 4: Systemd Hardening -->
     <section class="section-card">
-      <h2><span>4.</span> Systemd Service Hardening &amp; Sandboxing</h2>
+      <h2><span>4.</span> Systemd Oneshot Service (log-monitor.service)</h2>
       <p>
-        To prevent privilege escalation, the watchdog runs under a dedicated service user with strict system protections:
+        Runs under the dedicated user <code>log-monitor</code> with <code>NoNewPrivileges</code>, <code>PrivateTmp</code>, <code>PrivateDevices</code>, <code>ProtectSystem=strict</code>, <code>ProtectHome</code>, <code>ProtectKernelTunables</code>, <code>ProtectKernelModules</code>, <code>ProtectControlGroups</code>, and <code>UMask=0027</code>:
       </p>
 
       <div class="code-box">
@@ -518,18 +515,18 @@ ProtectControlGroups=yes</code></pre>
     <!-- CTA -->
     <div class="cta-box">
       <h3 style="font-family: 'Cinzel', serif; font-size: 1.8rem; margin-bottom: 0.8rem; color: #fff;">
-        Explore Linux Administration &amp; Automation
+        Source Repository
       </h3>
       <p style="color: var(--text-muted); max-width: 620px; margin: 0 auto 1.8rem;">
-        Check out the full 7-level Linux administration repository on GitHub with automation scripts and practice labs.
+        View the training project files in the linux-basics-project repository on GitHub.
       </p>
       <div>
         <a href="https://github.com/ibrahim-a-elsayed-eng/linux-basics-project" target="_blank" rel="noopener noreferrer" class="btn-action btn-primary">
           <span>View on GitHub (linux-basics-project)</span>
           <span>⚡</span>
         </a>
-        <a href="../index.html#contact" class="btn-action btn-outline">
-          <span>Contact Ibrahim</span>
+        <a href="../index.html#projects" class="btn-action btn-outline">
+          <span>Back to Projects</span>
           <span>🃏</span>
         </a>
       </div>

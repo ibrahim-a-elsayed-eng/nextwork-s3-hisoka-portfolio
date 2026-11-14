@@ -1688,32 +1688,33 @@ Index document: index.html</code>
         <article class="project-card" data-suit="♥">
           <div>
             <div class="project-header">
-              <span class="project-badge">Security &amp; Observability</span>
+              <span class="project-badge">Training Project</span>
               <span class="project-card-num">KING ♥</span>
             </div>
             <h3 class="project-title">Linux Log Watchdog</h3>
             <p class="project-desc">
-              Automated Bash daemon that continuously inspects `/var/log/auth.log` and `/var/log/syslog` for SSH brute-force attempts, critical kernel errors, and unauthorized privilege escalations with instant incident reporting.
+              Training project on Ubuntu WSL: practiced SSH hardening and UFW firewall rules, and wrote <code>log-monitor.sh</code> to read the last 200 lines of a demo app log, count <code>level=WARN</code> and <code>level=ERROR</code>, write a summary to <code>report.log</code>, and run via a hardened <code>systemd</code> oneshot service.
             </p>
             <div class="project-snippet">
-              <code>tail -Fn0 /var/log/auth.log | \
-  grep --line-buffered "Failed password"</code>
+              <code>recent_log="$(tail -n 200 /var/log/demo-app/application.log)"
+warning_count="$(grep -c 'level=WARN' &lt;&lt;&lt;"$recent_log" || true)"
+error_count="$(grep -c 'level=ERROR' &lt;&lt;&lt;"$recent_log" || true)"</code>
             </div>
           </div>
 
           <div class="project-footer">
             <div class="project-tech">
-              <span class="tech-pill">Linux</span>
+              <span class="tech-pill">Ubuntu WSL</span>
               <span class="tech-pill">Bash</span>
               <span class="tech-pill">systemd</span>
-              <span class="tech-pill">grep / awk</span>
+              <span class="tech-pill">SSH &amp; UFW</span>
             </div>
             <div class="project-links">
               <a href="./projects/linux-log-watchdog.html" target="_blank" rel="noopener noreferrer" class="project-link">
                 <span>🔍 Full Case Study ↗</span>
               </a>
               <button class="project-link" type="button" data-project="watchdog">
-                <span>⚡ Quick Blueprint →</span>
+                <span>⚡ Quick Summary →</span>
               </button>
             </div>
           </div>
@@ -1984,20 +1985,20 @@ Challenge:
           github: 'https://github.com/ibrahim-a-elsayed-eng/nextwork-s3-hisoka-portfolio'
         },
         watchdog: {
-          title: 'Linux Log Watchdog Blueprint',
-          body: 'Real-time security and anomaly detection script built for Linux servers to catch brute-force attacks and service failures.',
+          title: 'Linux Log Watchdog (Training Project)',
+          body: 'Training project on Ubuntu WSL: practiced SSH hardening and UFW firewall rules, and built log-monitor.sh with a hardened systemd oneshot service on a demo app log.',
           bullets: [
-            'Streams /var/log/auth.log and /var/log/syslog using non-blocking tail & regex filters.',
-            'Aggregates offending IP addresses and triggers automated firewall/alert actions.',
-            'Managed as a resilient systemd service with automatic restart policies.'
+            'Reads the last 200 lines of /var/log/demo-app/application.log and counts level=WARN and level=ERROR.',
+            'Writes a summary line to /var/log/log-monitor/report.log and prints an ALERT message if there is at least one ERROR.',
+            'Runs as log-monitor.service (Type=oneshot) under user log-monitor with NoNewPrivileges, PrivateTmp, PrivateDevices, ProtectSystem=strict, ProtectHome, ProtectKernelTunables, ProtectKernelModules, ProtectControlGroups, and UMask=0027.'
           ],
-          code: `#!/usr/bin/env bash
-LOG_FILE="/var/log/auth.log"
-tail -Fn0 "$LOG_FILE" | while read -r line; do
-  if echo "$line" | grep -qE "Failed password|Invalid user"; then
-    echo "[ALERT $(date -Iseconds)] Suspicious auth: $line" >> /var/log/watchdog_alerts.log
-  fi
-done`,
+          code: `recent_log="$(tail -n "$window_lines" "$source_log")"
+warning_count="$(grep -c 'level=WARN' <<<"$recent_log" || true)"
+error_count="$(grep -c 'level=ERROR' <<<"$recent_log" || true)"
+printf '%s\\n' "$summary" | tee -a "$report_log"
+if (( error_count > 0 )); then
+  printf 'ALERT errors=%s source=%s\\n' "$error_count" "$source_log" >&2
+fi`,
           github: 'https://github.com/ibrahim-a-elsayed-eng/linux-basics-project'
         },
         iam: {
