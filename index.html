@@ -839,6 +839,42 @@
       margin-bottom: 1.25rem;
     }
 
+    .series-parts-list {
+      list-style: none;
+      display: grid;
+      gap: 0.42rem;
+      margin-bottom: 1.25rem;
+      padding: 0.85rem 0.95rem;
+      background: rgba(5, 4, 12, 0.78);
+      border: 1px solid rgba(157, 78, 221, 0.28);
+      border-radius: 10px;
+      font-size: 0.82rem;
+    }
+
+    .series-parts-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+    }
+
+    .series-parts-list li.done a {
+      color: var(--electric-blue);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .series-parts-list li.done a:hover {
+      text-decoration: underline;
+    }
+
+    .series-parts-list .part-status {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: #8f85ad;
+    }
+
     .project-snippet {
       background: rgba(5, 4, 12, 0.85);
       border: 1px solid rgba(157, 78, 221, 0.28);
@@ -1587,43 +1623,53 @@
           </div>
         </article>
 
-        <!-- Project: AWS Custom VPC & Cloud Networking -->
+        <!-- Project: AWS VPC Series -->
         <article class="project-card" data-suit="♣">
           <div>
             <div class="project-header">
-              <span class="project-badge">Cloud Networking</span>
+              <span class="project-badge">In progress: 1 of 9</span>
               <span class="project-card-num">JACK ♣</span>
             </div>
             <div class="project-banner-wrap">
               <img
                 src="./vpc-banner.jpg"
-                alt="Hisoka's First VPC Project — AWS Custom VPC Architecture Banner"
+                alt="AWS VPC Series Banner"
                 class="project-banner-img"
               />
             </div>
-            <h3 class="project-title">🌐 AWS Custom VPC &amp; Cloud Networking</h3>
+            <h3 class="project-title">AWS VPC Series</h3>
             <p class="project-desc">
-              Built a secure, custom Virtual Private Cloud (10.0.0.0/16) on AWS using both the Management Console and CLI automation—configuring Public (10.0.1.0/24) &amp; Private (10.0.3.0/24) subnets, Route Tables, IGW, Security Groups, and NACLs.
+              A 9-part NextWork AWS networking series. Part 1 covers creating a VPC, subnet, and internet gateway in both the AWS Management Console and AWS CLI in CloudShell.
             </p>
-            <div class="project-snippet">
-              <code>aws ec2 create-vpc --cidr-block 10.0.0.0/16
-aws ec2 attach-internet-gateway --vpc-id $VPC_ID --internet-gateway-id $IGW_ID</code>
-            </div>
+            <ul class="series-parts-list">
+              <li class="done">
+                <a href="./projects/vpc-part-1.html" target="_blank" rel="noopener noreferrer">✅ Part 1: My First AWS VPC: Console &amp; CLI</a>
+                <span class="part-status">Done</span>
+              </li>
+              <li><span>Part 2</span><span class="part-status">Coming soon</span></li>
+              <li><span>Part 3</span><span class="part-status">Coming soon</span></li>
+              <li><span>Part 4</span><span class="part-status">Coming soon</span></li>
+              <li><span>Part 5</span><span class="part-status">Coming soon</span></li>
+              <li><span>Part 6</span><span class="part-status">Coming soon</span></li>
+              <li><span>Part 7</span><span class="part-status">Coming soon</span></li>
+              <li><span>Part 8</span><span class="part-status">Coming soon</span></li>
+              <li><span>Part 9</span><span class="part-status">Coming soon</span></li>
+            </ul>
           </div>
 
           <div class="project-footer">
             <div class="project-tech">
               <span class="tech-pill">AWS VPC</span>
-              <span class="tech-pill">Subnets &amp; CIDR</span>
-              <span class="tech-pill">IGW &amp; Routes</span>
+              <span class="tech-pill">Subnet</span>
+              <span class="tech-pill">Internet Gateway</span>
               <span class="tech-pill">AWS CLI</span>
             </div>
             <div class="project-links" style="flex-wrap: wrap;">
               <a href="./projects/aws-vpc-networking.html" target="_blank" rel="noopener noreferrer" class="project-link">
-                <span>🔍 Full Case Study ↗</span>
+                <span>♣ Series Page ↗</span>
               </a>
-              <a href="https://nextwork.ai/hemaa/docs/7f907ac7-2473-5c15-a8be-edb36581cdba" target="_blank" rel="noopener noreferrer" class="project-link">
-                <span>📘 NextWork Docs ↗</span>
+              <a href="./projects/vpc-part-1.html" target="_blank" rel="noopener noreferrer" class="project-link">
+                <span>🔍 Part 1 Page ↗</span>
               </a>
               <button class="project-link" type="button" data-project="vpc">
                 <span>⚡ Quick Blueprint →</span>
@@ -1794,7 +1840,7 @@ aws ec2 attach-internet-gateway --vpc-id $VPC_ID --internet-gateway-id $IGW_ID</
   <footer>
     <div class="suits-divider">♠ ♥ ♦ ♣</div>
     <p>
-      &copy; <span id="year"></span> <strong>Ibrahim Ahmed</strong> — Cloud Engineer &amp; Tech Magician. Hosted on Amazon S3.
+      &copy; <span id="year"></span> <strong>Ibrahim Ahmed</strong> — Cloud Engineer &amp; Tech Magician. Hosted on GitHub Pages.
       &nbsp;|&nbsp;
       <a href="https://nextwork.ai/portfolio/hemaa" target="_blank" rel="noopener noreferrer" style="color: var(--electric-blue); text-decoration: none; font-weight: 600;">View My NextWork Portfolio</a>
       &nbsp;&bull;&nbsp;
@@ -1982,18 +2028,18 @@ done`,
           github: 'https://github.com/ibrahim-a-elsayed-eng/linux-basics-project'
         },
         vpc: {
-          title: '🌐 AWS Custom VPC & Cloud Networking Blueprint',
-          body: 'Secure, isolated AWS Virtual Private Cloud (10.0.0.0/16) built via AWS Management Console and CLI automation with public/private subnet segmentation, IGW routing, and layered firewall controls.',
+          title: 'AWS VPC Series — Part 1: My First AWS VPC: Console & CLI',
+          body: 'In this NextWork project I created a VPC, a subnet, and an internet gateway (IGW) in the AWS Management Console, then repeated the same setup with the AWS CLI in CloudShell (Secret Mission).',
           bullets: [
-            'Custom VPC (10.0.0.0/16) segmented into Public Subnet (10.0.1.0/24) and Private Subnet (10.0.3.0/24).',
-            'Internet Gateway (IGW) attached with custom Route Table directing 0.0.0.0/0 traffic for public internet connectivity.',
-            'Layered defense using Security Groups (HTTP/SSH) and Network ACLs, documented on NextWork.'
+            'Console: VPC "NextWork VPC" (10.0.0.0/16), Subnet "Public 1" (10.0.0.0/24), Internet Gateway "NextWork IG" (attached).',
+            'CLI: VPC "NextWork VPC 2" (10.0.0.0/24), Subnet 10.0.0.0/25, IGW attached.',
+            'Note: "Public 1" only becomes truly public after a route to the internet gateway is added in the next project of the series.'
           ],
-          code: `aws ec2 create-vpc --cidr-block 10.0.0.0/16
-aws ec2 create-subnet --vpc-id "$VPC_ID" --cidr-block 10.0.1.0/24
-aws ec2 create-subnet --vpc-id "$VPC_ID" --cidr-block 10.0.3.0/24
-aws ec2 attach-internet-gateway --vpc-id "$VPC_ID" --internet-gateway-id "$IGW_ID"
-aws ec2 create-route --route-table-id "$RTB_ID" --destination-cidr-block 0.0.0.0/0 --gateway-id "$IGW_ID"`,
+          code: `aws ec2 create-vpc --cidr-block 10.0.0.0/24 --query Vpc.VpcId --output text
+aws ec2 create-tags --resources <vpc-id> --tags Key=Name,Value="NextWork VPC 2"
+aws ec2 create-subnet --vpc-id <vpc-id> --cidr-block 10.0.0.0/25
+aws ec2 create-internet-gateway --query InternetGateway.InternetGatewayId --output text
+aws ec2 attach-internet-gateway --vpc-id <vpc-id> --internet-gateway-id <igw-id>`,
           github: 'https://github.com/ibrahim-a-elsayed-eng/VPC-'
         },
         disk: {

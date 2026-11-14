@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Part 1 of AWS VPC Series: My First AWS VPC: Console & CLI by Ibrahim Ahmed | Cloud Engineer & Tech Magician" />
+  <title>Part 1: My First AWS VPC: Console &amp; CLI | Ibrahim Ahmed</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-deep: #06050c;
+      --bg-surface: #0e0b1c;
+      --bg-card: rgba(18, 14, 36, 0.85);
+      --magenta: #ff007f;
+      --magenta-glow: rgba(255, 0, 127, 0.45);
+      --purple: #9d4edd;
+      --electric-blue: #00f0ff;
+      --blue-glow: rgba(0, 240, 255, 0.4);
+      --text-main: #f4f0ff;
+      --text-muted: #a69ec0;
+      --border-subtle: rgba(157, 78, 221, 0.28);
+      --border-neon: rgba(255, 0, 127, 0.65);
+      --gradient-aura: linear-gradient(135deg, var(--magenta) 0%, var(--purple) 50%, var(--electric-blue) 100%);
+      --gradient-text: linear-gradient(90deg, #ff2a9d 0%, #c77dff 50%, #00f0ff 100%);
+      --shadow-aura: 0 0 28px rgba(255, 0, 127, 0.25), 0 0 60px rgba(157, 78, 221, 0.15);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-deep);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.7;
+      min-height: 100vh;
+      position: relative;
+      background:
+        radial-gradient(circle at 15% 15%, rgba(255, 0, 127, 0.12), transparent 40%),
+        radial-gradient(circle at 85% 30%, rgba(0, 240, 255, 0.1), transparent 38%),
+        radial-gradient(circle at 50% 85%, rgba(157, 78, 221, 0.14), transparent 45%),
+        var(--bg-deep);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(157, 78, 221, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(157, 78, 221, 0.045) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: rgba(6, 5, 12, 0.85);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 1rem 1.5rem;
+    }
+
+    .header-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--electric-blue);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: var(--transition);
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      padding: 0.45rem 0.95rem;
+      border-radius: var(--radius-md);
+    }
+
+    .back-btn:hover {
+      background: var(--electric-blue);
+      color: #06050c;
+      box-shadow: 0 0 16px var(--blue-glow);
+      transform: translateX(-2px);
+    }
+
+    .badge-rank {
+      font-family: 'Cinzel', serif;
+      color: var(--magenta);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    main {
+      position: relative;
+      z-index: 2;
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 6rem;
+    }
+
+    .hero-case {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      color: var(--electric-blue);
+      background: rgba(157, 78, 221, 0.15);
+      border: 1px solid var(--border-subtle);
+      padding: 0.35rem 1rem;
+      border-radius: 999px;
+      margin-bottom: 1.2rem;
+    }
+
+    .case-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.9rem, 4.5vw, 3.1rem);
+      line-height: 1.2;
+      background: var(--gradient-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+
+    .case-subtitle {
+      color: var(--text-muted);
+      font-size: 1.08rem;
+      max-width: 780px;
+      margin: 0 auto 1.75rem;
+    }
+
+    .tech-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.55rem;
+    }
+
+    .tech-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 8px;
+      background: rgba(255, 0, 127, 0.1);
+      color: #ff85c1;
+      border: 1px solid rgba(255, 0, 127, 0.32);
+    }
+
+    .banner-wrapper {
+      position: relative;
+      border-radius: 20px;
+      padding: 3px;
+      background: linear-gradient(135deg, var(--magenta), var(--purple), var(--electric-blue));
+      box-shadow: var(--shadow-aura);
+      margin-bottom: 3rem;
+      overflow: hidden;
+    }
+
+    .banner-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 17px;
+    }
+
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .spec-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.4rem;
+    }
+
+    .spec-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--magenta);
+      margin-bottom: 0.45rem;
+      text-transform: uppercase;
+    }
+
+    .spec-value {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .note-callout {
+      background: rgba(0, 240, 255, 0.06);
+      border: 1px solid rgba(0, 240, 255, 0.32);
+      border-left: 4px solid var(--electric-blue);
+      border-radius: var(--radius-md);
+      padding: 1.15rem 1.35rem;
+      margin-bottom: 2.5rem;
+      color: #dffbff;
+      font-size: 0.96rem;
+    }
+
+    .section-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 2.3rem;
+      margin-bottom: 2.2rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .section-card h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.5rem;
+      color: var(--magenta);
+      margin-bottom: 1.15rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .section-card p {
+      color: #d1c8e8;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-list {
+      list-style: none;
+      display: grid;
+      gap: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      color: var(--text-main);
+    }
+
+    .feature-list li::before {
+      content: "♣";
+      color: var(--magenta);
+      font-size: 1.05rem;
+      line-height: 1.5;
+    }
+
+    .numbered-list {
+      padding-left: 1.35rem;
+      display: grid;
+      gap: 0.75rem;
+      color: var(--text-main);
+    }
+
+    .numbered-list li::marker {
+      color: var(--electric-blue);
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88em;
+      color: var(--electric-blue);
+      background: rgba(0, 240, 255, 0.08);
+      padding: 0.12rem 0.4rem;
+      border-radius: 5px;
+    }
+
+    .code-box {
+      background: rgba(5, 4, 12, 0.95);
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin: 1.2rem 0 0;
+    }
+
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.65rem 1rem;
+      background: rgba(255, 255, 255, 0.04);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .copy-btn {
+      background: rgba(255, 0, 127, 0.15);
+      border: 1px solid var(--border-neon);
+      color: #fff;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: var(--transition);
+    }
+
+    .copy-btn:hover {
+      background: var(--magenta);
+    }
+
+    pre code {
+      display: block;
+      padding: 1.2rem;
+      background: transparent;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: #e2d9ff;
+      overflow-x: auto;
+      line-height: 1.65;
+    }
+
+    /* Challenges Table / Cards */
+    .challenge-grid {
+      display: grid;
+      gap: 1rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .challenge-item {
+      background: rgba(8, 6, 18, 0.78);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.15rem 1.3rem;
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .challenge-row {
+      font-size: 0.94rem;
+      color: #d9d0f2;
+    }
+
+    .challenge-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-right: 0.45rem;
+    }
+
+    .tag-prob { color: var(--magenta); }
+    .tag-diag { color: #c77dff; }
+    .tag-sol { color: var(--electric-blue); }
+
+    .lesson-box {
+      background: rgba(255, 0, 127, 0.08);
+      border: 1px solid rgba(255, 0, 127, 0.35);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      color: var(--text-main);
+      font-size: 0.96rem;
+    }
+
+    /* 3 Screenshot Placeholders */
+    .screenshots-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
+      margin-top: 1rem;
+    }
+
+    .screenshot-slot {
+      min-height: 200px;
+      border: 2px dashed rgba(0, 240, 255, 0.4);
+      border-radius: var(--radius-md);
+      background: rgba(6, 5, 12, 0.7);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1.5rem;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+    }
+
+    .screenshot-slot span.slot-num {
+      color: var(--electric-blue);
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      font-size: 0.9rem;
+    }
+
+    .cta-box {
+      text-align: center;
+      padding: 2.8rem 2rem;
+      background: linear-gradient(145deg, rgba(22, 16, 44, 0.9), rgba(10, 8, 24, 0.95));
+      border: 1px solid var(--magenta);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-aura);
+    }
+
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.9rem 1.8rem;
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      text-decoration: none;
+      transition: var(--transition);
+      margin: 0.5rem;
+    }
+
+    .btn-primary {
+      background: var(--gradient-aura);
+      color: #fff;
+      box-shadow: 0 0 24px var(--magenta-glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 35px var(--magenta-glow);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--electric-blue);
+      color: var(--electric-blue);
+    }
+
+    .btn-outline:hover {
+      background: rgba(0, 240, 255, 0.12);
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px var(--blue-glow);
+    }
+
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+
+    @media (max-width: 768px) {
+      .section-card { padding: 1.6rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <div class="header-nav">
+        <a href="../index.html#projects" class="back-btn">
+          <span>← Main Portfolio</span>
+        </a>
+        <a href="./aws-vpc-networking.html" class="back-btn">
+          <span>♣ AWS VPC Series (1 of 9)</span>
+        </a>
+      </div>
+      <span class="badge-rank">PART 1 OF 9 // VPC SERIES</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-case">
+      <div class="eyebrow">✅ AWS VPC Series — Part 1 of 9</div>
+      <h1 class="case-title">My First AWS VPC: Console &amp; CLI</h1>
+      <p class="case-subtitle">
+        In this NextWork project I took my first steps in AWS networking. I created a VPC, a subnet and an internet gateway (IGW) in the AWS Management Console. Then I repeated the same setup with the AWS CLI in CloudShell (Secret Mission).
+      </p>
+      <div class="tech-pills">
+        <span class="tech-pill">AWS (VPC, Subnet, Internet Gateway)</span>
+        <span class="tech-pill">AWS Management Console</span>
+        <span class="tech-pill">AWS CloudShell</span>
+        <span class="tech-pill">AWS CLI</span>
+        <span class="tech-pill">Git &amp; GitHub</span>
+      </div>
+    </section>
+
+    <div class="banner-wrapper">
+      <img src="../vpc-banner.jpg" alt="Hisoka's First VPC Project — AWS VPC Series Part 1 Banner" class="banner-img" />
+    </div>
+
+    <!-- What I Built -->
+    <div class="specs-grid">
+      <div class="spec-card">
+        <div class="spec-label">What I Built — Console</div>
+        <div class="spec-value">
+          VPC "NextWork VPC" (10.0.0.0/16)<br />
+          Subnet "Public 1" (10.0.0.0/24)<br />
+          Internet Gateway "NextWork IG" (attached)
+        </div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-label">What I Built — CLI (CloudShell)</div>
+        <div class="spec-value">
+          VPC "NextWork VPC 2" (10.0.0.0/24)<br />
+          Subnet 10.0.0.0/25<br />
+          IGW attached
+        </div>
+      </div>
+    </div>
+
+    <div class="note-callout">
+      <strong>Note:</strong> The subnet is named "Public 1", but it only becomes truly public after a route to the internet gateway is added. I will do that in the next project of the series.
+    </div>
+
+    <!-- Section 1: Steps, Console -->
+    <section class="section-card">
+      <h2><span>1.</span> Steps — AWS Management Console</h2>
+      <ol class="numbered-list">
+        <li>Created the VPC <code>NextWork VPC</code> with CIDR <code>10.0.0.0/16</code>.</li>
+        <li>Created the subnet <code>Public 1</code> with CIDR <code>10.0.0.0/24</code> and enabled auto-assign public IPv4.</li>
+        <li>Created the internet gateway <code>NextWork IG</code> and attached it to the VPC.</li>
+      </ol>
+    </section>
+
+    <!-- Section 2: Steps, Secret Mission -->
+    <section class="section-card">
+      <h2><span>2.</span> Steps — Secret Mission (AWS CLI in CloudShell)</h2>
+      <p>Repeated the setup using AWS CLI commands in AWS CloudShell:</p>
+
+      <div class="code-box">
+        <div class="code-header">
+          <span>aws-cloudshell-vpc-commands.sh</span>
+          <button class="copy-btn" id="copy-cli-btn" type="button">Copy Commands</button>
+        </div>
+        <pre><code id="cli-code">aws ec2 create-vpc --cidr-block 10.0.0.0/24 --query Vpc.VpcId --output text
+aws ec2 create-tags --resources &lt;vpc-id&gt; --tags Key=Name,Value="NextWork VPC 2"
+aws ec2 create-subnet --vpc-id &lt;vpc-id&gt; --cidr-block 10.0.0.0/25
+aws ec2 create-internet-gateway --query InternetGateway.InternetGatewayId --output text
+aws ec2 attach-internet-gateway --vpc-id &lt;vpc-id&gt; --internet-gateway-id &lt;igw-id&gt;</code></pre>
+      </div>
+    </section>
+
+    <!-- Section 3: Challenges -->
+    <section class="section-card">
+      <h2><span>3.</span> Challenges (Problem / Diagnosis / Solution)</h2>
+      <div class="challenge-grid">
+        <div class="challenge-item">
+          <div class="challenge-row"><span class="challenge-tag tag-prob">Problem:</span> <code>InvalidVpcId.Malformed</code> and <code>InvalidInternetGatewayId.Malformed</code></div>
+          <div class="challenge-row"><span class="challenge-tag tag-diag">Diagnosis:</span> I copied the IDs without their prefix (<code>vpc-</code>, <code>igw-</code>).</div>
+          <div class="challenge-row"><span class="challenge-tag tag-sol">Solution:</span> Used the full IDs.</div>
+        </div>
+
+        <div class="challenge-item">
+          <div class="challenge-row"><span class="challenge-tag tag-prob">Problem:</span> <code>create-tags</code> failed</div>
+          <div class="challenge-row"><span class="challenge-tag tag-diag">Diagnosis:</span> I left the placeholder <code>VPC-ID</code> in the command.</div>
+          <div class="challenge-row"><span class="challenge-tag tag-sol">Solution:</span> Replaced it with my real VPC ID.</div>
+        </div>
+
+        <div class="challenge-item">
+          <div class="challenge-row"><span class="challenge-tag tag-prob">Problem:</span> <code>create-subnet</code> failed</div>
+          <div class="challenge-row"><span class="challenge-tag tag-diag">Diagnosis:</span> I forgot <code>--cidr-block</code> and misspelled <code>--cidr-bloc</code>.</div>
+          <div class="challenge-row"><span class="challenge-tag tag-sol">Solution:</span> Added the option and fixed the spelling.</div>
+        </div>
+      </div>
+
+      <div class="lesson-box">
+        <strong>Lesson:</strong> Read the command slowly, replace every placeholder, and use <code>--help</code> to check option names.
+      </div>
+    </section>
+
+    <!-- Section 4: Cost & Cleanup -->
+    <section class="section-card">
+      <h2><span>4.</span> Cost &amp; Cleanup</h2>
+      <p>
+        A VPC, subnets and an internet gateway are free. I did not create any NAT gateway, EC2 instance or public IP. The resources are still in my account. I will delete them after I finish the VPC series: detach and delete the internet gateway, then the subnet, then the VPC.
+      </p>
+    </section>
+
+    <!-- Section 5: Screenshots (3 Empty Slots) -->
+    <section class="section-card">
+      <h2><span>5.</span> Screenshots</h2>
+      <p>Space reserved for my 3 project screenshots:</p>
+      <div class="screenshots-grid">
+        <div class="screenshot-slot">
+          <span class="slot-num">Screenshot 1</span>
+          <span>Placeholder — Add image here</span>
+        </div>
+        <div class="screenshot-slot">
+          <span class="slot-num">Screenshot 2</span>
+          <span>Placeholder — Add image here</span>
+        </div>
+        <div class="screenshot-slot">
+          <span class="slot-num">Screenshot 3</span>
+          <span>Placeholder — Add image here</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Links -->
+    <div class="cta-box">
+      <h3 style="font-family: 'Cinzel', serif; font-size: 1.7rem; margin-bottom: 0.8rem; color: #fff;">
+        Part 1 Resources &amp; Links
+      </h3>
+      <p style="color: var(--text-muted); max-width: 620px; margin: 0 auto 1.6rem;">
+        View the GitHub repository and the NextWork project guide for Part 1.
+      </p>
+      <div>
+        <a href="https://github.com/ibrahim-a-elsayed-eng/VPC-" target="_blank" rel="noopener noreferrer" class="btn-action btn-primary">
+          <span>View GitHub Repo</span>
+          <span>⚡</span>
+        </a>
+        <a href="https://nextwork.ai/hemaa/docs/7f907ac7-2473-5c15-a8be-edb36581cdba" target="_blank" rel="noopener noreferrer" class="btn-action btn-outline">
+          <span>Read NextWork Guide</span>
+          <span>↗</span>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div style="color: var(--magenta); letter-spacing: 0.5rem; margin-bottom: 0.5rem;">♠ ♥ ♦ ♣</div>
+    <p>&copy; 2026 <strong>Ibrahim Ahmed</strong> — Cloud Engineer &amp; Tech Magician. Hosted on GitHub Pages.</p>
+  </footer>
+
+  <script>
+    const copyBtn = document.getElementById('copy-cli-btn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        const text = document.getElementById('cli-code').innerText;
+        navigator.clipboard.writeText(text).then(() => {
+          copyBtn.textContent = 'Copied! 🃏';
+          setTimeout(() => copyBtn.textContent = 'Copy Commands', 2200);
+        });
+      });
+    }
+  </script>
+</body>
+</html>
