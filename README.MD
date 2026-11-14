@@ -1,36 +1,39 @@
+![Hisoka Portfolio Banner](./hisoka-banner.jpg)
 
-## What I Built
+# Ibrahim Ahmed (Hisoka) — Cloud & DevOps Portfolio | معرض أعمال السحابة وDevOps
 
-I hosted a static website on Amazon S3 during 39 minutes of hands-on work recorded by creating a bucket named nextwork-website-hisoka-portfolio in the eu-north-1 region, filling in 4 settings across 2 minutes in creation forms. I configured public access settings and bucket options, uploaded 3 website files totaling 211.3 KB including hisoka-banner.jpg, error.html, and index.html, and enabled static website hosting by setting the index document to index.html.
+> **Live Site / الموقع المباشر:** [ibrahim-a-elsayed-eng.github.io/nextwork-s3-hisoka-portfolio](https://ibrahim-a-elsayed-eng.github.io/nextwork-s3-hisoka-portfolio/)
 
-## Tech Stack
+---
 
-- Amazon S3, with 9 pages opened, used as a cloud object storage service to store and host the website files
-- eu-north-1, used as the region for hosting resources
-- AWS console, used as a web-based interface to manage cloud resources
+## 🌟 How This Project Started / كيف بدأ هذا المشروع
+- **EN:** This repository originally started as my NextWork project (**Hosting a Static Website on Amazon S3**). Instead of using a basic HTML page, I built my own portfolio site (`index.html`, `error.html`, `hisoka-banner.jpg`) and hosted it in an S3 bucket (`nextwork-website-hisoka-portfolio`, `eu-north-1`). During testing, I fixed a `403 Forbidden` error by making the objects public using ACL, and fixed an access denied error when deleting objects by deleting the restrictive bucket policy. After finishing the lab, I moved hosting to **GitHub Pages** to avoid AWS costs, and continued expanding the site to document my Cloud and Linux projects.
+- **AR:** بدأ هذا المستودع في الأصل كمشروع على منصة NextWork (**استضافة موقع ثابت على Amazon S3**). وبدلاً من استخدام صفحة HTML بسيطة، بنيتُ موقع البورتفوليو الخاص بي (`index.html`، `error.html`، `hisoka-banner.jpg`) واستضفته في حاوية S3 (`nextwork-website-hisoka-portfolio` في منطقة `eu-north-1`). أثناء الاختبار، أصلحتُ خطأ `403 Forbidden` بجعل الملفات عامة عبر ACL، وأصلحتُ خطأ رفض الحذف بحذف سياسة الحاوية المقيدة. بعد إنهاء المعمل، نقلتُ الاستضافة إلى **GitHub Pages** لتجنب تكاليف AWS، وواصلتُ توسيع الموقع لتوثيق مشاريع السحابة ولينكس.
 
-## Highlights
+---
 
-- Uploaded 3 website files totaling 211.3 KB, including hisoka-banner.jpg, error.html, and index.html to the S3 bucket.
-- Configured static website hosting on the S3 bucket using the index document setting of index.html.
-- Edited bucket policy by typing confirm to delete it successfully from the bucket.
-- Achieved a perfect score of 5 out of 5 on the quiz covering static website hosting on Amazon S3.
+## 📚 Projects in the Portfolio / المشاريع في البورتفوليو
 
-## Steps I took
+| Project / المشروع | Type / النوع | Status / الحالة | Page / الصفحة |
+| :--- | :--- | :--- | :--- |
+| **Hosting a Static Website on Amazon S3** | NextWork Project | Completed | [projects/aws-s3-hosting.html](./projects/aws-s3-hosting.html) |
+| **AWS IAM Cloud Security & ABAC Access Control** | NextWork Project | Completed | [projects/iam-cloud-security.html](./projects/iam-cloud-security.html) |
+| **AWS VPC Series (Part 1: Console & CLI)** | NextWork Project | In progress (1 of 9) | [projects/aws-vpc-networking.html](./projects/aws-vpc-networking.html) |
+| **Linux Log Watchdog & Hardening Practice** | Training Project (Ubuntu WSL) | Completed | [projects/linux-log-watchdog.html](./projects/linux-log-watchdog.html) |
 
-- Step 1: Opened the AWS console and searched for S3.
-- Step 2: Navigated to the S3 buckets homepage and checked the region.
-- Step 3: Filled in the Create S3 bucket form, typed in the bucket name nextwork-website-hisoka-portfolio, and configured public access settings and bucket options.
-- Step 4: Opened the created S3 bucket page and clicked upload to add website files.
-- Step 5: Uploaded website files including hisoka-banner.jpg, error.html, and index.html to the S3 bucket.
-- Step 6: Opened edit static website hosting, typed in the index document setting of index.html, and clicked save changes.
-- Step 7: Clicked the website endpoint link and encountered a 403 Forbidden error.
-- Step 8: Selected objects in the S3 bucket, opened the actions menu, and clicked make public using ACL to resolve the error.
-- Step 9: Opened bucket properties and permissions, and opened edit bucket policy.
-- Step 10: Attempted to delete objects including index.html and encountered an access denied error.
-- Step 11: Typed confirm to delete the bucket policy and successfully deleted it.
-- Step 12: Completed the quiz on hosting a static website on Amazon S3 and achieved a perfect score.
+> Note: `projects/disk-space-monitor.html` also exists in the repository and is pending content review.
 
-## Hardest Problem Solved
+---
 
-When I clicked the website endpoint link, I encountered a 403 Forbidden error because the uploaded objects were private by default. I found the issue by testing the endpoint in my browser, and I fixed it by selecting the index.html object in the S3 bucket, opening the actions menu, and clicking make public using ACL to grant public access. Later, when attempting to delete objects, I encountered an access denied error on index.html, which I resolved by deleting the restrictive bucket policy after typing confirm to confirm the action.
+## 📁 Repository Structure / هيكل المستودع
+- `index.html` — Main portfolio page and project cards / الصفحة الرئيسية وبطاقات المشاريع
+- `projects/` — Individual project pages and series pages / صفحات المشاريع التفصيلية
+- `images/` — Project screenshots / لقطات شاشة المشاريع
+- `hisoka-banner.jpg`, `iam-abac-banner.jpg`, `vpc-banner.jpg`, `linux-banner.jpg` — Project banners / صور واجهات المشاريع
+
+---
+
+## 🛠️ Tech Used / التقنيات المستخدمة
+- HTML, CSS, JavaScript
+- Git & GitHub
+- GitHub Pages (hosting)
