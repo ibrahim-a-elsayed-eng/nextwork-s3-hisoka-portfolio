@@ -1541,40 +1541,43 @@
         <article class="project-card" data-suit="♠">
           <div>
             <div class="project-header">
-              <span class="project-badge">Cloud Infrastructure</span>
+              <span class="project-badge">NextWork Project</span>
               <span class="project-card-num">ACE ♠</span>
             </div>
             <div class="project-banner-wrap">
               <img
                 src="./hisoka-banner.jpg"
-                alt="AWS S3 Static Hosting Preview Banner"
+                alt="Hosting a Static Website on Amazon S3 Preview Banner"
                 class="project-banner-img"
               />
             </div>
-            <h3 class="project-title">AWS S3 Static Hosting</h3>
+            <h3 class="project-title">Hosting a Static Website on Amazon S3</h3>
             <p class="project-desc">
-              Configured a highly available, globally accessible static portfolio website on Amazon S3. Engineered custom bucket policies, public access controls, static website endpoints, and custom S3 error handling (`error.html`).
+              I hosted a static website on Amazon S3 using the AWS console. I created the bucket nextwork-website-hisoka-portfolio in eu-north-1, uploaded 3 files, enabled static website hosting, and fixed a 403 Forbidden error using ACL.
             </p>
             <div class="project-snippet">
-              <code>aws s3 website s3://hisoka-portfolio/ \
-  --index-document index.html \
-  --error-document error.html</code>
+              <code>Bucket: nextwork-website-hisoka-portfolio (eu-north-1)
+Files: index.html, error.html, hisoka-banner.jpg (211.3 KB)
+Index document: index.html</code>
             </div>
           </div>
 
           <div class="project-footer">
             <div class="project-tech">
-              <span class="tech-pill">AWS S3</span>
-              <span class="tech-pill">Bucket Policy</span>
-              <span class="tech-pill">IAM</span>
-              <span class="tech-pill">HTML/CSS/JS</span>
+              <span class="tech-pill">Amazon S3</span>
+              <span class="tech-pill">AWS Management Console</span>
+              <span class="tech-pill">Static Hosting</span>
+              <span class="tech-pill">ACL</span>
             </div>
             <div class="project-links">
               <a href="./projects/aws-s3-hosting.html" target="_blank" rel="noopener noreferrer" class="project-link">
                 <span>🔍 Full Case Study ↗</span>
               </a>
+              <a href="https://github.com/ibrahim-a-elsayed-eng/nextwork-s3-hisoka-portfolio" target="_blank" rel="noopener noreferrer" class="project-link">
+                <span>📦 GitHub ↗</span>
+              </a>
               <button class="project-link" type="button" data-project="s3">
-                <span>⚡ Quick Blueprint →</span>
+                <span>⚡ Quick Summary →</span>
               </button>
             </div>
           </div>
@@ -1962,26 +1965,23 @@
       // Project Blueprint & Code Modal
       const projectData = {
         s3: {
-          title: 'AWS S3 Static Hosting Blueprint',
-          body: 'Zero-dependency static portfolio deployment engineered specifically for Amazon S3 static website hosting without broken relative asset paths.',
+          title: 'Hosting a Static Website on Amazon S3',
+          body: 'I hosted a static website on Amazon S3 using the AWS console as part of a NextWork project.',
           bullets: [
-            'Single-file bundle (index.html) + relative banner asset (./hisoka-banner.jpg) for reliable S3 object delivery.',
-            'Custom S3 Bucket Policy granting least-privilege public s3:GetObject read access.',
-            'Dedicated error.html document configured for graceful 404/403 S3 HTTP status handling.'
+            'Created S3 bucket nextwork-website-hisoka-portfolio in eu-north-1 and set public access settings.',
+            'Uploaded 3 website files (211.3 KB): index.html, error.html, hisoka-banner.jpg.',
+            'Enabled static website hosting with index.html as the index document.',
+            'Fixed a 403 Forbidden error using ACL, removed a restrictive bucket policy when deleting objects, and finished the NextWork quiz (5 out of 5).'
           ],
-          code: `{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "PublicReadGetObject",
-      "Effect": "Allow",
-      "Principal": "*",
-      "Action": "s3:GetObject",
-      "Resource": "arn:aws:s3:::hisoka-portfolio/*"
-    }
-  ]
-}`,
-          github: 'https://github.com/ibrahim-a-elsayed-eng/linux-basics-project'
+          code: `Bucket: nextwork-website-hisoka-portfolio
+Region: eu-north-1
+Files (211.3 KB): index.html, error.html, hisoka-banner.jpg
+
+Challenge:
+- Problem: 403 Forbidden on the website endpoint
+- Diagnosis: The uploaded objects were private by default
+- Solution: select objects > Actions > Make public using ACL`,
+          github: 'https://github.com/ibrahim-a-elsayed-eng/nextwork-s3-hisoka-portfolio'
         },
         watchdog: {
           title: 'Linux Log Watchdog Blueprint',

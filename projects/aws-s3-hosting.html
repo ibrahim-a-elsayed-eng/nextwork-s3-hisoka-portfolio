@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="AWS S3 Static Website Hosting & Custom Bucket Policy Case Study by Ibrahim Ahmed | Cloud Engineer & Tech Magician" />
-  <title>AWS S3 Static Hosting Case Study | Ibrahim Ahmed</title>
+  <meta name="description" content="Hosting a Static Website on Amazon S3 (NextWork project) by Ibrahim Ahmed" />
+  <title>Hosting a Static Website on Amazon S3 | Ibrahim Ahmed</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -193,9 +193,10 @@
     }
 
     .spec-value {
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       font-weight: 700;
       color: var(--electric-blue);
+      word-break: break-word;
     }
 
     .section-card {
@@ -228,7 +229,7 @@
       list-style: none;
       display: grid;
       gap: 0.85rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
     }
 
     .feature-list li {
@@ -245,89 +246,56 @@
       line-height: 1.5;
     }
 
-    .code-box {
-      background: rgba(5, 4, 12, 0.95);
-      border: 1px solid rgba(0, 240, 255, 0.35);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      margin: 1.5rem 0;
+    .steps-list {
+      list-style: none;
+      display: grid;
+      gap: 0.9rem;
+      counter-reset: step-counter;
     }
 
-    .code-header {
+    .steps-list li {
+      counter-increment: step-counter;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.65rem 1rem;
-      background: rgba(255, 255, 255, 0.04);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-
-    .copy-btn {
-      background: rgba(255, 0, 127, 0.15);
-      border: 1px solid var(--border-neon);
-      color: #fff;
-      padding: 0.25rem 0.65rem;
-      border-radius: 6px;
-      font-size: 0.72rem;
-      cursor: pointer;
-      font-family: inherit;
-      transition: var(--transition);
-    }
-
-    .copy-btn:hover {
-      background: var(--magenta);
-    }
-
-    pre code {
-      display: block;
-      padding: 1.2rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.86rem;
-      color: #e2d9ff;
-      overflow-x: auto;
-      line-height: 1.55;
-    }
-
-    .code-comment { color: #7f74a2; }
-    .code-key { color: var(--electric-blue); }
-    .code-str { color: #ff85c1; }
-
-    .flow-diagram {
-      background: radial-gradient(circle at center, rgba(157, 78, 221, 0.12), rgba(6, 5, 12, 0.9));
-      border: 1px dashed var(--magenta);
-      border-radius: 14px;
-      padding: 1.8rem;
-      margin: 1.5rem 0;
-      text-align: center;
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .flow-steps {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .flow-node {
-      background: rgba(18, 14, 36, 0.95);
-      border: 1px solid var(--electric-blue);
-      padding: 0.75rem 1.1rem;
-      border-radius: 10px;
+      align-items: flex-start;
+      gap: 0.85rem;
       color: var(--text-main);
-      font-size: 0.84rem;
-      box-shadow: 0 0 12px var(--blue-glow);
     }
 
-    .flow-arrow {
-      color: var(--magenta);
-      font-size: 1.2rem;
+    .steps-list li::before {
+      content: counter(step-counter) ".";
+      font-family: 'JetBrains Mono', monospace;
       font-weight: 700;
+      color: var(--electric-blue);
+      min-width: 1.8rem;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9em;
+      color: var(--electric-blue);
+      background: rgba(0, 240, 255, 0.08);
+      padding: 0.15rem 0.45rem;
+      border-radius: 6px;
+    }
+
+    .challenge-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .challenge-item {
+      background: rgba(5, 4, 12, 0.8);
+      border: 1px solid rgba(157, 78, 221, 0.35);
+      border-radius: var(--radius-md);
+      padding: 1.1rem 1.3rem;
+    }
+
+    .challenge-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--magenta);
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
     }
 
     .cta-box {
@@ -384,8 +352,6 @@
 
     @media (max-width: 768px) {
       .section-card { padding: 1.6rem 1.2rem; }
-      .flow-steps { flex-direction: column; }
-      .flow-arrow { transform: rotate(90deg); }
     }
   </style>
 </head>
@@ -402,142 +368,94 @@
 
   <main>
     <section class="hero-case">
-      <div class="eyebrow">♠ Cloud Infrastructure &amp; Storage Architecture ♦</div>
-      <h1 class="case-title">AWS S3 Static Website Hosting &amp; Security Policy</h1>
+      <div class="eyebrow">♠ NextWork Project // Amazon S3 ♦</div>
+      <h1 class="case-title">Hosting a Static Website on Amazon S3</h1>
       <p class="case-subtitle">
-        Deploying a zero-maintenance, globally resilient static portfolio on Amazon S3 with automated error handling, least-privilege public access, and 99.999999999% durability.
+        I hosted a static website on Amazon S3 using the AWS console.
       </p>
     </section>
 
     <div class="banner-wrapper">
-      <img src="../hisoka-banner.jpg" alt="AWS S3 Static Website Hosting Banner with Hisoka" class="banner-img" />
+      <img src="../hisoka-banner.jpg" alt="Hosting a Static Website on Amazon S3 Banner" class="banner-img" />
     </div>
 
     <div class="specs-grid">
       <div class="spec-card">
-        <div class="spec-label">Target Architecture</div>
-        <div class="spec-value">Serverless Static Hosting</div>
+        <div class="spec-label">S3 Bucket</div>
+        <div class="spec-value">nextwork-website-hisoka-portfolio</div>
       </div>
       <div class="spec-card">
-        <div class="spec-label">Core AWS Service</div>
-        <div class="spec-value">Amazon S3 + IAM Policies</div>
+        <div class="spec-label">AWS Region</div>
+        <div class="spec-value">eu-north-1</div>
       </div>
       <div class="spec-card">
-        <div class="spec-label">Data Durability</div>
-        <div class="spec-value">11 9's (99.999999999%)</div>
+        <div class="spec-label">Website Files</div>
+        <div class="spec-value">3 Files (211.3 KB)</div>
       </div>
       <div class="spec-card">
-        <div class="spec-label">Operational Cost</div>
-        <div class="spec-value">Near-Zero ($0.01 - $0.50/mo)</div>
+        <div class="spec-label">Tools</div>
+        <div class="spec-value">Amazon S3 &amp; AWS Console</div>
       </div>
     </div>
 
-    <!-- Section 1: The Problem -->
+    <!-- Section 1: What I Built -->
     <section class="section-card">
-      <h2><span>1.</span> The Engineering Problem: Costly Servers vs Static Needs</h2>
-      <p>
-        Hosting personal portfolios or documentation websites on standard virtual machines (e.g. AWS EC2, DigitalOcean Droplets) introduces unnecessary overhead:
-      </p>
+      <h2><span>1.</span> What I Built</h2>
       <ul class="feature-list">
-        <li><strong>Continuous Running Cost:</strong> Paying \$5 to \$20 every month for an idle server with underutilized CPU and RAM.</li>
-        <li><strong>Security Maintenance:</strong> Regularly patching OS vulnerabilities, configuring firewalls, and managing SSH keys.</li>
-        <li><strong>Single Point of Failure:</strong> If the VM crashes or its volume fills up, the portfolio goes offline.</li>
+        <li>An S3 bucket named <code>nextwork-website-hisoka-portfolio</code> in <code>eu-north-1</code>.</li>
+        <li>Uploaded 3 website files (211.3 KB): <code>index.html</code>, <code>error.html</code>, <code>hisoka-banner.jpg</code>.</li>
+        <li>Enabled static website hosting with <code>index.html</code> as the index document.</li>
       </ul>
-      <p>
-        <strong>The Solution:</strong> Leverage <strong>Amazon Simple Storage Service (Amazon S3)</strong> as a serverless static web server.
-      </p>
     </section>
 
-    <!-- Section 2: Architecture Flow -->
+    <!-- Section 2: Steps -->
     <section class="section-card">
-      <h2><span>2.</span> The Hosting Architecture &amp; Request Flow</h2>
-      <p>
-        When a client visits the website endpoint, Amazon S3 evaluates bucket policies, confirms public read permissions for objects, serves <code>index.html</code> as the entry document, and routes any invalid keys to the customized <code>error.html</code>.
-      </p>
+      <h2><span>2.</span> Steps</h2>
+      <ol class="steps-list">
+        <li>Created the S3 bucket and set the public access settings.</li>
+        <li>Uploaded the 3 website files (<code>index.html</code>, <code>error.html</code>, <code>hisoka-banner.jpg</code>).</li>
+        <li>Enabled static website hosting and set <code>index.html</code>.</li>
+        <li>Opened the website endpoint and got a <code>403 Forbidden</code> error.</li>
+        <li>Fixed it with: <code>select objects &gt; Actions &gt; Make public using ACL</code>.</li>
+        <li>Later, I got an access denied error when deleting objects, and I fixed it by deleting the restrictive bucket policy.</li>
+        <li>Finished the NextWork quiz with 5 out of 5.</li>
+      </ol>
+    </section>
 
-      <div class="flow-diagram">
-        <div style="color: var(--electric-blue); font-weight: 700; margin-bottom: 0.5rem;">[ S3 Static Website Hosting Flow ]</div>
-        <div class="flow-steps">
-          <div class="flow-node">User Request<br><small style="color: var(--magenta);">GET /index.html</small></div>
-          <span class="flow-arrow">➔</span>
-          <div class="flow-node">S3 Static Website Endpoint<br><small style="color: #00f0ff;">Bucket Web Service</small></div>
-          <span class="flow-arrow">➔</span>
-          <div class="flow-node">Bucket Policy Evaluation<br><small style="color: #8be9fd;">s3:GetObject Allowed?</small></div>
-          <span class="flow-arrow">➔</span>
-          <div class="flow-node" style="border-color: #50fa7b; color: #50fa7b;">Serve Webpage (200 OK) ✅<br><small style="color: #f1fa8c;">Fallback: error.html (404)</small></div>
+    <!-- Section 3: Challenge -->
+    <section class="section-card">
+      <h2><span>3.</span> Challenge (Problem / Diagnosis / Solution)</h2>
+      <div class="challenge-grid">
+        <div class="challenge-item">
+          <div class="challenge-label">Problem</div>
+          <div>403 Forbidden on the website endpoint.</div>
+        </div>
+        <div class="challenge-item">
+          <div class="challenge-label">Diagnosis</div>
+          <div>The uploaded objects were private by default.</div>
+        </div>
+        <div class="challenge-item">
+          <div class="challenge-label">Solution</div>
+          <div>I made the objects public using ACL (<code>select objects &gt; Actions &gt; Make public using ACL</code>).</div>
         </div>
       </div>
     </section>
 
-    <!-- Section 3: Bucket Policy -->
-    <section class="section-card">
-      <h2><span>3.</span> Least-Privilege Public Read Bucket Policy</h2>
-      <p>
-        To ensure objects are publicly readable by internet browsers while forbidding unauthorized uploads, deletions, or bucket modifications:
-      </p>
-
-      <div class="code-box">
-        <div class="code-header">
-          <span>s3-public-read-bucket-policy.json</span>
-          <button class="copy-btn" id="copy-policy-btn" type="button">Copy JSON</button>
-        </div>
-        <pre><code id="policy-code">{
-  <span class="code-key">"Version"</span>: <span class="code-str">"2012-10-17"</span>,
-  <span class="code-key">"Statement"</span>: [
-    {
-      <span class="code-key">"Sid"</span>: <span class="code-str">"PublicReadGetObject"</span>,
-      <span class="code-key">"Effect"</span>: <span class="code-str">"Allow"</span>,
-      <span class="code-key">"Principal"</span>: <span class="code-str">"*"</span>,
-      <span class="code-key">"Action"</span>: <span class="code-str">"s3:GetObject"</span>,
-      <span class="code-key">"Resource"</span>: <span class="code-str">"arn:aws:s3:::hisoka-portfolio/*"</span>
-    }
-  ]
-}</code></pre>
-      </div>
-    </section>
-
-    <!-- Section 4: CLI Deployment Workflow -->
-    <section class="section-card">
-      <h2><span>4.</span> Automated Deployment Workflow via AWS CLI</h2>
-      <p>
-        The entire portfolio deployment is managed with idempotent AWS CLI commands, enabling quick updates without manual AWS Management Console clicks:
-      </p>
-
-      <div class="code-box">
-        <div class="code-header"><span>AWS CLI Commands</span></div>
-        <pre><code><span class="code-comment"># 1. Enable Static Website Hosting on S3 Bucket</span>
-aws s3 website s3://hisoka-portfolio/ \
-  --index-document index.html \
-  --error-document error.html
-
-<span class="code-comment"># 2. Disable S3 Block Public Access for website hosting</span>
-aws s3api put-public-access-block \
-  --bucket hisoka-portfolio \
-  --public-access-block-configuration "BlockPublicPolicy=false,RestrictPublicBuckets=false"
-
-<span class="code-comment"># 3. Synchronize local files to the bucket with content type headers</span>
-aws s3 sync . s3://hisoka-portfolio/ \
-  --exclude ".git/*" \
-  --exclude "*.md" \
-  --delete</code></pre>
-      </div>
-    </section>
-
-    <!-- Call to action -->
+    <!-- Links -->
     <div class="cta-box">
       <h3 style="font-family: 'Cinzel', serif; font-size: 1.8rem; margin-bottom: 0.8rem; color: #fff;">
-        Need Serverless &amp; Cloud Migration?
+        Project Repository
       </h3>
       <p style="color: var(--text-muted); max-width: 620px; margin: 0 auto 1.8rem;">
-        Let's build highly durable, low-cost serverless architectures on AWS with zero server management overhead.
+        Tools used: Amazon S3 and AWS Management Console.
       </p>
       <div>
-        <a href="https://github.com/ibrahim-a-elsayed-eng" target="_blank" rel="noopener noreferrer" class="btn-action btn-primary">
-          <span>View GitHub Profile</span>
+        <a href="https://github.com/ibrahim-a-elsayed-eng/nextwork-s3-hisoka-portfolio" target="_blank" rel="noopener noreferrer" class="btn-action btn-primary">
+          <span>View GitHub Repo</span>
           <span>♠</span>
         </a>
-        <a href="../index.html#contact" class="btn-action btn-outline">
-          <span>Summon / Contact Ibrahim</span>
+        <a href="../index.html#projects" class="btn-action btn-outline">
+          <span>Back to Projects</span>
           <span>🃏</span>
         </a>
       </div>
@@ -549,17 +467,5 @@ aws s3 sync . s3://hisoka-portfolio/ \
     <p>&copy; 2026 <strong>Ibrahim Ahmed</strong> — Cloud Engineer &amp; Tech Magician. Hosted on GitHub Pages.</p>
   </footer>
 
-  <script>
-    const copyBtn = document.getElementById('copy-policy-btn');
-    if (copyBtn) {
-      copyBtn.addEventListener('click', () => {
-        const text = document.getElementById('policy-code').innerText;
-        navigator.clipboard.writeText(text).then(() => {
-          copyBtn.textContent = 'Copied! 🃏';
-          setTimeout(() => copyBtn.textContent = 'Copy JSON', 2200);
-        });
-      });
-    }
-  </script>
 </body>
 </html>
