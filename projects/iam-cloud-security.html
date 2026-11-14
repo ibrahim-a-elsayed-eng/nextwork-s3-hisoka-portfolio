@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="AWS IAM Cloud Security & ABAC Access Control Case Study by Ibrahim Ahmed | Cloud Engineer & Tech Magician" />
-  <title>AWS IAM Cloud Security &amp; ABAC Case Study | Ibrahim Ahmed</title>
+  <meta name="description" content="AWS IAM Cloud Security & ABAC Access Control (NextWork project) by Ibrahim Ahmed" />
+  <title>AWS IAM Cloud Security &amp; ABAC Access Control | Ibrahim Ahmed</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -117,10 +117,9 @@
       padding: 3rem 1.5rem 6rem;
     }
 
-    /* Hero Banner Area */
     .hero-case {
       text-align: center;
-      margin-bottom: 3.5rem;
+      margin-bottom: 3rem;
     }
 
     .eyebrow {
@@ -139,7 +138,7 @@
 
     .case-title {
       font-family: 'Cinzel', serif;
-      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-size: clamp(1.9rem, 4.5vw, 3.1rem);
       line-height: 1.2;
       background: var(--gradient-text);
       -webkit-background-clip: text;
@@ -149,9 +148,9 @@
 
     .case-subtitle {
       color: var(--text-muted);
-      font-size: 1.12rem;
+      font-size: 1.08rem;
       max-width: 780px;
-      margin: 0 auto 2rem;
+      margin: 0 auto;
     }
 
     .banner-wrapper {
@@ -160,7 +159,7 @@
       padding: 3px;
       background: linear-gradient(135deg, var(--magenta), var(--purple), var(--electric-blue));
       box-shadow: var(--shadow-aura);
-      margin-bottom: 3.5rem;
+      margin-bottom: 3rem;
       overflow: hidden;
     }
 
@@ -171,12 +170,11 @@
       border-radius: 17px;
     }
 
-    /* Key Specs Grid */
     .specs-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 1.2rem;
-      margin-bottom: 3.5rem;
+      margin-bottom: 3rem;
     }
 
     .spec-card {
@@ -195,27 +193,26 @@
     }
 
     .spec-value {
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       font-weight: 700;
       color: var(--electric-blue);
     }
 
-    /* Article Sections */
     .section-card {
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg);
-      padding: 2.5rem;
-      margin-bottom: 2.5rem;
+      padding: 2.3rem;
+      margin-bottom: 2.2rem;
       backdrop-filter: blur(12px);
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     }
 
     .section-card h2 {
       font-family: 'Cinzel', serif;
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       color: var(--magenta);
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.15rem;
       display: flex;
       align-items: center;
       gap: 0.6rem;
@@ -223,15 +220,15 @@
 
     .section-card p {
       color: #d1c8e8;
-      font-size: 1.02rem;
-      margin-bottom: 1.2rem;
+      font-size: 1rem;
+      margin-bottom: 1rem;
     }
 
     .feature-list {
       list-style: none;
       display: grid;
       gap: 0.85rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 0.5rem;
     }
 
     .feature-list li {
@@ -244,101 +241,35 @@
     .feature-list li::before {
       content: "♦";
       color: var(--magenta);
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       line-height: 1.5;
     }
 
-    /* Code & Terminal Blocks */
-    .code-box {
-      background: rgba(5, 4, 12, 0.95);
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88em;
+      color: var(--electric-blue);
+      background: rgba(0, 240, 255, 0.08);
+      padding: 0.12rem 0.4rem;
+      border-radius: 5px;
+    }
+
+    .policy-summary-box {
+      background: rgba(5, 4, 12, 0.92);
       border: 1px solid rgba(0, 240, 255, 0.35);
       border-radius: var(--radius-md);
-      overflow: hidden;
-      margin: 1.5rem 0;
-    }
-
-    .code-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.65rem 1rem;
-      background: rgba(255, 255, 255, 0.04);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-
-    .copy-btn {
-      background: rgba(255, 0, 127, 0.15);
-      border: 1px solid var(--border-neon);
-      color: #fff;
-      padding: 0.25rem 0.65rem;
-      border-radius: 6px;
-      font-size: 0.72rem;
-      cursor: pointer;
-      font-family: inherit;
-      transition: var(--transition);
-    }
-
-    .copy-btn:hover {
-      background: var(--magenta);
-    }
-
-    pre code {
-      display: block;
-      padding: 1.2rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.86rem;
-      color: #e2d9ff;
-      overflow-x: auto;
-      line-height: 1.55;
-    }
-
-    .code-comment { color: #7f74a2; }
-    .code-key { color: var(--electric-blue); }
-    .code-str { color: #ff85c1; }
-
-    /* Architecture Flow Box */
-    .flow-diagram {
-      background: radial-gradient(circle at center, rgba(157, 78, 221, 0.12), rgba(6, 5, 12, 0.9));
-      border: 1px dashed var(--magenta);
-      border-radius: 14px;
-      padding: 1.8rem;
-      margin: 1.5rem 0;
-      text-align: center;
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .flow-steps {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
+      padding: 1.35rem 1.5rem;
       margin-top: 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88rem;
+      color: #e2d9ff;
+      display: grid;
+      gap: 0.6rem;
     }
 
-    .flow-node {
-      background: rgba(18, 14, 36, 0.95);
-      border: 1px solid var(--electric-blue);
-      padding: 0.75rem 1.1rem;
-      border-radius: 10px;
-      color: var(--text-main);
-      font-size: 0.84rem;
-      box-shadow: 0 0 12px var(--blue-glow);
-    }
-
-    .flow-arrow {
-      color: var(--magenta);
-      font-size: 1.2rem;
-      font-weight: 700;
-    }
-
-    /* Actions Footer */
     .cta-box {
       text-align: center;
-      padding: 3rem 2rem;
+      padding: 2.8rem 2rem;
       background: linear-gradient(145deg, rgba(22, 16, 44, 0.9), rgba(10, 8, 24, 0.95));
       border: 1px solid var(--magenta);
       border-radius: var(--radius-lg);
@@ -390,8 +321,6 @@
 
     @media (max-width: 768px) {
       .section-card { padding: 1.6rem 1.2rem; }
-      .flow-steps { flex-direction: column; }
-      .flow-arrow { transform: rotate(90deg); }
     }
   </style>
 </head>
@@ -402,164 +331,100 @@
       <a href="../index.html#projects" class="back-btn">
         <span>← Back to Main Portfolio</span>
       </a>
-      <span class="badge-rank">QUEEN ♦ // HISOKA ARCHIVES</span>
+      <span class="badge-rank">QUEEN ♦ // NEXTWORK IAM PROJECT</span>
     </div>
   </header>
 
   <main>
-    <!-- Hero Title -->
     <section class="hero-case">
-      <div class="eyebrow">♠ AWS IAM &amp; Enterprise Governance ♦</div>
+      <div class="eyebrow">♦ NextWork Project • AWS IAM &amp; ABAC ♠</div>
       <h1 class="case-title">AWS IAM Cloud Security &amp; ABAC Access Control</h1>
       <p class="case-subtitle">
-        Leveling Up: From S3 Bucket to IAM Least Privilege Security! Implementing dynamic Attribute-Based Access Control to scale security boundaries without role explosion.
+        I used Attribute-Based Access Control (ABAC) and the principle of least privilege with AWS IAM and resource tags. I gave a new intern user full control over development resources and protected production.
       </p>
     </section>
 
-    <!-- Main Visual Banner -->
     <div class="banner-wrapper">
-      <img src="../iam-abac-banner.jpg" alt="AWS IAM &amp; ABAC Case Study Banner with Hisoka" class="banner-img" />
+      <img src="../iam-abac-banner.jpg" alt="AWS IAM Cloud Security &amp; ABAC Access Control Banner" class="banner-img" />
     </div>
 
-    <!-- Quick Technical Specs -->
     <div class="specs-grid">
       <div class="spec-card">
-        <div class="spec-label">Security Model</div>
-        <div class="spec-value">ABAC + RBAC Hybrid</div>
+        <div class="spec-label">Access Model</div>
+        <div class="spec-value">ABAC &amp; Least Privilege</div>
       </div>
       <div class="spec-card">
         <div class="spec-label">AWS Services</div>
-        <div class="spec-value">IAM, S3, CloudTrail, Security Hub</div>
+        <div class="spec-value">AWS IAM, Amazon EC2</div>
       </div>
       <div class="spec-card">
-        <div class="spec-label">Core Principle</div>
-        <div class="spec-value">Zero-Trust &amp; Least Privilege</div>
+        <div class="spec-label">IAM Policy</div>
+        <div class="spec-value">NextWorkDevEnvironmentPolicy</div>
       </div>
       <div class="spec-card">
-        <div class="spec-label">Scalability</div>
-        <div class="spec-value">Tag-Based Dynamic Matching</div>
+        <div class="spec-label">IAM Group</div>
+        <div class="spec-value">nextwork-dev-group</div>
       </div>
     </div>
 
-    <!-- Section 1: The Problem -->
+    <!-- Section 1: What I Built -->
     <section class="section-card">
-      <h2><span>1.</span> The Challenge: Role Explosion &amp; Privilege Creep</h2>
-      <p>
-        In traditional <strong>Role-Based Access Control (RBAC)</strong>, as an organization scales across multiple departments (DevOps, Data, Security, QA) and environments (Dev, Staging, Prod), cloud engineers face <strong>Role Explosion</strong>. Hundreds of static IAM roles and policies are created, resulting in:
-      </p>
+      <h2><span>1.</span> What I Built</h2>
+      <p>In this project I practiced securing AWS EC2 instances using IAM policies and resource tags:</p>
       <ul class="feature-list">
-        <li>Accidental privilege escalation and unmonitored wildcards (<code>Action: "*"</code>).</li>
-        <li>High administrative overhead whenever new projects or employees join teams.</li>
-        <li>Risk of human error in S3 bucket permissions exposing sensitive customer data.</li>
+        <li>Two EC2 instances with tags: <code>Env=development</code> and <code>Env=production</code>.</li>
+        <li>A custom IAM policy (<code>NextWorkDevEnvironmentPolicy</code>) with a condition on <code>ec2:ResourceTag/Env</code>.</li>
+        <li>An IAM user group <code>nextwork-dev-group</code> and a user added to it.</li>
+        <li>An AWS account alias for a custom sign-in URL.</li>
+        <li>Tested with the IAM Policy Simulator.</li>
       </ul>
     </section>
 
-    <!-- Section 2: The Solution (ABAC) -->
+    <!-- Section 2: Policy Rules -->
     <section class="section-card">
-      <h2><span>2.</span> The Architectural Solution: Dynamic ABAC</h2>
-      <p>
-        Instead of creating individual roles for every team and environment combination, we implemented <strong>Attribute-Based Access Control (ABAC)</strong>. Access is governed dynamically at runtime by evaluating tags attached to the <strong>Principal</strong> (IAM User or Role) against tags attached to the <strong>Resource</strong> (e.g., S3 Buckets, EC2 instances, KMS keys).
-      </p>
-
-      <!-- Flow Visual -->
-      <div class="flow-diagram">
-        <div style="color: var(--electric-blue); font-weight: 700; margin-bottom: 0.5rem;">[ ABAC Dynamic Policy Evaluation Flow ]</div>
-        <div class="flow-steps">
-          <div class="flow-node">User: Ibrahim<br><small style="color: var(--magenta);">PrincipalTag: Department=CloudDevOps</small></div>
-          <span class="flow-arrow">➔</span>
-          <div class="flow-node">IAM Policy Rule<br><small style="color: #00f0ff;">Condition: StringEquals PrincipalTag == ResourceTag</small></div>
-          <span class="flow-arrow">➔</span>
-          <div class="flow-node">Target S3 Bucket<br><small style="color: #8be9fd;">ResourceTag: Department=CloudDevOps</small></div>
-          <span class="flow-arrow">➔</span>
-          <div class="flow-node" style="border-color: #50fa7b; color: #50fa7b;">Access: ALLOWED ✅</div>
-        </div>
+      <h2><span>2.</span> Policy Rules (NextWorkDevEnvironmentPolicy)</h2>
+      <p>I learned how to combine Allow and Deny statements with tag conditions so the intern user can work freely in development without touching production or changing tags:</p>
+      <div class="policy-summary-box">
+        <div>• Allow <code>ec2:*</code> where <code>ec2:ResourceTag/Env = development</code>.</div>
+        <div>• Allow <code>ec2:Describe*</code> on all resources.</div>
+        <div>• Deny <code>ec2:DeleteTags</code> and <code>ec2:CreateTags</code>.</div>
       </div>
     </section>
 
-    <!-- Section 3: IAM Policy Implementation -->
+    <!-- Section 3: Testing -->
     <section class="section-card">
-      <h2><span>3.</span> Production-Ready IAM Policy Document</h2>
-      <p>
-        Below is the core least-privilege IAM policy statement engineered to strictly enforce department and environment tagging boundaries:
-      </p>
-
-      <div class="code-box">
-        <div class="code-header">
-          <span>iam-abac-least-privilege-policy.json</span>
-          <button class="copy-btn" id="copy-code-btn" type="button">Copy JSON</button>
-        </div>
-        <pre><code id="policy-code">{
-  <span class="code-key">"Version"</span>: <span class="code-str">"2012-10-17"</span>,
-  <span class="code-key">"Statement"</span>: [
-    {
-      <span class="code-key">"Sid"</span>: <span class="code-str">"AllowS3AccessMatchingDepartmentAndEnv"</span>,
-      <span class="code-key">"Effect"</span>: <span class="code-str">"Allow"</span>,
-      <span class="code-key">"Action"</span>: [
-        <span class="code-str">"s3:GetObject"</span>,
-        <span class="code-str">"s3:PutObject"</span>,
-        <span class="code-str">"s3:ListBucket"</span>
-      ],
-      <span class="code-key">"Resource"</span>: [
-        <span class="code-str">"arn:aws:s3:::hisoka-enterprise-assets"</span>,
-        <span class="code-str">"arn:aws:s3:::hisoka-enterprise-assets/*"</span>
-      ],
-      <span class="code-key">"Condition"</span>: {
-        <span class="code-key">"StringEquals"</span>: {
-          <span class="code-str">"aws:ResourceTag/Department"</span>: <span class="code-str">"${aws:PrincipalTag/Department}"</span>,
-          <span class="code-str">"aws:ResourceTag/Environment"</span>: <span class="code-str">"${aws:PrincipalTag/Environment}"</span>
-        }
-      }
-    },
-    {
-      <span class="code-key">"Sid"</span>: <span class="code-str">"ExplicitDenyPrivilegeEscalation"</span>,
-      <span class="code-key">"Effect"</span>: <span class="code-str">"Deny"</span>,
-      <span class="code-key">"Action"</span>: [
-        <span class="code-str">"iam:CreatePolicyVersion"</span>,
-        <span class="code-str">"iam:SetDefaultPolicyVersion"</span>,
-        <span class="code-str">"iam:AttachUserPolicy"</span>
-      ],
-      <span class="code-key">"Resource"</span>: <span class="code-str">"*"</span>
-    }
-  ]
-}</code></pre>
-      </div>
+      <h2><span>3.</span> Testing</h2>
+      <p>I tested the permissions in two ways to verify that development access worked and production was protected:</p>
+      <ul class="feature-list">
+        <li><strong>In an incognito session:</strong> I stopped the development server (worked). I tried to stop the production server and got <strong>Access Denied</strong>.</li>
+        <li><strong>IAM Policy Simulator:</strong> <code>StopInstances</code> on development = <strong>Allowed</strong>. <code>DeleteTags</code> = <strong>Denied</strong>.</li>
+      </ul>
     </section>
 
-    <!-- Section 4: Testing & Verification -->
+    <!-- Section 4: Cleanup -->
     <section class="section-card">
-      <h2><span>4.</span> Testing &amp; Verification with AWS CLI</h2>
+      <h2><span>4.</span> Cleanup</h2>
       <p>
-        Simulated multi-role permission requests via the AWS CLI and IAM Policy Simulator to verify that cross-department tampering is automatically blocked:
+        I terminated both EC2 instances and deleted the test group and user.
       </p>
-
-      <div class="code-box">
-        <div class="code-header"><span>AWS CLI Simulation Log</span></div>
-        <pre><code><span class="code-comment"># Test 1: Matching department tag (DevOps -> DevOps Assets)</span>
-$ aws s3 cp deployment.tar.gz s3://hisoka-enterprise-assets/devops/
-upload: ./deployment.tar.gz to s3://hisoka-enterprise-assets/devops/deployment.tar.gz [200 OK]
-
-<span class="code-comment"># Test 2: Mismatched department tag (DevOps -> Financial Assets)</span>
-$ aws s3 cp ledger.csv s3://hisoka-enterprise-assets/finance/
-upload failed: (AccessDenied) when calling PutObject: User is not authorized based on tag condition.</code></pre>
-      </div>
     </section>
 
     <!-- Call to action -->
     <div class="cta-box">
-      <h3 style="font-family: 'Cinzel', serif; font-size: 1.8rem; margin-bottom: 0.8rem; color: #fff;">
-        Interested in Cloud Security &amp; Infrastructure?
+      <h3 style="font-family: 'Cinzel', serif; font-size: 1.7rem; margin-bottom: 0.8rem; color: #fff;">
+        Project Links &amp; Documentation
       </h3>
-      <p style="color: var(--text-muted); max-width: 620px; margin: 0 auto 1.8rem;">
-        Let's discuss zero-trust cloud architectures, AWS automation pipelines, and infrastructure as code.
+      <p style="color: var(--text-muted); max-width: 620px; margin: 0 auto 1.6rem;">
+        View my repository on GitHub or read the NextWork project guide.
       </p>
       <div>
-        <a href="https://github.com/ibrahim-a-elsayed-eng" target="_blank" rel="noopener noreferrer" class="btn-action btn-primary">
-          <span>View GitHub Repository</span>
+        <a href="https://github.com/ibrahim-a-elsayed-eng/aws-iam-abac-security" target="_blank" rel="noopener noreferrer" class="btn-action btn-primary">
+          <span>View GitHub Repo</span>
           <span>⚡</span>
         </a>
-        <a href="../index.html#contact" class="btn-action btn-outline">
-          <span>Summon / Contact Ibrahim</span>
-          <span>🃏</span>
+        <a href="https://nextwork.ai/hemaa/docs/51a5fd24-7458-58a6-8653-9b90119a0e4a" target="_blank" rel="noopener noreferrer" class="btn-action btn-outline">
+          <span>Read NextWork Guide</span>
+          <span>↗</span>
         </a>
       </div>
     </div>
@@ -570,18 +435,5 @@ upload failed: (AccessDenied) when calling PutObject: User is not authorized bas
     <p>&copy; 2026 <strong>Ibrahim Ahmed</strong> — Cloud Engineer &amp; Tech Magician. Hosted on GitHub Pages.</p>
   </footer>
 
-  <script>
-    // Copy Code Helper
-    const copyBtn = document.getElementById('copy-code-btn');
-    if (copyBtn) {
-      copyBtn.addEventListener('click', () => {
-        const text = document.getElementById('policy-code').innerText;
-        navigator.clipboard.writeText(text).then(() => {
-          copyBtn.textContent = 'Copied! 🃏';
-          setTimeout(() => copyBtn.textContent = 'Copy JSON', 2200);
-        });
-      });
-    }
-  </script>
 </body>
 </html>

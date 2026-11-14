@@ -1584,7 +1584,7 @@
         <article class="project-card" data-suit="♦">
           <div>
             <div class="project-header">
-              <span class="project-badge">Cloud Security &amp; IAM</span>
+              <span class="project-badge">NextWork Project • IAM</span>
               <span class="project-card-num">QUEEN ♦</span>
             </div>
             <div class="project-banner-wrap">
@@ -1596,11 +1596,11 @@
             </div>
             <h3 class="project-title">🛡️ AWS IAM Cloud Security &amp; ABAC Access Control</h3>
             <p class="project-desc">
-              Leveling Up: From S3 Bucket to IAM Least Privilege Security! Engineered Attribute-Based Access Control (ABAC), fine-grained least-privilege IAM policies, resource tag boundaries, and GuardDuty / Security Hub monitoring.
+              I practiced Attribute-Based Access Control (ABAC) and least privilege with AWS IAM and EC2 resource tags—giving an intern user full control over development instances (`Env=development`) while protecting production (`Env=production`).
             </p>
             <div class="project-snippet">
               <code>"Condition": {
-  "StringEquals": {"aws:PrincipalTag/Department": "${aws:ResourceTag/Department}"}
+  "StringEquals": {"ec2:ResourceTag/Env": "development"}
 }</code>
             </div>
           </div>
@@ -1608,16 +1608,19 @@
           <div class="project-footer">
             <div class="project-tech">
               <span class="tech-pill">AWS IAM</span>
-              <span class="tech-pill">ABAC &amp; RBAC</span>
-              <span class="tech-pill">Least Privilege</span>
-              <span class="tech-pill">Security Hub</span>
+              <span class="tech-pill">ABAC &amp; Tags</span>
+              <span class="tech-pill">EC2</span>
+              <span class="tech-pill">Policy Simulator</span>
             </div>
-            <div class="project-links">
+            <div class="project-links" style="flex-wrap: wrap;">
               <a href="./projects/iam-cloud-security.html" target="_blank" rel="noopener noreferrer" class="project-link">
-                <span>🔍 Full Case Study ↗</span>
+                <span>🔍 Full Details ↗</span>
+              </a>
+              <a href="https://nextwork.ai/hemaa/docs/51a5fd24-7458-58a6-8653-9b90119a0e4a" target="_blank" rel="noopener noreferrer" class="project-link">
+                <span>📘 NextWork Guide ↗</span>
               </a>
               <button class="project-link" type="button" data-project="iam">
-                <span>⚡ Quick Blueprint →</span>
+                <span>⚡ Quick Summary →</span>
               </button>
             </div>
           </div>
@@ -1998,34 +2001,18 @@ done`,
           github: 'https://github.com/ibrahim-a-elsayed-eng/linux-basics-project'
         },
         iam: {
-          title: '🛡️ AWS IAM Cloud Security & ABAC Access Control Blueprint',
-          body: 'Fine-grained cloud security and least privilege governance architecture leveraging AWS IAM Policies, Attribute-Based Access Control (ABAC), and GuardDuty monitoring.',
+          title: '🛡️ AWS IAM Cloud Security & ABAC Access Control',
+          body: 'I used Attribute-Based Access Control (ABAC) and the principle of least privilege with AWS IAM and resource tags. I gave a new intern user full control over development resources and protected production.',
           bullets: [
-            'Attribute-Based Access Control (ABAC) using aws:PrincipalTag and aws:ResourceTag matching to scale permissions dynamically without role explosion.',
-            'Strict least-privilege IAM policies preventing unauthorized S3 deletion, privilege escalation, and unintended cross-account access.',
-            'Continuous monitoring & audit trails using AWS CloudTrail, GuardDuty, and Security Hub dashboard.'
+            'Built two EC2 instances with tags Env=development and Env=production.',
+            'Created NextWorkDevEnvironmentPolicy, IAM group "nextwork-dev-group", a test user, and an AWS account alias.',
+            'Tested in an incognito session (stopped dev server, got Access Denied on prod) and with IAM Policy Simulator (StopInstances on dev = Allowed, DeleteTags = Denied).'
           ],
-          code: `{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "AllowAccessBasedOnMatchingTags",
-      "Effect": "Allow",
-      "Action": [
-        "s3:GetObject",
-        "s3:PutObject"
-      ],
-      "Resource": "arn:aws:s3:::hisoka-secure-bucket/*",
-      "Condition": {
-        "StringEquals": {
-          "aws:ResourceTag/Department": "${aws:PrincipalTag/Department}",
-          "aws:ResourceTag/Environment": "${aws:PrincipalTag/Environment}"
-        }
-      }
-    }
-  ]
-}`,
-          github: 'https://github.com/ibrahim-a-elsayed-eng/linux-basics-project'
+          code: `Policy: NextWorkDevEnvironmentPolicy
+- Allow ec2:* where ec2:ResourceTag/Env = development
+- Allow ec2:Describe* on all resources
+- Deny ec2:DeleteTags and ec2:CreateTags`,
+          github: 'https://github.com/ibrahim-a-elsayed-eng/aws-iam-abac-security'
         },
         vpc: {
           title: 'AWS VPC Series — Part 1: My First AWS VPC: Console & CLI',
