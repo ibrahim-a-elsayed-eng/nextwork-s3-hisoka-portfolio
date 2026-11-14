@@ -1587,6 +1587,51 @@
           </div>
         </article>
 
+        <!-- Project: AWS Custom VPC & Cloud Networking -->
+        <article class="project-card" data-suit="♣">
+          <div>
+            <div class="project-header">
+              <span class="project-badge">Cloud Networking</span>
+              <span class="project-card-num">JACK ♣</span>
+            </div>
+            <div class="project-banner-wrap">
+              <img
+                src="./vpc-banner.jpg"
+                alt="Hisoka's First VPC Project — AWS Custom VPC Architecture Banner"
+                class="project-banner-img"
+              />
+            </div>
+            <h3 class="project-title">🌐 AWS Custom VPC &amp; Cloud Networking</h3>
+            <p class="project-desc">
+              Built a secure, custom Virtual Private Cloud (10.0.0.0/16) on AWS using both the Management Console and CLI automation—configuring Public (10.0.1.0/24) &amp; Private (10.0.3.0/24) subnets, Route Tables, IGW, Security Groups, and NACLs.
+            </p>
+            <div class="project-snippet">
+              <code>aws ec2 create-vpc --cidr-block 10.0.0.0/16
+aws ec2 attach-internet-gateway --vpc-id $VPC_ID --internet-gateway-id $IGW_ID</code>
+            </div>
+          </div>
+
+          <div class="project-footer">
+            <div class="project-tech">
+              <span class="tech-pill">AWS VPC</span>
+              <span class="tech-pill">Subnets &amp; CIDR</span>
+              <span class="tech-pill">IGW &amp; Routes</span>
+              <span class="tech-pill">AWS CLI</span>
+            </div>
+            <div class="project-links" style="flex-wrap: wrap;">
+              <a href="./projects/aws-vpc-networking.html" target="_blank" rel="noopener noreferrer" class="project-link">
+                <span>🔍 Full Case Study ↗</span>
+              </a>
+              <a href="https://nextwork.ai/hemaa/docs/7f907ac7-2473-5c15-a8be-edb36581cdba" target="_blank" rel="noopener noreferrer" class="project-link">
+                <span>📘 NextWork Docs ↗</span>
+              </a>
+              <button class="project-link" type="button" data-project="vpc">
+                <span>⚡ Quick Blueprint →</span>
+              </button>
+            </div>
+          </div>
+        </article>
+
         <!-- Project 2: Linux Log Watchdog -->
         <article class="project-card" data-suit="♥">
           <div>
@@ -1935,6 +1980,21 @@ done`,
   ]
 }`,
           github: 'https://github.com/ibrahim-a-elsayed-eng/linux-basics-project'
+        },
+        vpc: {
+          title: '🌐 AWS Custom VPC & Cloud Networking Blueprint',
+          body: 'Secure, isolated AWS Virtual Private Cloud (10.0.0.0/16) built via AWS Management Console and CLI automation with public/private subnet segmentation, IGW routing, and layered firewall controls.',
+          bullets: [
+            'Custom VPC (10.0.0.0/16) segmented into Public Subnet (10.0.1.0/24) and Private Subnet (10.0.3.0/24).',
+            'Internet Gateway (IGW) attached with custom Route Table directing 0.0.0.0/0 traffic for public internet connectivity.',
+            'Layered defense using Security Groups (HTTP/SSH) and Network ACLs, documented on NextWork.'
+          ],
+          code: `aws ec2 create-vpc --cidr-block 10.0.0.0/16
+aws ec2 create-subnet --vpc-id "$VPC_ID" --cidr-block 10.0.1.0/24
+aws ec2 create-subnet --vpc-id "$VPC_ID" --cidr-block 10.0.3.0/24
+aws ec2 attach-internet-gateway --vpc-id "$VPC_ID" --internet-gateway-id "$IGW_ID"
+aws ec2 create-route --route-table-id "$RTB_ID" --destination-cidr-block 0.0.0.0/0 --gateway-id "$IGW_ID"`,
+          github: 'https://github.com/ibrahim-a-elsayed-eng/VPC-'
         },
         disk: {
           title: 'Disk Space Monitor Blueprint',
