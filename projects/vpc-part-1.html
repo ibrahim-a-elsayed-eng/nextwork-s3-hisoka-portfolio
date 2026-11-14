@@ -402,26 +402,29 @@
     }
 
     .screenshot-slot {
-      min-height: 200px;
-      border: 2px dashed rgba(0, 240, 255, 0.4);
+      border: 1px solid var(--border-subtle);
       border-radius: var(--radius-md);
-      background: rgba(6, 5, 12, 0.7);
+      background: rgba(6, 5, 12, 0.85);
+      overflow: hidden;
+      padding: 0.75rem;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 1.5rem;
-      color: var(--text-muted);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.82rem;
+      gap: 0.65rem;
+    }
+
+    .screenshot-slot img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+      border: 1px solid rgba(0, 240, 255, 0.25);
     }
 
     .screenshot-slot span.slot-num {
       color: var(--electric-blue);
+      font-family: 'JetBrains Mono', monospace;
       font-weight: 700;
-      margin-bottom: 0.4rem;
-      font-size: 0.9rem;
+      font-size: 0.82rem;
     }
 
     .cta-box {
@@ -605,22 +608,21 @@ aws ec2 attach-internet-gateway --vpc-id &lt;vpc-id&gt; --internet-gateway-id &l
       </p>
     </section>
 
-    <!-- Section 5: Screenshots (3 Empty Slots) -->
+    <!-- Section 5: Screenshots -->
     <section class="section-card">
       <h2><span>5.</span> Screenshots</h2>
-      <p>Space reserved for my 3 project screenshots:</p>
       <div class="screenshots-grid">
         <div class="screenshot-slot">
           <span class="slot-num">Screenshot 1</span>
-          <span>Placeholder — Add image here</span>
+          <img src="../images/vpc-part1-1.png" alt="Create VPC NextWork VPC 10.0.0.0/16 in AWS Console" />
         </div>
         <div class="screenshot-slot">
           <span class="slot-num">Screenshot 2</span>
-          <span>Placeholder — Add image here</span>
+          <img src="../images/vpc-part1-2.png" alt="Subnet Public 1 10.0.0.0/24 created in AWS Console" />
         </div>
         <div class="screenshot-slot">
           <span class="slot-num">Screenshot 3</span>
-          <span>Placeholder — Add image here</span>
+          <img src="../images/vpc-part1-3.png" alt="Internet Gateway NextWork IG attached to NextWork VPC" />
         </div>
       </div>
     </section>
