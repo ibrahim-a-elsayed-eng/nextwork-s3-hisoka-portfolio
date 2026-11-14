@@ -153,6 +153,23 @@
       margin: 0 auto 2rem;
     }
 
+    .banner-wrapper {
+      position: relative;
+      border-radius: 20px;
+      padding: 3px;
+      background: linear-gradient(135deg, var(--magenta), var(--purple), var(--electric-blue));
+      box-shadow: var(--shadow-aura);
+      margin-bottom: 3.5rem;
+      overflow: hidden;
+    }
+
+    .banner-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 17px;
+    }
+
     .specs-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -387,6 +404,10 @@
         A training project on a demo app log (<code>/var/log/demo-app/application.log</code>) on Ubuntu WSL, combining general SSH hardening and UFW firewall rules with a Bash log-monitoring script running inside a hardened <code>systemd</code> oneshot service.
       </p>
     </section>
+
+    <div class="banner-wrapper">
+      <img src="../linux-banner.jpg" alt="Linux Log Watchdog Banner" class="banner-img" />
+    </div>
 
     <div class="specs-grid">
       <div class="spec-card">
