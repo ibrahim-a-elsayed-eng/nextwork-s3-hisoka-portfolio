@@ -407,9 +407,133 @@
 
     /* Hero Right: Cyber-Magic Joker Card + Live Terminal */
     .hero-visual {
+      position: relative;
       perspective: 1000px;
       display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .hisoka-anime-companion {
+      position: absolute;
+      right: -145px;
+      bottom: -18px;
+      width: 285px;
+      z-index: 1;
+      pointer-events: none;
+      transform: translate3d(var(--parallax-x, 0px), var(--parallax-y, 0px), 0);
+      transition: transform 0.28s ease-out;
+    }
+
+    .hisoka-aura-glow {
+      position: absolute;
+      inset: 12% 8% 8% 8%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 0, 127, 0.34) 0%, rgba(0, 240, 255, 0.18) 45%, transparent 72%);
+      filter: blur(26px);
+      animation: auraPulse 4.5s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    .hisoka-char-img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 0 18px rgba(255, 0, 127, 0.42)) drop-shadow(0 0 28px rgba(0, 240, 255, 0.22));
+      animation: hisokaFloat 5.2s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    .floating-suit-card {
+      position: absolute;
+      z-index: 2;
+      width: 30px;
+      height: 42px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
       justify-content: center;
+      font-size: 0.95rem;
+      font-weight: 700;
+      background: linear-gradient(150deg, rgba(24, 17, 48, 0.9), rgba(10, 8, 22, 0.95));
+      border: 1px solid rgba(255, 0, 127, 0.65);
+      color: var(--magenta);
+      box-shadow: 0 0 14px rgba(255, 0, 127, 0.4);
+      backdrop-filter: blur(4px);
+    }
+
+    .floating-suit-card.card-1 {
+      top: 12%;
+      right: 4%;
+      color: var(--electric-blue);
+      border-color: rgba(0, 240, 255, 0.7);
+      box-shadow: 0 0 14px rgba(0, 240, 255, 0.45);
+      animation: cardOrbitFloat 4.2s ease-in-out infinite;
+    }
+
+    .floating-suit-card.card-2 {
+      top: 44%;
+      right: -6%;
+      animation: cardOrbitFloat 5.4s ease-in-out infinite reverse;
+    }
+
+    .floating-suit-card.card-3 {
+      bottom: 22%;
+      right: 6%;
+      color: #e0aaff;
+      border-color: rgba(157, 78, 221, 0.7);
+      box-shadow: 0 0 14px rgba(157, 78, 221, 0.45);
+      animation: cardOrbitFloat 4.8s ease-in-out 0.8s infinite;
+    }
+
+    @keyframes hisokaFloat {
+      0%, 100% {
+        transform: translateY(0px) scale(1);
+      }
+      50% {
+        transform: translateY(-14px) scale(1.015);
+      }
+    }
+
+    @keyframes auraPulse {
+      0%, 100% {
+        opacity: 0.65;
+        transform: scale(0.96);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.06);
+      }
+    }
+
+    @keyframes cardOrbitFloat {
+      0%, 100% {
+        transform: translateY(0px) rotate(-8deg);
+      }
+      50% {
+        transform: translateY(-12px) rotate(10deg);
+      }
+    }
+
+    @media (max-width: 1320px) {
+      .hero-visual {
+        justify-content: center;
+      }
+
+      .hisoka-anime-companion {
+        right: -95px;
+        width: 235px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hisoka-char-img,
+      .hisoka-aura-glow,
+      .floating-suit-card {
+        animation: none;
+      }
     }
 
     .magician-card {
@@ -424,6 +548,7 @@
         0 0 35px rgba(255, 0, 127, 0.22),
         inset 0 0 22px rgba(0, 240, 255, 0.08);
       position: relative;
+      z-index: 2;
       transition: transform 0.2s ease, box-shadow 0.3s ease;
       transform-style: preserve-3d;
     }
@@ -1216,6 +1341,10 @@
       .nav-status {
         display: none;
       }
+
+      .hisoka-anime-companion {
+        display: none;
+      }
     }
 
     @media (max-width: 680px) {
@@ -1323,6 +1452,19 @@
 
       <!-- Cyber-Magic Card & Live Terminal -->
       <div class="hero-visual">
+        <div class="hisoka-anime-companion" id="hisoka-companion" aria-hidden="true">
+          <div class="hisoka-aura-glow"></div>
+          <img
+            src="./hisoka-char.png"
+            alt=""
+            class="hisoka-char-img"
+            loading="eager"
+          />
+          <span class="floating-suit-card card-1">♠</span>
+          <span class="floating-suit-card card-2">♦</span>
+          <span class="floating-suit-card card-3">♥</span>
+        </div>
+
         <div class="magician-card" id="tilt-card">
           <div class="card-corner">
             <div class="joker-rank">
@@ -1929,6 +2071,23 @@ error_count="$(grep -c 'level=ERROR' &lt;&lt;&lt;"$recent_log" || true)"</code>
         });
         tiltCard.addEventListener('mouseleave', () => {
           tiltCard.style.transform = 'rotateX(0deg) rotateY(0deg)';
+        });
+      }
+
+      // Subtle Mouse Parallax on Anime Companion
+      const heroSection = document.querySelector('.hero');
+      const hisokaCompanion = document.getElementById('hisoka-companion');
+      if (heroSection && hisokaCompanion) {
+        heroSection.addEventListener('mousemove', (e) => {
+          const rect = heroSection.getBoundingClientRect();
+          const offsetX = ((e.clientX - rect.left) / rect.width - 0.5) * -18;
+          const offsetY = ((e.clientY - rect.top) / rect.height - 0.5) * -12;
+          hisokaCompanion.style.setProperty('--parallax-x', `${offsetX.toFixed(1)}px`);
+          hisokaCompanion.style.setProperty('--parallax-y', `${offsetY.toFixed(1)}px`);
+        });
+        heroSection.addEventListener('mouseleave', () => {
+          hisokaCompanion.style.setProperty('--parallax-x', '0px');
+          hisokaCompanion.style.setProperty('--parallax-y', '0px');
         });
       }
 
