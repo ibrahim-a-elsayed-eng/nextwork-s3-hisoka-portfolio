@@ -1,39 +1,82 @@
+<div align="center">
+
 ![Hisoka Portfolio Banner](./hisoka-banner.jpg)
 
-# Ibrahim Ahmed (Hisoka) — Cloud & DevOps Portfolio | معرض أعمال السحابة وDevOps
+# Ibrahim Ahmed (Hisoka) — Cloud & DevOps Portfolio
 
-> **Live Site / الموقع المباشر:** [ibrahim-a-elsayed-eng.github.io/nextwork-s3-hisoka-portfolio](https://ibrahim-a-elsayed-eng.github.io/nextwork-s3-hisoka-portfolio/)
+![AWS](https://img.shields.io/badge/AWS-Amazon%20S3-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white)
+![Hosting](https://img.shields.io/badge/Hosting-GitHub%20Pages-0EA5E9?style=for-the-badge&logo=githubpages&logoColor=white)
+![Frontend](https://img.shields.io/badge/Stack-HTML%20%7C%20CSS%20%7C%20JS-10B981?style=for-the-badge)
+![Cost](https://img.shields.io/badge/Hosting%20Cost-%240%20Free-0F172A?style=for-the-badge)
+
+**Static Cloud & DevOps portfolio originally hosted on Amazon S3 (`eu-north-1`) and migrated to GitHub Pages for `$0` ongoing hosting cost.**
+
+🔗 **Live Site:** [ibrahim-a-elsayed-eng.github.io/nextwork-s3-hisoka-portfolio](https://ibrahim-a-elsayed-eng.github.io/nextwork-s3-hisoka-portfolio/)
+
+</div>
 
 ---
 
-## 🌟 How This Project Started / كيف بدأ هذا المشروع
-- **EN:** This repository originally started as my NextWork project (**Hosting a Static Website on Amazon S3**). Instead of using a basic HTML page, I built my own portfolio site (`index.html`, `error.html`, `hisoka-banner.jpg`) and hosted it in an S3 bucket (`nextwork-website-hisoka-portfolio`, `eu-north-1`). During testing, I fixed a `403 Forbidden` error by making the objects public using ACL, and fixed an access denied error when deleting objects by deleting the restrictive bucket policy. After finishing the lab, I moved hosting to **GitHub Pages** to avoid AWS costs, and continued expanding the site to document my Cloud and Linux projects.
-- **AR:** بدأ هذا المستودع في الأصل كمشروع على منصة NextWork (**استضافة موقع ثابت على Amazon S3**). وبدلاً من استخدام صفحة HTML بسيطة، بنيتُ موقع البورتفوليو الخاص بي (`index.html`، `error.html`، `hisoka-banner.jpg`) واستضفته في حاوية S3 (`nextwork-website-hisoka-portfolio` في منطقة `eu-north-1`). أثناء الاختبار، أصلحتُ خطأ `403 Forbidden` بجعل الملفات عامة عبر ACL، وأصلحتُ خطأ رفض الحذف بحذف سياسة الحاوية المقيدة. بعد إنهاء المعمل، نقلتُ الاستضافة إلى **GitHub Pages** لتجنب تكاليف AWS، وواصلتُ توسيع الموقع لتوثيق مشاريع السحابة ولينكس.
+## 1. Architecture Overview
+
+```mermaid
+flowchart LR
+    Repo["GitHub Repository\n(index.html, error.html, projects/)"] -->|Originally Tested On| S3["Amazon S3 Static Hosting\nnextwork-website-hisoka-portfolio (eu-north-1)"]
+    Repo -->|Migrated For $0 Hosting| GHP["GitHub Pages\nibrahim-a-elsayed-eng.github.io/nextwork-s3-hisoka-portfolio"]
+```
+
+> [!IMPORTANT]
+> **Key Design Decision:** Built and validated S3 static website hosting first (troubleshooting `403 Forbidden` ACLs and restrictive bucket policies), then migrated live hosting to **GitHub Pages** to eliminate ongoing AWS S3 storage/request costs while expanding the portfolio.
 
 ---
 
-## 📚 Projects in the Portfolio / المشاريع في البورتفوليو
+## 2. Problem & Solution
 
-| Project / المشروع | Type / النوع | Status / الحالة | Page / الصفحة |
+| Aspect | Detail |
+| :--- | :--- |
+| **Problem** | Needed a live public portfolio beyond a basic single HTML page without paying recurring cloud hosting fees after completing the S3 lab. |
+| **Solution** | Built a multi-page static portfolio (`index.html`, `error.html`, `projects/`, banners), deployed and tested it on Amazon S3, then migrated hosting to GitHub Pages. |
+| **Troubleshooting & Security** | Resolved `403 Forbidden` by making objects public via ACL during the S3 lab, and resolved object-deletion access denied errors by removing the restrictive bucket policy. |
+
+---
+
+## 3. Tech Stack
+- **Cloud Lab:** Amazon S3 Static Website Hosting (`nextwork-website-hisoka-portfolio`, `eu-north-1`)
+- **Production Hosting:** GitHub Pages
+- **Frontend:** HTML, CSS, JavaScript
+- **Version Control:** Git & GitHub
+
+---
+
+## 4. Implementation Steps & Portfolio Index
+
+| Project | Type | Status | Page |
 | :--- | :--- | :--- | :--- |
 | **Hosting a Static Website on Amazon S3** | NextWork Project | Completed | [projects/aws-s3-hosting.html](./projects/aws-s3-hosting.html) |
 | **AWS IAM Cloud Security & ABAC Access Control** | NextWork Project | Completed | [projects/iam-cloud-security.html](./projects/iam-cloud-security.html) |
 | **AWS VPC Series (Part 1: Console & CLI)** | NextWork Project | In progress (1 of 9) | [projects/aws-vpc-networking.html](./projects/aws-vpc-networking.html) |
 | **Linux Log Watchdog & Hardening Practice** | Training Project (Ubuntu WSL) | Completed | [projects/linux-log-watchdog.html](./projects/linux-log-watchdog.html) |
 
-> Note: `projects/disk-space-monitor.html` also exists in the repository and is pending content review.
+> *Note: `projects/disk-space-monitor.html` also exists in the repository and is pending content review.*
+
+<details>
+<summary><b>Click to expand Repository Structure</b></summary>
+
+- `index.html` & `error.html` — Main portfolio landing page, project cards, and custom error page
+- `projects/` — Individual project and series detail pages (`vpc-part-1.html`, `aws-s3-hosting.html`, etc.)
+- `images/` — Project screenshots (`vpc-part1-1.png`, `vpc-part1-2.png`, `vpc-part1-3.png`)
+- `hisoka-banner.jpg`, `iam-abac-banner.jpg`, `vpc-banner.jpg`, `linux-banner.jpg` — Project banners
+
+</details>
 
 ---
 
-## 📁 Repository Structure / هيكل المستودع
-- `index.html` — Main portfolio page and project cards / الصفحة الرئيسية وبطاقات المشاريع
-- `projects/` — Individual project pages and series pages / صفحات المشاريع التفصيلية
-- `images/` — Project screenshots / لقطات شاشة المشاريع
-- `hisoka-banner.jpg`, `iam-abac-banner.jpg`, `vpc-banner.jpg`, `linux-banner.jpg` — Project banners / صور واجهات المشاريع
+## 5. Verification & Results
+- **Live Portfolio URL:** [ibrahim-a-elsayed-eng.github.io/nextwork-s3-hisoka-portfolio](https://ibrahim-a-elsayed-eng.github.io/nextwork-s3-hisoka-portfolio/)
+- Verified S3 static hosting (`403` ACL & bucket policy cleanup) before migrating cleanly to GitHub Pages.
 
 ---
 
-## 🛠️ Tech Used / التقنيات المستخدمة
-- HTML, CSS, JavaScript
-- Git & GitHub
-- GitHub Pages (hosting)
+## 6. Key Engineering Takeaways
+- **S3 Access Control Layers:** Public static hosting on S3 requires aligning Block Public Access, bucket policies, and object ACLs—and checking bucket policies when delete operations fail.
+- **Cost-Aware Hosting:** Using AWS S3 for hands-on learning and GitHub Pages for long-term static portfolio hosting keeps recurring costs at `$0`.
