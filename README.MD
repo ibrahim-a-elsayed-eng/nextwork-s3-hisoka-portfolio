@@ -1,6 +1,6 @@
 <div align="center">
 
-![Hisoka Portfolio Banner](./hisoka-banner.jpg)
+<img alt="Static Portfolio Website on Amazon S3 & GitHub Pages Architecture Diagram" src="./images/s3_github_pages_architecture.jpg" />
 
 # Ibrahim Ahmed (Hisoka) — Cloud & DevOps Portfolio
 
