@@ -1,15 +1,16 @@
 <div align="center">
 
-# Ibrahim Ahmed (Hisoka) — Cloud & DevOps Portfolio
+# Ibrahim Ahmed El Sayed — Amazon S3 Static Hosting Lab (Migrated)
+
+> **Notice:** Production portfolio hosting has been upgraded and moved to **[ibrahim-a-elsayed-eng.github.io](https://ibrahim-a-elsayed-eng.github.io/)** (`https://github.com/ibrahim-a-elsayed-eng/ibrahim-a-elsayed-eng.github.io`). This repository now serves as the preserved Amazon S3 lab proof and automatic redirect so legacy links never break.
 
 ![AWS](https://img.shields.io/badge/AWS-Amazon%20S3-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white)
-![Hosting](https://img.shields.io/badge/Hosting-GitHub%20Pages-0EA5E9?style=for-the-badge&logo=githubpages&logoColor=white)
-![Frontend](https://img.shields.io/badge/Stack-HTML%20%7C%20CSS%20%7C%20JS-10B981?style=for-the-badge)
+![Hosting](https://img.shields.io/badge/Hosting-GitHub%20Pages%20Redirect-0EA5E9?style=for-the-badge&logo=githubpages&logoColor=white)
 ![Cost](https://img.shields.io/badge/Hosting%20Cost-%240%20Free-0F172A?style=for-the-badge)
 
-**Static Cloud & DevOps portfolio originally hosted on Amazon S3 (`eu-north-1`) and migrated to GitHub Pages for `$0` ongoing hosting cost.**
+**Static portfolio originally tested on Amazon S3 (`eu-north-1`) and migrated to [ibrahim-a-elsayed-eng.github.io](https://ibrahim-a-elsayed-eng.github.io/) for `$0` ongoing hosting cost.**
 
-🔗 **Live Site:** [ibrahim-a-elsayed-eng.github.io/nextwork-s3-hisoka-portfolio](https://ibrahim-a-elsayed-eng.github.io/nextwork-s3-hisoka-portfolio/)
+🔗 **Active Portfolio:** [ibrahim-a-elsayed-eng.github.io](https://ibrahim-a-elsayed-eng.github.io/)
 
 </div>
 
