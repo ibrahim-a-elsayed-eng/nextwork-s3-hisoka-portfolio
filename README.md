@@ -61,17 +61,16 @@ flowchart LR
 <details>
 <summary><b>Click to expand Repository Structure</b></summary>
 
-- `index.html` & `error.html` — Main portfolio landing page, project cards, and custom error page
-- `projects/` — Individual project and series detail pages (`vpc-part-1.html`, `aws-s3-hosting.html`, etc.)
-- `images/` — Project screenshots (`vpc-part1-1.png`, `vpc-part1-2.png`, `vpc-part1-3.png`)
-- `hisoka-banner.jpg`, `iam-abac-banner.jpg`, `vpc-banner.jpg`, `linux-banner.jpg` — Project banners
+- `index.html` & `error.html` — Instant canonical redirects to `https://ibrahim-a-elsayed-eng.github.io/`
+- `projects/` — Legacy project route redirects preserving backward compatibility for older links
+- `images/s3_github_pages_architecture.jpg` — S3 static hosting to GitHub Pages migration diagram
 
 </details>
 
 ---
 
 ## 5. Verification & Results
-- **Live Portfolio URL:** [ibrahim-a-elsayed-eng.github.io/nextwork-s3-hisoka-portfolio](https://ibrahim-a-elsayed-eng.github.io/nextwork-s3-hisoka-portfolio/)
+- **Live Portfolio URL:** [ibrahim-a-elsayed-eng.github.io](https://ibrahim-a-elsayed-eng.github.io/) (legacy route redirects automatically)
 - Verified S3 static hosting (`403` ACL & bucket policy cleanup) before migrating cleanly to GitHub Pages.
 
 ---
