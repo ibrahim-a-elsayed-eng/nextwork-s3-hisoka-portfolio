@@ -1,7 +1,5 @@
 <div align="center">
 
-<img alt="Static Portfolio Website on Amazon S3 & GitHub Pages Architecture Diagram" src="./images/s3_github_pages_architecture.jpg" />
-
 # Ibrahim Ahmed (Hisoka) — Cloud & DevOps Portfolio
 
 ![AWS](https://img.shields.io/badge/AWS-Amazon%20S3-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white)
@@ -18,6 +16,8 @@
 ---
 
 ## 1. Architecture Overview
+
+![Architecture Diagram](./images/s3_github_pages_architecture.jpg)
 
 ```mermaid
 flowchart LR
@@ -54,10 +54,8 @@ flowchart LR
 | :--- | :--- | :--- | :--- |
 | **Hosting a Static Website on Amazon S3** | NextWork Project | Completed | [projects/aws-s3-hosting.html](./projects/aws-s3-hosting.html) |
 | **AWS IAM Cloud Security & ABAC Access Control** | NextWork Project | Completed | [projects/iam-cloud-security.html](./projects/iam-cloud-security.html) |
-| **AWS VPC Series (Part 1: Console & CLI)** | NextWork Project | In progress (1 of 9) | [projects/aws-vpc-networking.html](./projects/aws-vpc-networking.html) |
+| **AWS VPC Networking Series (Parts 1–2)** | NextWork Project | In progress (2 of 9) | [projects/aws-vpc-networking.html](./projects/aws-vpc-networking.html) |
 | **Linux Log Watchdog & Hardening Practice** | Training Project (Ubuntu WSL) | Completed | [projects/linux-log-watchdog.html](./projects/linux-log-watchdog.html) |
-
-> *Note: `projects/disk-space-monitor.html` also exists in the repository and is pending content review.*
 
 <details>
 <summary><b>Click to expand Repository Structure</b></summary>
@@ -77,6 +75,20 @@ flowchart LR
 
 ---
 
-## 6. Key Engineering Takeaways
+## 6. Troubleshooting & Fixes
+- **Issue 1 (`403 Forbidden` on S3 Static Endpoint):** Uploading files with private default permissions blocked public browser access to the S3 website endpoint.
+  - **Root Cause & Fix:** Enabled public object read access via ACLs during the S3 lab so `index.html` and assets served cleanly.
+- **Issue 2 (`AccessDenied` on S3 Object Deletion):** Deleting lab objects failed during teardown due to a restrictive S3 bucket policy.
+  - **Root Cause & Fix:** Removed the restrictive bucket policy first, then emptied and deleted the S3 bucket cleanly.
+
+---
+
+## 7. Cost & Teardown Verification ($0.00)
+- [x] Amazon S3 lab bucket (`nextwork-website-hisoka-portfolio`, `eu-north-1`) emptied and deleted after verification.
+- [x] Live portfolio migrated to GitHub Pages (`$0.00` ongoing AWS spend).
+
+---
+
+## 8. Key Engineering Takeaways
 - **S3 Access Control Layers:** Public static hosting on S3 requires aligning Block Public Access, bucket policies, and object ACLs—and checking bucket policies when delete operations fail.
 - **Cost-Aware Hosting:** Using AWS S3 for hands-on learning and GitHub Pages for long-term static portfolio hosting keeps recurring costs at `$0`.
