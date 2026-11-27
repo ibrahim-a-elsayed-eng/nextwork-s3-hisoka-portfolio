@@ -3,7 +3,7 @@
 # Ibrahim Ahmed El Sayed — Cloud & DevOps Engineering Portfolio
 
 [![Live Portfolio](https://img.shields.io/badge/Live%20Site-ibrahim--a--elsayed--eng.github.io-FF9900?style=for-the-badge&logo=githubpages&logoColor=white)](https://ibrahim-a-elsayed-eng.github.io/)
-[![GitHub](https://img.shields.io/badge/GitHub-Profile-0F172A?style=for-the-badge)](https://github.com/ibrahim-a-elsayed-eng)
+[![GitHub Profile](https://img.shields.io/badge/Code-GitHub%20Overview-0F172A?style=for-the-badge)](https://github.com/ibrahim-a-elsayed-eng)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge)](https://www.linkedin.com/in/ibrahim-ahmed-elsayed-eng)
 [![NextWork](https://img.shields.io/badge/NextWork-12%2B%20Labs-10B981?style=for-the-badge)](https://nextwork.ai/portfolio/hemaa)
 
@@ -30,8 +30,8 @@
 
 ```mermaid
 flowchart LR
-    Repo["GitHub Repository\n(ibrahim-a-elsayed-eng.github.io)"] -->|Originally Tested On| S3["Amazon S3 Static Hosting\n(eu-north-1, torn down cleanly)"]
-    Repo -->|Production Hosting ($0.00/mo)| GHP["GitHub Pages\nibrahim-a-elsayed-eng.github.io"]
+    Repo["GitHub Repository\n(ibrahim-a-elsayed-eng.github.io)"] -->|Originally Tested On| S3["Amazon S3 Static Hosting\neu-north-1 - torn down cleanly"]
+    Repo -->|Zero-Cost Production Hosting| GHP["GitHub Pages\nibrahim-a-elsayed-eng.github.io"]
 ```
 
 > [!IMPORTANT]
