@@ -3,7 +3,7 @@
 # Ibrahim Ahmed El Sayed — Cloud & DevOps Engineering Portfolio
 
 [![Live Portfolio](https://img.shields.io/badge/Live%20Site-ibrahim--a--elsayed--eng.github.io-FF9900?style=for-the-badge&logo=githubpages&logoColor=white)](https://ibrahim-a-elsayed-eng.github.io/)
-[![GitHub](https://img.shields.io/badge/GitHub-Profile-0F172A?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ibrahim-a-elsayed-eng)
+[![GitHub](https://img.shields.io/badge/GitHub-Profile-0F172A?style=for-the-badge)](https://github.com/ibrahim-a-elsayed-eng)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge)](https://www.linkedin.com/in/ibrahim-ahmed-elsayed-eng)
 [![NextWork](https://img.shields.io/badge/NextWork-12%2B%20Labs-10B981?style=for-the-badge)](https://nextwork.ai/portfolio/hemaa)
 
