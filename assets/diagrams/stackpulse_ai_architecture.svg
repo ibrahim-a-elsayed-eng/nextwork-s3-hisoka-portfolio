@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" fill="none">
+  <rect width="1280" height="720" fill="#0F172A"/>
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1E293B" stroke-width="1"/>
+  </pattern>
+  <rect width="1280" height="720" fill="url(#grid)"/>
+
+  <!-- Header -->
+  <rect x="48" y="40" width="1184" height="84" rx="14" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+  <text x="80" y="78" fill="#F8FAFC" font-family="system-ui, -apple-system, sans-serif" font-size="26" font-weight="700">StackPulse AI — Multi-Agent Media &amp; Distribution Pipeline</text>
+  <text x="80" y="106" fill="#94A3B8" font-family="monospace" font-size="16">Python 3.12 • Pydantic Contracts • SQLite Deduplication • 115+ Pytest • $0.00/mo Local Stack</text>
+  <rect x="1032" y="62" width="172" height="40" rx="8" fill="#10B981" fill-opacity="0.16" stroke="#10B981" stroke-width="1.5"/>
+  <text x="1118" y="88" text-anchor="middle" fill="#10B981" font-family="monospace" font-size="15" font-weight="700">HITL SAFETY GATE</text>
+
+  <!-- Step 1: Source -->
+  <rect x="48" y="210" width="180" height="170" rx="14" fill="#1E293B" stroke="#0EA5E9" stroke-width="2"/>
+  <text x="138" y="250" text-anchor="middle" fill="#0EA5E9" font-family="monospace" font-size="14" font-weight="700">INGEST</text>
+  <text x="138" y="286" text-anchor="middle" fill="#F8FAFC" font-family="system-ui, sans-serif" font-size="20" font-weight="700">Product Hunt</text>
+  <text x="138" y="314" text-anchor="middle" fill="#CBD5E1" font-family="system-ui, sans-serif" font-size="15">RSS Candidate Feed</text>
+  <text x="138" y="350" text-anchor="middle" fill="#94A3B8" font-family="monospace" font-size="13">httpx + feedparser</text>
+
+  <!-- Arrow 1 -->
+  <path d="M228 295 H268" stroke="#0EA5E9" stroke-width="3" stroke-linecap="round"/>
+  <polygon points="268,288 282,295 268,302" fill="#0EA5E9"/>
+
+  <!-- Step 2: Agent 1 -->
+  <rect x="282" y="185" width="210" height="220" rx="14" fill="#1E293B" stroke="#FF9900" stroke-width="2"/>
+  <text x="387" y="220" text-anchor="middle" fill="#FF9900" font-family="monospace" font-size="14" font-weight="700">AGENT 1</text>
+  <text x="387" y="252" text-anchor="middle" fill="#F8FAFC" font-family="system-ui, sans-serif" font-size="20" font-weight="700">Research &amp; Verify</text>
+  <text x="387" y="286" text-anchor="middle" fill="#CBD5E1" font-family="system-ui, sans-serif" font-size="14">• Gemini Tool Selection</text>
+  <text x="387" y="314" text-anchor="middle" fill="#CBD5E1" font-family="system-ui, sans-serif" font-size="14">• Official URL Resolver</text>
+  <text x="387" y="342" text-anchor="middle" fill="#CBD5E1" font-family="system-ui, sans-serif" font-size="14">• SQLite Dedup Check</text>
+  <rect x="312" y="362" width="150" height="28" rx="6" fill="#0F172A" stroke="#334155"/>
+  <text x="387" y="381" text-anchor="middle" fill="#94A3B8" font-family="monospace" font-size="12">research.json</text>
+
+  <!-- SQLite DB Box -->
+  <rect x="282" y="460" width="210" height="100" rx="14" fill="#0B1120" stroke="#10B981" stroke-width="2"/>
+  <text x="387" y="498" text-anchor="middle" fill="#10B981" font-family="monospace" font-size="15" font-weight="700">SQLite: automation.db</text>
+  <text x="387" y="528" text-anchor="middle" fill="#94A3B8" font-family="monospace" font-size="13">UNIQUE normalized_name</text>
+  <path d="M387 405 V452" stroke="#10B981" stroke-width="2.5" stroke-dasharray="5 5"/>
+
+  <!-- Arrow 2 -->
+  <path d="M492 295 H528" stroke="#FF9900" stroke-width="3" stroke-linecap="round"/>
+  <polygon points="528,288 542,295 528,302" fill="#FF9900"/>
+
+  <!-- Step 3: Agent 2 -->
+  <rect x="542" y="185" width="200" height="220" rx="14" fill="#1E293B" stroke="#0EA5E9" stroke-width="2"/>
+  <text x="642" y="220" text-anchor="middle" fill="#0EA5E9" font-family="monospace" font-size="14" font-weight="700">AGENT 2</text>
+  <text x="642" y="252" text-anchor="middle" fill="#F8FAFC" font-family="system-ui, sans-serif" font-size="20" font-weight="700">Script &amp; SEO</text>
+  <text x="642" y="286" text-anchor="middle" fill="#CBD5E1" font-family="system-ui, sans-serif" font-size="14">• 4-Beat Short Script</text>
+  <text x="642" y="314" text-anchor="middle" fill="#CBD5E1" font-family="system-ui, sans-serif" font-size="14">• Word-Budget Guard</text>
+  <text x="642" y="342" text-anchor="middle" fill="#CBD5E1" font-family="system-ui, sans-serif" font-size="14">• Disclosure Metadata</text>
+  <rect x="567" y="362" width="150" height="28" rx="6" fill="#0F172A" stroke="#334155"/>
+  <text x="642" y="381" text-anchor="middle" fill="#94A3B8" font-family="monospace" font-size="12">script.json</text>
+
+  <!-- Arrow 3 -->
+  <path d="M742 295 H778" stroke="#0EA5E9" stroke-width="3" stroke-linecap="round"/>
+  <polygon points="778,288 792,295 778,302" fill="#0EA5E9"/>
+
+  <!-- Step 4: Agent 3 -->
+  <rect x="792" y="185" width="220" height="220" rx="14" fill="#1E293B" stroke="#10B981" stroke-width="2"/>
+  <text x="902" y="220" text-anchor="middle" fill="#10B981" font-family="monospace" font-size="14" font-weight="700">AGENT 3</text>
+  <text x="902" y="252" text-anchor="middle" fill="#F8FAFC" font-family="system-ui, sans-serif" font-size="20" font-weight="700">Media Renderer</text>
+  <text x="902" y="286" text-anchor="middle" fill="#CBD5E1" font-family="system-ui, sans-serif" font-size="14">• Edge-TTS Voiceover</text>
+  <text x="902" y="314" text-anchor="middle" fill="#CBD5E1" font-family="system-ui, sans-serif" font-size="14">• Playwright + Pixabay</text>
+  <text x="902" y="342" text-anchor="middle" fill="#CBD5E1" font-family="system-ui, sans-serif" font-size="14">• Whisper .ass + FFmpeg</text>
+  <rect x="822" y="362" width="160" height="28" rx="6" fill="#0F172A" stroke="#334155"/>
+  <text x="902" y="381" text-anchor="middle" fill="#94A3B8" font-family="monospace" font-size="12">final_short.mp4</text>
+
+  <!-- Arrow 4 -->
+  <path d="M1012 295 H1048" stroke="#10B981" stroke-width="3" stroke-linecap="round"/>
+  <polygon points="1048,288 1062,295 1048,302" fill="#10B981"/>
+
+  <!-- Step 5: Agent 4 -->
+  <rect x="1062" y="185" width="170" height="220" rx="14" fill="#1E293B" stroke="#FF9900" stroke-width="2"/>
+  <text x="1147" y="220" text-anchor="middle" fill="#FF9900" font-family="monospace" font-size="14" font-weight="700">AGENT 4</text>
+  <text x="1147" y="252" text-anchor="middle" fill="#F8FAFC" font-family="system-ui, sans-serif" font-size="20" font-weight="700">Distribute</text>
+  <text x="1147" y="286" text-anchor="middle" fill="#CBD5E1" font-family="system-ui, sans-serif" font-size="14">• YouTube API v3</text>
+  <text x="1147" y="314" text-anchor="middle" fill="#CBD5E1" font-family="system-ui, sans-serif" font-size="14">• Strictly Unlisted</text>
+  <text x="1147" y="342" text-anchor="middle" fill="#CBD5E1" font-family="system-ui, sans-serif" font-size="14">• Telegram HITL</text>
+  <rect x="1082" y="362" width="130" height="28" rx="6" fill="#FF9900" fill-opacity="0.16" stroke="#FF9900"/>
+  <text x="1147" y="381" text-anchor="middle" fill="#FF9900" font-family="monospace" font-size="12">Manual Review</text>
+
+  <!-- Bottom DevOps Target Banner -->
+  <rect x="542" y="460" width="690" height="100" rx="14" fill="#1E293B" stroke="#334155" stroke-width="1.5"/>
+  <text x="572" y="498" fill="#0EA5E9" font-family="monospace" font-size="15" font-weight="700">CLOUD CAPSTONE TARGET (ROADMAP FLAGSHIPS #3 &amp; #4)</text>
+  <text x="572" y="530" fill="#CBD5E1" font-family="system-ui, sans-serif" font-size="16">Docker Multi-Stage + GitHub Actions CI/CD (OIDC + Trivy) + AWS ECS/EC2 + S3 SQLite Backup + CloudWatch</text>
+
+  <!-- Footer -->
+  <text x="48" y="666" fill="#64748B" font-family="monospace" font-size="14">Ibrahim Ahmed El Sayed • ibrahim-a-elsayed-eng.github.io</text>
+</svg>

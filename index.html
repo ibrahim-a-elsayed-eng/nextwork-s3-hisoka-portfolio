@@ -1,24 +1,623 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="refresh" content="0; url=https://ibrahim-a-elsayed-eng.github.io/" />
-  <link rel="canonical" href="https://ibrahim-a-elsayed-eng.github.io/" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Redirecting — Ibrahim Ahmed El Sayed Portfolio</title>
-  <script>window.location.replace("https://ibrahim-a-elsayed-eng.github.io/");</script>
-  <style>
-    body { font-family: system-ui, sans-serif; background: #090e1a; color: #f8fafc; min-height: 100vh; display: grid; place-items: center; margin: 0; padding: 1.5rem; }
-    .box { max-width: 520px; background: #0f172a; border: 1px solid #334155; border-radius: 14px; padding: 2rem; text-align: center; }
-    a { display: inline-block; margin-top: 1rem; padding: 0.65rem 1.25rem; background: #ff9900; color: #090e1a; border-radius: 8px; text-decoration: none; font-weight: 700; }
-    p { color: #94a3b8; line-height: 1.6; }
-  </style>
+  <title>Ibrahim Ahmed El Sayed — Cloud &amp; DevOps Engineer</title>
+  <meta name="description" content="Cloud &amp; DevOps Infrastructure Portfolio of Ibrahim Ahmed El Sayed: AWS VPC Networking, IAM ABAC Security, Linux Hardening, Containers, and Cost-Conscious ($0.00) Cloud Engineering." />
+  <meta property="og:title" content="Ibrahim Ahmed El Sayed — Cloud &amp; DevOps Engineer" />
+  <meta property="og:description" content="Hands-on AWS VPC, IAM Least-Privilege, Linux Automation, and Docker/Python Infrastructure Portfolio." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ibrahim-a-elsayed-eng.github.io/" />
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/css/style.css" />
 </head>
 <body>
-  <div class="box">
-    <h1>Portfolio Moved</h1>
-    <p>This portfolio has moved to the unified engineering domain <strong>ibrahim-a-elsayed-eng.github.io</strong>.</p>
-    <a href="https://ibrahim-a-elsayed-eng.github.io/">Continue to Portfolio &rarr;</a>
+  <canvas id="holo-bg-canvas" aria-hidden="true"></canvas>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a href="#" class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 64 64" fill="none">
+            <path d="M20 42C14.477 42 10 37.523 10 32C10 26.81 13.952 22.543 19.013 22.049C20.992 16.774 26.065 13 32 13C39.732 13 46 19.268 46 27C46 27.367 45.986 27.731 45.958 28.091C50.478 29.076 54 33.133 54 38C54 43.523 49.523 48 44 48H20V42Z" stroke="#0EA5E9" stroke-width="4"/>
+            <circle cx="25" cy="34" r="3.5" fill="#FF9900"/>
+            <circle cx="38" cy="34" r="3.5" fill="#10B981"/>
+          </svg>
+        </span>
+        <span>Ibrahim Ahmed <span class="brand-sub">/ cloud-devops</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#projects">Systems</a></li>
+        <li><a href="#roadmap">Roadmap</a></li>
+        <li><a href="#stack">Tech Stack</a></li>
+        <li><a href="#connect">Connect</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="theme-toggle" class="icon-btn" type="button" title="Toggle theme">☀️</button>
+        <a href="https://www.linkedin.com/in/ibrahim-ahmed-elsayed-eng" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">LinkedIn ↗</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <div class="status-pill">
+              <span class="pulse-dot" aria-hidden="true"></span>
+              <span>AWS Cloud &amp; Linux Track • Building Flagship #1 (VPC + Terraform)</span>
+            </div>
+
+            <h1>Ibrahim Ahmed El Sayed</h1>
+            <p class="hero-role">Junior Cloud &amp; DevOps Engineer — AWS • Linux • Terraform • Docker</p>
+            <p class="hero-summary">
+              Building secure, cost-disciplined cloud infrastructure with strict <strong>$0.00 teardown verification</strong>, least-privilege IAM/ABAC boundaries, and documented Architecture Decision Records (ADRs) across AWS, Linux, and Python automation.
+            </p>
+
+            <div class="hero-cta">
+              <a href="#projects" class="btn btn-primary">Inspect Systems &amp; Diagrams</a>
+              <a href="https://github.com/ibrahim-a-elsayed-eng" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">GitHub Profile ↗</a>
+              <a href="https://nextwork.ai/portfolio/hemaa" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">NextWork Portfolio ↗</a>
+            </div>
+
+            <div class="hero-links-inline">
+              <span>Aligned across:</span>
+              <a href="https://github.com/ibrahim-a-elsayed-eng" target="_blank" rel="noopener noreferrer">6 Public Repos</a>
+              <a href="https://nextwork.ai/portfolio/hemaa" target="_blank" rel="noopener noreferrer">4 NextWork Groups</a>
+              <a href="https://www.linkedin.com/in/ibrahim-ahmed-elsayed-eng" target="_blank" rel="noopener noreferrer">LinkedIn Synced</a>
+            </div>
+          </div>
+
+          <!-- Interactive Hologram Cloud Ops HUD -->
+          <aside class="holo-hud" aria-label="Interactive Hologram Cloud Architecture HUD">
+            <div class="holo-hud-top">
+              <span class="holo-hud-label">● HOLOGRAM CLOUD TOPOLOGY HUD</span>
+              <span class="mono" style="font-size: 0.71rem; color: #34d399;">LIVE SYNCED • 4 GROUPS</span>
+            </div>
+
+            <div class="holo-orb-stage">
+              <canvas id="holo-core-canvas"></canvas>
+              <div class="holo-node-pills">
+                <button class="holo-node n-vpc active" type="button" data-holo="vpc">VPC • 2/9</button>
+                <button class="holo-node n-iam" type="button" data-holo="abac">IAM • ABAC</button>
+                <button class="holo-node n-auto" type="button" data-holo="n8n">EC2 • n8n</button>
+                <button class="holo-node n-linux" type="button" data-holo="linux">Linux • 7/7</button>
+              </div>
+            </div>
+
+            <div class="console-header">
+              <div class="console-tabs" role="tablist">
+                <button class="console-tab active" type="button" data-tab="vpc">vpc-setup.sh</button>
+                <button class="console-tab" type="button" data-tab="abac">abac-policy.json</button>
+                <button class="console-tab" type="button" data-tab="n8n">compose.yaml</button>
+                <button class="console-tab" type="button" data-tab="linux">log-monitor.sh</button>
+              </div>
+              <button id="console-copy" class="copy-pill" type="button">Copy</button>
+            </div>
+            <div class="console-body">
+              <pre id="console-code"></pre>
+            </div>
+            <div class="console-footer">
+              <span>Click any node to inspect config</span>
+              <span style="color: #34d399;">Spend Gate: $0.00 ✓</span>
+            </div>
+          </aside>
+        </div>
+
+        <!-- Connected Ecosystem Flow -->
+        <div class="card ecosystem-strip">
+          <div class="ecosystem-head">
+            <span class="mono" style="font-size: 0.76rem; color: var(--holo-cyan); font-weight: 700;">UNIFIED INFRASTRUCTURE PIPELINE (CLICK ANY LAYER TO FILTER SYSTEMS)</span>
+            <span class="mono" style="font-size: 0.73rem; color: var(--text-muted);">GitHub ⇄ NextWork ⇄ LinkedIn ⇄ Roadmap</span>
+          </div>
+          <div class="ecosystem-flow">
+            <button class="eco-node" type="button" data-jump-filter="linux">
+              <div class="eco-step">01 • FOUNDATION ✓</div>
+              <div class="eco-title">Linux &amp; Hardening</div>
+              <div class="eco-sub">7/7 Ubuntu Labs, Bash, systemd</div>
+            </button>
+            <button class="eco-node" type="button" data-jump-filter="iam">
+              <div class="eco-step">02 • GOVERNANCE ✓</div>
+              <div class="eco-title">AWS IAM &amp; ABAC</div>
+              <div class="eco-sub">Root MFA, Budgets, Tag Policies</div>
+            </button>
+            <button class="eco-node active-step" type="button" data-jump-filter="vpc">
+              <div class="eco-step" style="color: var(--amber);">03 • ACTIVE TRACK ●</div>
+              <div class="eco-title">AWS VPC Networking</div>
+              <div class="eco-sub">2/9 Labs &rarr; Terraform Flagship #1</div>
+            </button>
+            <button class="eco-node" type="button" data-jump-filter="automation">
+              <div class="eco-step">04 • AUTOMATION ✓</div>
+              <div class="eco-title">Private EC2 &amp; S3/Pages</div>
+              <div class="eco-sub">SSH-Tunnel n8n + StackPulse AI</div>
+            </button>
+            <button class="eco-node" type="button" data-jump-roadmap="true">
+              <div class="eco-step">05 • NEXT TARGETS →</div>
+              <div class="eco-title">CI/CD &amp; Kubernetes</div>
+              <div class="eco-sub">GitHub Actions, OIDC, Cloud Capstone</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- KPI Metrics -->
+        <div class="kpi-grid">
+          <div class="card kpi-card">
+            <div class="kpi-value" style="color: var(--amber);">12 Labs</div>
+            <div class="kpi-label">Completed &amp; documented on NextWork</div>
+          </div>
+          <div class="card kpi-card">
+            <div class="kpi-value" style="color: var(--sky);">6 Repos</div>
+            <div class="kpi-label">Public GitHub repositories with diagrams</div>
+          </div>
+          <div class="card kpi-card">
+            <div class="kpi-value" style="color: var(--emerald);">$0.00</div>
+            <div class="kpi-label">Verified AWS recurring spend (strict teardown)</div>
+          </div>
+          <div class="card kpi-card">
+            <div class="kpi-value">2 / 9 <span style="font-size: 0.85rem; color: var(--sky); font-weight: 500;">Active</span></div>
+            <div class="kpi-label">Amazon VPC Networking Series progress</div>
+            <div class="kpi-bar" aria-label="VPC Series 2 of 9 completed"><div class="kpi-bar-fill"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Systems & Projects -->
+    <section id="projects" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Synced with NextWork Groups &amp; GitHub Repositories</p>
+            <h2 class="section-title">Production &amp; Lab Architecture Systems</h2>
+            <p class="section-desc">
+              Click any diagram or <strong>Case Study</strong> button to inspect the Problem &rarr; Solution, Key Design Decision (ADR), real troubleshooting fix, and verified code.
+            </p>
+          </div>
+        </div>
+
+        <div class="filter-bar" role="tablist" aria-label="Filter projects by NextWork group">
+          <button class="filter-btn active" type="button" data-filter="all">All Systems (7)</button>
+          <button class="filter-btn" type="button" data-filter="vpc">AWS VPC Networking</button>
+          <button class="filter-btn" type="button" data-filter="iam">AWS Security &amp; IAM</button>
+          <button class="filter-btn" type="button" data-filter="automation">Cloud Automation &amp; Hosting</button>
+          <button class="filter-btn" type="button" data-filter="linux">Linux &amp; DevOps Foundations</button>
+        </div>
+
+        <div class="projects-grid">
+          <!-- 1. AWS VPC Series -->
+          <article class="card project-card" data-group="vpc">
+            <div class="project-thumb-wrap" data-case="vpc">
+              <img src="./assets/diagrams/aws_vpc_part1_architecture.jpg" alt="Amazon VPC Networking architecture diagram" loading="lazy" />
+              <div class="thumb-overlay">
+                <span class="badge badge-amber">In Progress • 2/9</span>
+                <span class="badge badge-sky">Inspect Diagram ↗</span>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-group">AWS VPC Networking • Flagship #1 Track</div>
+              <h3 class="project-title">Amazon VPC Networking Series</h3>
+              <p class="project-desc">
+                9-part hands-on AWS VPC series covering CIDR design, Internet Gateways, Route Tables, stateful Security Groups vs stateless NACLs, and EC2 Global View via Console &amp; CloudShell CLI.
+              </p>
+              <div class="tag-row">
+                <span class="tag">AWS VPC</span>
+                <span class="tag">Route Tables</span>
+                <span class="tag">SG &amp; NACL</span>
+                <span class="tag">AWS CLI</span>
+              </div>
+              <div class="project-actions">
+                <button class="btn btn-primary btn-sm" type="button" data-case="vpc">Case Study</button>
+                <a class="btn btn-secondary btn-sm" href="https://github.com/ibrahim-a-elsayed-eng/aws-vpc-networking-series" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                <a class="btn btn-secondary btn-sm" href="https://nextwork.ai/hemaa/docs/fe5ed473-5874-57e1-a58f-d9b3d652330c" target="_blank" rel="noopener noreferrer">NextWork ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 2. Private n8n on EC2 -->
+          <article class="card project-card" data-group="automation">
+            <div class="project-thumb-wrap" data-case="n8n">
+              <img src="./assets/diagrams/n8n_aws_ec2_architecture.jpg" alt="Private n8n on AWS EC2 SSH tunnel architecture diagram" loading="lazy" />
+              <div class="thumb-overlay">
+                <span class="badge badge-emerald">Authored • $0.00</span>
+                <span class="badge badge-sky">Inspect Diagram ↗</span>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-group">Cloud Automation &amp; Hosting</div>
+              <h3 class="project-title">Private n8n RSS Alerts on AWS EC2</h3>
+              <p class="project-desc">
+                Self-hosted Docker Compose workflow engine on Ubuntu EC2 with 2 GiB swap, strictly bound to loopback <code>127.0.0.1:5678</code> and accessed exclusively through an encrypted SSH tunnel.
+              </p>
+              <div class="tag-row">
+                <span class="tag">AWS EC2</span>
+                <span class="tag">Docker Compose</span>
+                <span class="tag">SSH Tunnel</span>
+                <span class="tag">Telegram API</span>
+              </div>
+              <div class="project-actions">
+                <button class="btn btn-primary btn-sm" type="button" data-case="n8n">Case Study</button>
+                <a class="btn btn-secondary btn-sm" href="https://github.com/ibrahim-a-elsayed-eng/n8n-private-rss-alerts" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                <a class="btn btn-secondary btn-sm" href="https://nextwork.ai/hemaa/docs/3191c4e6-7776-4b75-9db2-40266083fc20" target="_blank" rel="noopener noreferrer">NextWork ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 3. AWS IAM ABAC -->
+          <article class="card project-card" data-group="iam">
+            <div class="project-thumb-wrap" data-case="abac">
+              <img src="./assets/diagrams/aws_iam_abac_architecture.jpg" alt="AWS IAM ABAC architecture diagram" loading="lazy" />
+              <div class="thumb-overlay">
+                <span class="badge badge-emerald">Verified • $0.00</span>
+                <span class="badge badge-sky">Inspect Diagram ↗</span>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-group">AWS Security &amp; IAM</div>
+              <h3 class="project-title">AWS IAM Cloud Security &amp; ABAC Control</h3>
+              <p class="project-desc">
+                Tag-based Attribute-Based Access Control granting EC2 control on <code>Env=development</code> while blocking production changes and denying tag escalation via explicit <code>Deny</code> statements.
+              </p>
+              <div class="tag-row">
+                <span class="tag">AWS IAM</span>
+                <span class="tag">ABAC JSON</span>
+                <span class="tag">Policy Simulator</span>
+                <span class="tag">EC2 Tags</span>
+              </div>
+              <div class="project-actions">
+                <button class="btn btn-primary btn-sm" type="button" data-case="abac">Case Study</button>
+                <a class="btn btn-secondary btn-sm" href="https://github.com/ibrahim-a-elsayed-eng/aws-iam-abac-security" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                <a class="btn btn-secondary btn-sm" href="https://nextwork.ai/hemaa/docs/51a5fd24-7458-58a6-8653-9b90119a0e4a" target="_blank" rel="noopener noreferrer">NextWork ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 4. Week 1 IAM Security Baseline -->
+          <article class="card project-card" data-group="iam">
+            <div class="project-thumb-wrap" data-case="baseline">
+              <img src="./assets/diagrams/week1_iam_security_baseline_architecture.png" alt="AWS Account Security and IAM Baseline architecture diagram" loading="lazy" />
+              <div class="thumb-overlay">
+                <span class="badge badge-emerald">Baseline • $0.00</span>
+                <span class="badge badge-sky">Inspect Diagram ↗</span>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-group">AWS Security &amp; IAM</div>
+              <h3 class="project-title">AWS Account Hardening &amp; Billing Guardrails</h3>
+              <p class="project-desc">
+                Day-one governance baseline: Root MFA lockdown, daily MFA-enforced <code>cloud-admin</code> user, Free Tier &amp; Zero-Spend Budgets, CloudTrail audit verification, and S3 ABAC prefix policies.
+              </p>
+              <div class="tag-row">
+                <span class="tag">Root MFA</span>
+                <span class="tag">AWS Budgets</span>
+                <span class="tag">CloudTrail</span>
+                <span class="tag">S3 ABAC</span>
+              </div>
+              <div class="project-actions">
+                <button class="btn btn-primary btn-sm" type="button" data-case="baseline">Case Study</button>
+                <a class="btn btn-secondary btn-sm" href="https://github.com/ibrahim-a-elsayed-eng/week-01-iam-security-baseline" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                <a class="btn btn-secondary btn-sm" href="https://nextwork.ai/portfolio/hemaa" target="_blank" rel="noopener noreferrer">NextWork ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 5. Linux & DevOps 7 Labs -->
+          <article class="card project-card" data-group="linux">
+            <div class="project-thumb-wrap" data-case="linux">
+              <img src="./assets/diagrams/linux_devops_7labs_architecture.jpg" alt="Linux and DevOps 7-lab architecture diagram" loading="lazy" />
+              <div class="thumb-overlay">
+                <span class="badge badge-emerald">7 / 7 Labs • $0.00</span>
+                <span class="badge badge-sky">Inspect Diagram ↗</span>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-group">Linux &amp; DevOps Foundations</div>
+              <h3 class="project-title">Linux &amp; DevOps Journey (7 Progressive Labs)</h3>
+              <p class="project-desc">
+                Ubuntu Linux administration progression from DAC permissions and process signals to socket auditing (<code>ss</code>), fail-fast Bash automation, <code>cron</code>/<code>logrotate</code>, and sandboxed <code>systemd</code> services.
+              </p>
+              <div class="tag-row">
+                <span class="tag">Ubuntu WSL2</span>
+                <span class="tag">Bash</span>
+                <span class="tag">systemd</span>
+                <span class="tag">SSH / UFW</span>
+              </div>
+              <div class="project-actions">
+                <button class="btn btn-primary btn-sm" type="button" data-case="linux">Case Study</button>
+                <a class="btn btn-secondary btn-sm" href="https://github.com/ibrahim-a-elsayed-eng/linux-basics-project" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                <a class="btn btn-secondary btn-sm" href="https://nextwork.ai/portfolio/hemaa" target="_blank" rel="noopener noreferrer">NextWork ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 6. S3 Static Hosting -> GitHub Pages -->
+          <article class="card project-card" data-group="automation">
+            <div class="project-thumb-wrap" data-case="s3pages">
+              <img src="./assets/diagrams/s3_github_pages_architecture.jpg" alt="Amazon S3 to GitHub Pages migration architecture diagram" loading="lazy" />
+              <div class="thumb-overlay">
+                <span class="badge badge-emerald">Live • $0.00/mo</span>
+                <span class="badge badge-sky">Inspect Diagram ↗</span>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-group">Cloud Automation &amp; Hosting</div>
+              <h3 class="project-title">S3 Static Hosting &rarr; GitHub Pages</h3>
+              <p class="project-desc">
+                Prototyped static hosting on Amazon S3 (resolving <code>403</code> ACL &amp; restrictive bucket-policy deletion blocks), then migrated permanently to this custom GitHub Pages domain at zero ongoing cost.
+              </p>
+              <div class="tag-row">
+                <span class="tag">Amazon S3</span>
+                <span class="tag">GitHub Pages</span>
+                <span class="tag">ACLs &amp; Policies</span>
+                <span class="tag">$0 Hosting</span>
+              </div>
+              <div class="project-actions">
+                <button class="btn btn-primary btn-sm" type="button" data-case="s3pages">Case Study</button>
+                <a class="btn btn-secondary btn-sm" href="https://github.com/ibrahim-a-elsayed-eng/ibrahim-a-elsayed-eng.github.io" target="_blank" rel="noopener noreferrer">Site Repo ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 7. StackPulse AI Production Pipeline -->
+          <article class="card project-card" data-group="automation">
+            <div class="project-thumb-wrap" data-case="stackpulse">
+              <img src="./assets/diagrams/stackpulse_ai_architecture.svg" alt="StackPulse AI multi-agent Python pipeline diagram" loading="lazy" />
+              <div class="thumb-overlay">
+                <span class="badge badge-sky">Production • 115+ Tests</span>
+                <span class="badge badge-sky">Inspect Diagram ↗</span>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-group">Cloud Automation &amp; Hosting • Capstone Workload</div>
+              <h3 class="project-title">StackPulse AI Automation Pipeline</h3>
+              <p class="project-desc">
+                4-agent Python 3.12 pipeline with Pydantic contracts, SQLite deduplication, Playwright/FFmpeg rendering, unlisted YouTube uploads, and Telegram HITL gates — target workload for Docker &amp; CI/CD Flagships.
+              </p>
+              <div class="tag-row">
+                <span class="tag">Python 3.12</span>
+                <span class="tag">Pytest (115+)</span>
+                <span class="tag">SQLite</span>
+                <span class="tag">FFmpeg</span>
+              </div>
+              <div class="project-actions">
+                <button class="btn btn-primary btn-sm" type="button" data-case="stackpulse">Case Study</button>
+                <a class="btn btn-secondary btn-sm" href="https://www.youtube.com/@StackPulseAITools" target="_blank" rel="noopener noreferrer">Channel ↗</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Engineering Roadmap & Guardrails -->
+    <section id="roadmap" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Execution Plan &amp; Engineering Discipline</p>
+            <h2 class="section-title">Cloud &amp; DevOps Roadmap</h2>
+            <p class="section-desc">
+              Console-first foundations transitioning into Infrastructure as Code, Containers, and automated DevSecOps pipelines — anchored by strict verification gates.
+            </p>
+          </div>
+        </div>
+
+        <div class="roadmap-grid">
+          <div class="card roadmap-card">
+            <div class="roadmap-head">
+              <span class="badge badge-emerald">Completed • 3/3 + 7/7</span>
+              <span class="mono" style="font-size: 0.75rem; color: var(--text-muted);">Phase 1</span>
+            </div>
+            <h3>Cloud, IAM &amp; Linux Baseline</h3>
+            <ul class="roadmap-list">
+              <li><strong>IAM &amp; Governance:</strong> Root MFA, Budgets, CloudTrail, ABAC JSON</li>
+              <li><strong>Static Cloud Hosting:</strong> Amazon S3 &rarr; GitHub Pages migration</li>
+              <li><strong>Linux Ops:</strong> 7/7 Ubuntu labs, Bash, cron, logrotate, systemd</li>
+              <li><strong>Self-Hosted Security:</strong> Private n8n on EC2 via SSH tunnel</li>
+            </ul>
+          </div>
+
+          <div class="card roadmap-card active-phase">
+            <div class="roadmap-head">
+              <span class="badge badge-amber">Active • 2/9 Labs</span>
+              <span class="mono" style="font-size: 0.75rem; color: var(--amber);">Phases 2–4</span>
+            </div>
+            <h3>VPC Networking, Terraform &amp; Serverless</h3>
+            <ul class="roadmap-list">
+              <li><strong>Phase 2 (Active):</strong> Subnets, Route Tables, SG vs NACL, Peering, Flow Logs, Endpoints</li>
+              <li><strong>Flagship #1:</strong> Rebuild full VPC architecture in <strong>Terraform IaC</strong></li>
+              <li><strong>Flagship #2:</strong> DynamoDB, CloudFront, API Gateway, Lambda &amp; <code>boto3</code></li>
+              <li><strong>Observability:</strong> CloudWatch Logs, Alarms &amp; Cloud Support Launch</li>
+            </ul>
+          </div>
+
+          <div class="card roadmap-card">
+            <div class="roadmap-head">
+              <span class="badge badge-sky">Upcoming Targets</span>
+              <span class="mono" style="font-size: 0.75rem; color: var(--text-muted);">Phases 5–9</span>
+            </div>
+            <h3>Containers, DevSecOps &amp; Kubernetes</h3>
+            <ul class="roadmap-list">
+              <li><strong>Security:</strong> AWS KMS, GuardDuty, Secrets Manager</li>
+              <li><strong>Flagship #3:</strong> Containerize <strong>StackPulse AI</strong> + GitHub Actions OIDC + Trivy/Checkov</li>
+              <li><strong>Flagship #4 (Capstone):</strong> Full AWS 24/7 Cloud Deployment + Prometheus/Grafana</li>
+              <li><strong>Flagship #5:</strong> Kubernetes (Kind/EKS), NGINX Ingress, Helm, ArgoCD</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="guardrails-grid">
+          <div class="card guardrail-card">
+            <h4>$0.00 Zero-Spend Gate</h4>
+            <p>No lab closes until every billable resource (EC2, NAT Gateway, EIP, EBS) is verified deleted in Console &amp; Billing.</p>
+          </div>
+          <div class="card guardrail-card">
+            <h4>Secret Hygiene Gate</h4>
+            <p>Every commit, diagram, and screenshot is audited to redact AWS Account IDs, private keys, tokens, and public IPs.</p>
+          </div>
+          <div class="card guardrail-card">
+            <h4>Least-Privilege Design</h4>
+            <p>Loopback-only service bindings, ABAC tag boundaries, explicit deny statements, and unprivileged systemd units.</p>
+          </div>
+          <div class="card guardrail-card">
+            <h4>ADR &amp; Troubleshooting Proof</h4>
+            <p>Flagship documentation records real architectural trade-offs and verified failures/fixes rather than textbook summaries.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Stack -->
+    <section id="stack" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Verified Hands-On Tooling</p>
+            <h2 class="section-title">Core Technical Stack</h2>
+          </div>
+        </div>
+
+        <div class="stack-grid">
+          <div class="card stack-card">
+            <h3>AWS Cloud <span class="mono" style="font-size: 0.75rem; color: var(--amber);">Primary</span></h3>
+            <div class="tag-row">
+              <span class="tag">VPC &amp; Subnets</span>
+              <span class="tag">Route Tables</span>
+              <span class="tag">IGW / SG / NACL</span>
+              <span class="tag">IAM &amp; ABAC</span>
+              <span class="tag">EC2 &amp; EBS gp3</span>
+              <span class="tag">Amazon S3</span>
+              <span class="tag">CloudTrail</span>
+              <span class="tag">AWS Budgets</span>
+            </div>
+          </div>
+
+          <div class="card stack-card">
+            <h3>Linux &amp; Scripting <span class="mono" style="font-size: 0.75rem; color: var(--sky);">Verified</span></h3>
+            <div class="tag-row">
+              <span class="tag">Ubuntu WSL2</span>
+              <span class="tag">Bash (strict mode)</span>
+              <span class="tag">systemd &amp; journalctl</span>
+              <span class="tag">cron &amp; logrotate</span>
+              <span class="tag">SSH Hardening</span>
+              <span class="tag">UFW Firewall</span>
+              <span class="tag">ss / curl / awk</span>
+            </div>
+          </div>
+
+          <div class="card stack-card">
+            <h3>Containers &amp; Code <span class="mono" style="font-size: 0.75rem; color: var(--emerald);">Active</span></h3>
+            <div class="tag-row">
+              <span class="tag">Docker Engine</span>
+              <span class="tag">Docker Compose</span>
+              <span class="tag">Python 3.12</span>
+              <span class="tag">Pytest</span>
+              <span class="tag">Pydantic</span>
+              <span class="tag">SQLite</span>
+              <span class="tag">Terraform (Next)</span>
+            </div>
+          </div>
+
+          <div class="card stack-card">
+            <h3>Workflows &amp; Git <span class="mono" style="font-size: 0.75rem; color: var(--text-muted);">Daily</span></h3>
+            <div class="tag-row">
+              <span class="tag">Git &amp; GitHub</span>
+              <span class="tag">GitHub Pages</span>
+              <span class="tag">AWS CloudShell</span>
+              <span class="tag">n8n Workflows</span>
+              <span class="tag">Telegram Bot API</span>
+              <span class="tag">GitHub Actions (Next)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Connect -->
+    <section id="connect" class="section">
+      <div class="container">
+        <div class="card connect-box">
+          <div>
+            <p class="section-kicker" style="margin-bottom: 0.3rem;">Open to Cloud Support, Junior SysAdmin &amp; DevOps Collaborations</p>
+            <h2 class="section-title" style="font-size: 1.65rem;">Let&rsquo;s Connect</h2>
+            <p style="color: var(--text-muted); margin-top: 0.35rem; max-width: 560px;">
+              All project repositories, NextWork lab verifications, and LinkedIn case cards are synchronized directly with this portfolio.
+            </p>
+          </div>
+          <div class="connect-actions">
+            <a href="https://www.linkedin.com/in/ibrahim-ahmed-elsayed-eng" target="_blank" rel="noopener noreferrer" class="btn btn-primary">LinkedIn Profile ↗</a>
+            <a href="https://github.com/ibrahim-a-elsayed-eng" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">GitHub ↗</a>
+            <a href="https://nextwork.ai/portfolio/hemaa" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">NextWork ↗</a>
+            <button id="copy-email" type="button" class="btn btn-secondary">Copy Email</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>&copy; 2026 Ibrahim Ahmed El Sayed &bull; Hosted on GitHub Pages ($0.00/mo)</span>
+      <span class="mono" style="font-size: 0.78rem;">ibrahim-a-elsayed-eng.github.io &bull; ibrahim.a.elsayed.eng@gmail.com</span>
+    </div>
+  </footer>
+
+  <!-- Case Study Modal -->
+  <div id="case-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-dialog">
+      <div class="modal-top">
+        <div>
+          <div id="modal-group" class="project-group" style="margin-bottom: 0.15rem;"></div>
+          <h3 id="modal-title" style="font-family: var(--font-display); font-size: 1.2rem;"></h3>
+        </div>
+        <button id="modal-close" class="icon-btn" type="button" aria-label="Close modal">✕</button>
+      </div>
+      <div class="modal-content">
+        <img id="modal-diagram" class="modal-diagram" src="" alt="" />
+        <div class="modal-meta-grid">
+          <div class="modal-box">
+            <h4>Problem</h4>
+            <p id="modal-problem"></p>
+          </div>
+          <div class="modal-box">
+            <h4>Solution Built</h4>
+            <p id="modal-solution"></p>
+          </div>
+          <div class="modal-box">
+            <h4>Key Design Decision (ADR)</h4>
+            <p id="modal-adr"></p>
+          </div>
+          <div class="modal-box">
+            <h4>Troubleshooting &amp; Verification</h4>
+            <p id="modal-troubleshooting"></p>
+          </div>
+        </div>
+        <div class="modal-box">
+          <h4>Engineering Highlights &amp; Cost Check</h4>
+          <ul id="modal-highlights"></ul>
+        </div>
+        <div>
+          <div class="mono" style="font-size: 0.76rem; color: var(--sky); margin-bottom: 0.4rem;">VERIFIED CONFIG / CLI</div>
+          <pre id="modal-snippet" class="modal-code"></pre>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <span class="mono" style="font-size: 0.76rem; color: var(--emerald);">Zero-Spend &amp; Secret Hygiene Verified</span>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <a id="modal-github" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">GitHub Repository ↗</a>
+          <a id="modal-nextwork" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">NextWork Proof ↗</a>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <script src="./assets/js/app.js"></script>
 </body>
 </html>
