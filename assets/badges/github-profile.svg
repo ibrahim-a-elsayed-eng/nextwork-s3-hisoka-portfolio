@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="168" height="28" role="img" aria-label="GITHUB: PROFILE">
+  <title>GITHUB: PROFILE</title>
+  <g shape-rendering="crispEdges">
+    <rect width="84" height="28" fill="#334155"/>
+    <rect x="84" width="84" height="28" fill="#0F172A"/>
+  </g>
+  <g fill="#FFFFFF" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="100">
+    <text transform="scale(.1)" x="420" y="175" textLength="540" fill="#FFFFFF">GITHUB</text>
+    <text transform="scale(.1)" x="1260" y="175" textLength="560" fill="#FFFFFF" font-weight="bold">PROFILE</text>
+  </g>
+</svg>
